@@ -17,7 +17,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: cp .config/test/package.json .
     - run: yarn install
     - run: cp .config/test/*.yml .config/
     - run: yarn build
-    - run: yarn test 
+    - run: yarn test
