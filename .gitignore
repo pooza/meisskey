@@ -22,6 +22,9 @@ api-docs.json
 .DS_Store
 /files
 /mods.json
+Thumbs.db
+._*
+.fuse*
 
 # blender backups
 *.blend1
