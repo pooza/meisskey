@@ -18,6 +18,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install
-    - run: cp .circleci/misskey/*.yml .config/
+    - run: cp .config/test/*.yml .config/
     - run: yarn build
     - run: yarn test 
