@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "syuilo <syuilotan@yahoo.co.jp>",
-	"version": "10.102.301-m544",
+	"version": "10.102.302-m544",
 	"codename": "nighthike",
 	"repository": {
 		"type": "git",
@@ -22,7 +22,7 @@
 		"format": "gulp format"
 	},
 	"resolutions": {
-		"lodash": "^4.17.19",
+		"lodash": "^4.17.20",
 		"dot-prop": "^5.2.0",
 		"gulp/gulp-cli/yargs/yargs-parser": "5.0.0-security.0",
 		"mocha/serialize-javascript": "^3.1.0"
@@ -63,9 +63,9 @@
 		"@types/koa__multer": "2.0.1",
 		"@types/koa__router": "8.0.2",
 		"@types/lodash": "4.14.159",
-		"@types/mocha": "8.0.2",
-		"@types/mongodb": "3.5.25",
-		"@types/node": "14.0.27",
+		"@types/mocha": "8.0.3",
+		"@types/mongodb": "3.5.26",
+		"@types/node": "14.6.0",
 		"@types/node-fetch": "2.5.7",
 		"@types/nodemailer": "6.4.0",
 		"@types/nprogress": "0.2.0",
@@ -151,7 +151,7 @@
 		"koa-send": "5.0.1",
 		"koa-slow": "2.1.0",
 		"koa-views": "6.3.0",
-		"lodash": "4.17.19",
+		"lodash": "^4.17.20",
 		"lookup-dns-cache": "2.1.0",
 		"mecab-async": "0.1.2",
 		"mocha": "8.1.1",
