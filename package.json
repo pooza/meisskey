@@ -12,9 +12,9 @@
 	"scripts": {
 		"start": "node ./index.js",
 		"debug": "DEBUG=misskey:* node ./index.js",
-		"build": "NODE_OPTIONS=--max_old_space_size=1024 webpack && gulp build",
-		"webpack": "NODE_OPTIONS=--max_old_space_size=1024 webpack",
-		"gulp": "NODE_OPTIONS=--max_old_space_size=1024 gulp build",
+		"build": "NODE_OPTIONS=--max_old_space_size=2048 webpack && gulp build",
+		"webpack": "NODE_OPTIONS=--max_old_space_size=2048 webpack",
+		"gulp": "NODE_OPTIONS=--max_old_space_size=2048 gulp build",
 		"clean": "gulp clean",
 		"cleanall": "gulp cleanall",
 		"lint": "gulp lint",
