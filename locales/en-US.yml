@@ -1191,6 +1191,7 @@ desktop/views/components/ui.header.account.vue:
   follow-requests: "Follow requests"
   admin: "Admin"
   room: "Room"
+  mulukhiya: "Mulukhiya HOME"
 desktop/views/components/ui.header.nav.vue:
   game: "Games"
 desktop/views/components/ui.header.notifications.vue:
@@ -1726,6 +1727,7 @@ mobile/views/components/ui.nav.vue:
   admin: "Admin"
   about: "About Misskey"
   mark-all-as-read: "Mark all as read"
+  mulukhiya: "Mulukhiya HOME"
 mobile/views/components/user-timeline.vue:
   fetch-posts: Fetch posts
 mobile/views/pages/drive.vue:

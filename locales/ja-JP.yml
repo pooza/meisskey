@@ -1325,6 +1325,7 @@ desktop/views/components/ui.header.account.vue:
   follow-requests: "フォロー申請"
   admin: "管理"
   room: "ルーム"
+  mulukhiya: "モロヘイヤHOME"
 
 desktop/views/components/ui.header.nav.vue:
   game: "ゲーム"
@@ -1921,6 +1922,7 @@ mobile/views/components/ui.nav.vue:
   admin: "管理"
   about: "Misskeyについて"
   mark-all-as-read: "全て既読にする"
+  mulukhiya: "モロヘイヤHOME"
 
 mobile/views/components/user-timeline.vue:
   fetch-posts: 投稿を取得

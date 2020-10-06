@@ -72,6 +72,13 @@
 						<i><fa icon="angle-right"/></i>
 					</a>
 				</li>
+				<li>
+					<a href="/mulukhiya">
+						<i><fa icon="envira" fixed-width/></i>
+						<span>Mulukhiya HOME</span>
+						<i><fa icon="angle-right"/></i>
+					</a>
+				</li>
 			</ul>
 			<ul>
 				<li @click="toggleDeckMode">
