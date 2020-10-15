@@ -38,10 +38,14 @@ export type Source = {
 	disableUrlPreview?: boolean;
 	disablePosts?: boolean;
 
+	signToActivityPubGet?: boolean;
+
 	proxy?: string;
 	proxySmtp?: string;
 
 	proxyProxy?: string;
+
+	useClientHttp2?: string;
 
 	accesslog?: string;
 
