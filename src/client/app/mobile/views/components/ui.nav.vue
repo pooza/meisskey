@@ -36,7 +36,7 @@
 						<li><a @click="search"><i><fa icon="search" fixed-width/></i>{{ $t('search') }}<i><fa icon="angle-right"/></i></a></li>
 						<li><router-link to="/i/settings" :data-active="$route.name == 'settings'"><i><fa icon="cog" fixed-width/></i>{{ $t('@.settings') }}<i><fa icon="angle-right"/></i></router-link></li>
 						<li v-if="$store.getters.isSignedIn && ($store.state.i.isAdmin || $store.state.i.isModerator)"><a href="/admin"><i><fa icon="terminal" fixed-width/></i><span>{{ $t('admin') }}</span><i><fa icon="angle-right"/></i></a></li>
-						<li><a href="/mulukhiya"><i><fa icon="envira" fixed-width/></i><span>Mulukhiya HOME</span><i><fa icon="angle-right"/></i></a></li>
+						<li><a href="/mulukhiya"><i><fa icon="faLeaf" fixed-width/></i><span>{{ $t('mulukhiyaHome') }}</span><i><fa icon="angle-right"/></i></a></li>
 					</ul>
 					<ul>
 						<li @click="toggleDeckMode"><p><i><fa :icon="$store.state.device.inDeckMode ? faHome : faColumns" fixed-width/></i><span>{{ $store.state.device.inDeckMode ? $t('@.undeck') : $t('@.deck') }}</span></p></li>
@@ -75,7 +75,7 @@
 import Vue from 'vue';
 import i18n from '../../../i18n';
 import { faNewspaper, faUsers, faHome, faColumns, faSync, faDesktop, faMobileAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { faMoon, faSun, faStickyNote } from '@fortawesome/free-regular-svg-icons';
+import { faMoon, faSun, faStickyNote, faLeaf } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/components/ui.nav.vue'),

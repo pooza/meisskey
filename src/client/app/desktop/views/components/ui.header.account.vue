@@ -83,8 +83,8 @@
 				</li>
 				<li>
 					<a href="/mulukhiya">
-						<i><fa icon="envira" fixed-width/></i>
-						<span>Mulukhiya HOME</span>
+						<i><fa icon="faLeaf" fixed-width/></i>
+						<span>{{ $t('mulukhiyaHome') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</a>
 				</li>
@@ -130,7 +130,7 @@ import MkFollowRequestsWindow from './received-follow-requests-window.vue';
 import MkDriveWindow from './drive-window.vue';
 import contains from '../../../common/scripts/contains';
 import { faHome, faColumns, faUsers, faDoorOpen, faDesktop, faMobileAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { faMoon, faSun, faStickyNote } from '@fortawesome/free-regular-svg-icons';
+import { faMoon, faSun, faStickyNote, faLeaf } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('desktop/views/components/ui.header.account.vue'),
