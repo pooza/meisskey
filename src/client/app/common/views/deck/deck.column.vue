@@ -279,15 +279,14 @@ export default Vue.extend({
 		},
 
 		onDragstart(e) {
-			// テンポラリカラムはドラッグさせない
-			if (this.isTemporaryColumn) {
-				e.preventDefault();
-				return;
-			}
-
 			e.dataTransfer.effectAllowed = 'move';
-			e.dataTransfer.setData('mk-deck-column', this.column.id);
-			this.dragging = true;
+			e.dataTransfer.setData('mk-deck-column', this.isTemporaryColumn ? 'TEMP' : this.column.id);
+
+			// Chromeのバグで、Dragstartハンドラ内ですぐにDOMを変更する(=リアクティブなプロパティを変更する)とDragが終了してしまう
+			// SEE: https://stackoverflow.com/questions/19639969/html5-dragend-event-firing-immediately
+			setTimeout(() => {
+				this.dragging = true;
+			}, 10);
 		},
 
 		onDragend(e) {
@@ -324,6 +323,12 @@ export default Vue.extend({
 			this.$root.$emit('deck.column.dragEnd');
 
 			const id = e.dataTransfer.getData('mk-deck-column');
+
+			if (id === 'TEMP') {
+				this.$store.commit('device/changeTemporaryColumn', this.column.id);
+				return;
+			}
+
 			if (id != null && id != '') {
 				this.$store.commit('device/swapDeckColumn', {
 					a: this.column.id,
