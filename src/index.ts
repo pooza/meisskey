@@ -136,15 +136,23 @@ async function workerMain() {
 	if (workerType === 'server') {
 		await require('./server').default();
 	} else if (workerType === 'queue') {
-		require('./queue').default();
+		await require('./queue').default();
 	} else {
 		await require('./server').default();
-		require('./queue').default();
+		await require('./queue').default();
 	}
 
 	if (cluster.isWorker) {
 		// Send a 'ready' message to parent process
-		process.send('ready');
+		if (process.send) {
+			process.send('ready');
+		}
+	}
+
+	// ユニットテスト時にMisskeyが子プロセスで起動された時のため
+	// それ以外のときは process.send は使えないので弾く
+	if (process.send) {
+		process.send('ok');
 	}
 }
 
