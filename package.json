@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "pooza <tkoishi@b-shock.co.jp>",
-	"version": "10.102.403-m544-reco",
+	"version": "10.102.404-m544-reco",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -97,7 +97,7 @@
 		"autobind-decorator": "2.4.0",
 		"autosize": "4.0.2",
 		"autwh": "0.1.0",
-		"aws-sdk": "2.831.0",
+		"aws-sdk": "2.833.0",
 		"bcryptjs": "2.4.3",
 		"bootstrap-vue": "2.21.2",
 		"browser-image-resizer": "2.1.3",
