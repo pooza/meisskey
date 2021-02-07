@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "pooza <tkoishi@b-shock.co.jp>",
-	"version": "10.102.405-m544-reco",
+	"version": "10.102.406-m544-reco",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -188,7 +188,7 @@
 		"rimraf": "3.0.2",
 		"rndstr": "1.0.0",
 		"s-age": "1.1.2",
-		"sharp": "0.25.4",
+		"sharp": "0.27.1",
 		"showdown": "1.9.1",
 		"showdown-highlightjs-extension": "0.1.2",
 		"speakeasy": "2.0.0",
