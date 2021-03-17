@@ -14,10 +14,11 @@ import { dbLogger } from '../db/logger';
 import { decodeReaction, decodeReactionCounts } from '../misc/reaction-lib';
 import { parse } from '../mfm/parse';
 import { toString } from '../mfm/to-string';
-import { PackedNote } from './packedSchemas';
+import { PackedNote } from './packed-schemas';
 import { awaitAll } from '../prelude/await-all';
-import { inspect } from 'util';
 import { pack as packApp } from './app';
+import { toISODateOrNull, toOidString, toOidStringOrNull } from '../misc/pack-utils';
+import { transform } from '../misc/cafy-id';
 
 const Note = db.get<INote>('notes');
 Note.createIndex('uri', { sparse: true, unique: true });
@@ -46,7 +47,7 @@ export function isValidCw(text: string): boolean {
 export type INote = {
 	_id: mongo.ObjectID;
 	createdAt: Date;
-	deletedAt: Date;
+	deletedAt?: Date;
 	updatedAt?: Date;
 	fileIds: mongo.ObjectID[];
 	replyId: mongo.ObjectID;
@@ -59,7 +60,7 @@ export type INote = {
 	emojis: string[];
 	cw: string;
 	userId: mongo.ObjectID;
-	appId: mongo.ObjectID;
+	appId?: mongo.ObjectID;
 	viaMobile: boolean;
 	localOnly: boolean;
 	copyOnce?: boolean;
@@ -141,7 +142,7 @@ export type IChoice = {
 	votes: number;
 };
 
-export const hideNote = async (packedNote: any, meId: mongo.ObjectID | null) => {
+export const hideNote = async (packedNote: PackedNote, meId: mongo.ObjectID | null) => {
 	let hide = false;
 
 	// visibility が private かつ投稿者のIDが自分のIDではなかったら非表示(後方互換性のため)
@@ -182,7 +183,7 @@ export const hideNote = async (packedNote: any, meId: mongo.ObjectID | null) => 
 		} else {
 			// フォロワーかどうか
 			const following = await Following.findOne({
-				followeeId: packedNote.userId,
+				followeeId: transform(packedNote.userId),
 				followerId: meId
 			});
 
@@ -377,14 +378,14 @@ export const pack = async (
 		return renote ? `${renote._id}` : null;
 	};
 
-	console.log(inspect(db));
-
 	const packed: PackedNote = await awaitAll({
-		id: db._id.toHexString(),
-		createdAt: db.createdAt ? db.createdAt.toISOString() : null,
+		id: toOidString(db._id),
+		createdAt: toISODateOrNull(db.createdAt),
+		deletedAt: toISODateOrNull(db.deletedAt),
+		updatedAt: toISODateOrNull(db.updatedAt),
 		text: text,
 		cw: db.cw,
-		userId: `${db.userId}`,
+		userId: toOidString(db.userId),
 		user: packUser(db.userId, meId),
 		replyId: db.replyId ? `${db.replyId}` : null,
 		renoteId: db.renoteId ? `${db.renoteId}` : null,
@@ -400,12 +401,15 @@ export const pack = async (
 		reactions: reactionCounts,
 		reactionCounts: reactionCounts,
 		emojis: populateEmojis(),
-		fileIds: db.fileIds ? db.fileIds.map(x => `${x}`) : [],
+		fileIds: db.fileIds ? db.fileIds.map(toOidString) : [],
 		files: packFileMany(db.fileIds || []),
 		uri: db.uri || null,
 		url: db.url || null,
-		appId: db.appId ? `${db.appId}` : null,
+		appId: toOidStringOrNull(db.appId),
 		app: db.appId ? packApp(db.appId) : null,
+
+		visibleUserIds: db.visibleUserIds?.length > 0 ? db.visibleUserIds.map(toOidString) : [],
+		mentions: db.mentions?.length > 0 ? db.mentions.map(toOidString) : [],
 
 		...(opts.detail ? {
 			reply: (opts.detail && db.replyId) ? pack(db.replyId, meId, {
@@ -413,7 +417,7 @@ export const pack = async (
 			}) : null,
 
 			renote: db.renoteId ? pack(db.renoteId, meId, {
-				detail: db.text == null
+				detail: true
 			}) : null,
 
 			poll: db.poll ? populatePoll() : null,
@@ -431,7 +435,7 @@ export const pack = async (
 	}
 
 	if (!opts.skipHide) {
-		await hideNote(db, meId);
+		await hideNote(packed, meId);
 	}
 
 	//#region (データベースの欠損などで)参照しているデータがデータベース上に見つからなかったとき
