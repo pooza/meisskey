@@ -1512,10 +1512,10 @@ autwh@0.1.0:
   dependencies:
     oauth "0.9.15"
 
-aws-sdk@2.866.0:
-  version "2.866.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.866.0.tgz#8150fb2e0cfecd281968edee7cad84598d8d7a09"
-  integrity sha512-6Z581Ek2Yfm78NpeEFMNuSoyiYG7tipEaqfWNFR1AGyYheZwql4ajhzzlpWn91LBpdm7qcFldSNY9U0tKpKWNw==
+aws-sdk@2.867.0:
+  version "2.867.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.867.0.tgz#3fae9a583bfd89f6098dc9bca6553b5b85e2a2fc"
+  integrity sha512-6iXRTW6dlCU4UwMivDGHoRyMCvX9Ch1G2gIZZl5yKwzVNaBNpJiAyByWFuxrcBqQsSIFKBEbxeRjePE6QiBbkw==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -1799,10 +1799,10 @@ builtin-modules@^1.1.1:
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
   integrity sha1-Jw8HbFpywC9bZaR9+Uxf46J4iS8=
 
-bull@3.20.1:
-  version "3.20.1"
-  resolved "https://registry.yarnpkg.com/bull/-/bull-3.20.1.tgz#97c4156f48001565baf3c04b81267a5604f40754"
-  integrity sha512-wDwpVu47WKaGhiguEPa/US5UMrtGLPKNPiGFPo4OgVs3EEGzJEWwv3LRPfjJVIf1COdMAN/yowGhZwYmoOonjQ==
+bull@3.21.0:
+  version "3.21.0"
+  resolved "https://registry.yarnpkg.com/bull/-/bull-3.21.0.tgz#60ab64a58469a489a9d4b62d543ac2046ffd3c44"
+  integrity sha512-8eZq28N80dntCvUZum6x7OEHrQUQYjwfUf8JwWR//VKVW92VjVTfsvXgdYoOePGeFY04fdXRolFWPxvKTny3HA==
   dependencies:
     cron-parser "^2.13.0"
     debuglog "^1.0.0"
@@ -7252,10 +7252,10 @@ printj@~1.1.0:
   resolved "https://registry.yarnpkg.com/printj/-/printj-1.1.2.tgz#d90deb2975a8b9f600fb3a1c94e3f4c53c78a222"
   integrity sha512-zA2SmoLaxZyArQTOPj5LXecR+RagfPSU5Kw1qP+jkWeNlrq+eJZyY2oS68SU1Z/7/myXM4lo9716laOFAVStCQ==
 
-probe-image-size@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/probe-image-size/-/probe-image-size-7.0.0.tgz#8a287207c04058f33edd31e7a66f6c5eaac02301"
-  integrity sha512-pddLh5UPAR2tj0GXin5qCFoYa9oo1HOvk+9HYb+V1z7sUjuhCsVbCAKDVvMXwJp5JSsYOoCZ6iQaDpjPvS04nQ==
+probe-image-size@7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/probe-image-size/-/probe-image-size-7.0.1.tgz#ac815d78bdf8c5643af6e541a572c0077c75f2c1"
+  integrity sha512-4ua2TGdO761JWaTgbLD2Uq9yFvB34QBAxnqz9GOs3w4+SC4dfbQcnnNY8loHjZV5NRW8PSQRz+WZ6NfUvbuRDA==
   dependencies:
     deepmerge "^4.0.0"
     needle "^2.5.2"
