@@ -66,6 +66,12 @@
 	</section>
 
 	<section>
+		<header>上付き・下付き</header>
+		<p><mfm :text="preview_supsub" :key="preview_supsub"/></p>
+		<ui-textarea :slim="true" class="text" v-model="preview_supsub"></ui-textarea>
+	</section>
+
+	<section>
 		<header>打ち消し線</header>
 		<p>文字に打ち消し線を付けることができます。</p>
 		<p><mfm :text="preview_strike" :key="preview_strike"/></p>
@@ -131,8 +137,14 @@
 	<section>
 		<header>アニメーション</header>
 		<p>いろんなアニメーションをすることができます</p>
-		<p><mfm :text="preview_legacyAnime" :key="preview_legacyAnime"/></p>
-		<ui-textarea :slim="false" class="text" v-model="preview_legacyAnime"></ui-textarea>
+		<p><mfm :text="preview_anime1" :key="preview_anime1"/></p>
+		<ui-textarea :slim="false" class="text" v-model="preview_anime1"></ui-textarea>
+	</section>
+
+	<section>
+		<header>色ずれアニメーション</header>
+		<p><mfm :text="preview_rgbshift" :key="preview_rgbshift"/></p>
+		<ui-textarea :slim="true" class="text" v-model="preview_rgbshift"></ui-textarea>
 	</section>
 
 	<section>
@@ -195,12 +207,6 @@
 	</section>
 
 	<section>
-		<header>色ずれアニメーション</header>
-		<p><mfm :text="preview_rgbshift" :key="preview_rgbshift"/></p>
-		<ui-textarea :slim="true" class="text" v-model="preview_rgbshift"></ui-textarea>
-	</section>
-
-	<section>
 		<header>fn系speed</header>
 		<p>fn系の一部は1ループの速度調整ができます。なお、fn系同士ではネストができません。</p>
 		<p><mfm :text="preview_fnSpeed" :key="preview_fnSpeed"/></p>
@@ -255,6 +261,7 @@ export default Vue.extend({
 			preview_bold: '**太字**\n__abc__ \`// [0-9A-Za-z]にのみ効く見なかったことにしたい記法\`',
 			preview_small: `<small>小さくなります</small>`,
 			preview_italic: '<i>これは斜体</i>\n_a先頭がアルファベットとかと接着してれば斜体になる構文_\n*a先頭がアルファベットとかと接着してれば斜体になる構文*',preview_strike: '~~環境によって意味が変わるとかめんどくさいこと言われる打ち消し線です~~',
+			preview_supsub: '上付き<sup>a</sup>\n下付き<sub>b</sub>',
 			preview_quote: `> これは引用です`,
 			preview_center: `<center>中央に</center>`,
 			preview_inlineCode: '`a ? 1 : 0`',
@@ -263,7 +270,7 @@ export default Vue.extend({
 			preview_blockMath: '\\[\nx= \\frac{-b\' \\pm \\sqrt{(b\')^2-ac}}{a}\n\\]',
 			preview_search: `MisskeyでFediverseの世界が広がります 検索`,
 			preview_title: `【タイトル】`,
-			preview_legacyAnime: `<motion>モーション</motion>\n*** ビッグ＋ ***\n<jump>ジャンプ</jump>`,
+			preview_anime1: `<motion>モーション</motion>\n*** ビッグ＋ ***\n<jump>ジャンプ</jump>\n<blink>blink</blink> <twitch>twitch</twitch> <shake>shake</shake>`,
 			preview_flip: '<flip>左右反転</flip>\n<vflip>上下反転</vflip>\n<flip><vflip>双方反転</vflip></flip>',
 			preview_spin: '<spin>回転</spin> <spin left>左回転</spin> <spin alternate>往復回転</spin>',
 			preview_xspin: '<xspin>回転</xspin> <xspin left>左回転</xspin> <xspin alternate>往復回転</xspin>',
@@ -282,7 +289,7 @@ export default Vue.extend({
 			preview_fnSpin: '[spin あいう] [spin.left あいう] [spin.alternate あいう]\n[spin.x あいう] [spin.x,left あいう] [spin.x,alternate あいう]\n[spin.y あいう] [spin.y,left あいう] [spin.y,alternate あいう]',
 			preview_fnSpeed: '[spin.y,left,speed=1s あいう]\n[spin.y,left,speed=2s あいう]\n[spin.y,left,speed=3s あいう]',
 			preview_fnDelay: '[spin.y,left,speed=1s,delay=0.1s あいう]\n[spin.y,left,speed=1s,delay=0.2s あいう]\n[spin.y,left,speed=1s,delay=0.3s あいう]',
-			preview_rgbshift: '[rgbshift 色ずれアニメーション効果です]',
+			preview_rgbshift: '<rgbshift>色ずれアニメーション効果です</rgbshift>',
 			preview_x: '[x2 あいう]\n[x3 あいう]\n[x4 あいう]',
 			preview_blur: '[blur あいう]',
 			preview_font: '[font.serif serif]\n[font.monospace monospace]',

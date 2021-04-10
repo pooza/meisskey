@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "pooza <tkoishi@b-shock.co.jp>",
-	"version": "10.102.436-m544-reco",
+	"version": "10.102.438-m544-reco",
 	"codename": "m544",
 	"repository": {
 		"type": "git",

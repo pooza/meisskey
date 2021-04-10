@@ -100,6 +100,22 @@ export default Vue.component('misskey-flavored-markdown', {
 					}, genEl(node.children, inQuote));
 				}
 
+				case 'sup': {
+					return (createElement as any)('sup', {
+						attrs: {
+							style: 'vertical-align: super; font-size: smaller;'
+						},
+					}, genEl(node.children));
+				}
+
+				case 'sub': {
+					return (createElement as any)('sub', {
+						attrs: {
+							style: 'vertical-align: sub; font-size: smaller;'
+						},
+					}, genEl(node.children));
+				}
+
 				case 'big': {
 					bigCount++;
 					const isMany = bigCount > 50;
@@ -326,6 +342,33 @@ export default Vue.component('misskey-flavored-markdown', {
 							style: `display: inline-block; transform: rotate(${deg}deg);`
 						},
 					}, genEl(node.children, inQuote));
+				}
+
+				// 装飾はここに追加
+				case 'blink': {
+					return (createElement as any)('span', {
+						attrs: {
+							style: (this.$store.state.settings.disableAnimatedMfm) ? 'display: inline-block;' : 'display: inline-block; animation: blink 0.75s linear infinite;'
+						},
+					}, genEl(node.children));
+				}
+
+				case 'twitch': {
+					return (createElement as any)('span', {
+						style: !this.$store.state.settings.disableAnimatedMfm ? 'display: inline-block; animation: mfm-twitch 0.5s ease infinite;' : 'display: inline-block;'
+					}, genEl(node.children));
+				}
+
+				case 'shake': {
+					return (createElement as any)('span', {
+						style: !this.$store.state.settings.disableAnimatedMfm ? 'display: inline-block; animation: mfm-shake 0.5s ease infinite;' : 'display: inline-block;'
+					}, genEl(node.children));
+				}
+
+				case 'rgbshift': {
+					return (createElement as any)('span', {
+						style: !this.$store.state.settings.disableAnimatedMfm ? 'animation: mfm-rgbshift 2s linear infinite;' : ''
+					}, genEl(node.children));
 				}
 
 				case 'url': {
