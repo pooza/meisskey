@@ -10,10 +10,15 @@
 
 import * as assert from 'assert';
 
-import { parseFull, parsePlain } from '../src/mfm/parse';
-import { createMfmNode, MfmNode } from '../src/mfm/prelude';
+import { parseFull, parsePlain, parseBasic } from '../src/mfm/parse';
+import { createMfmNode } from '../src/mfm/utils';
+import { MfmNode } from '../src/mfm/types';
 import { removeOrphanedBrackets } from '../src/mfm/language';
-
+import { fromHtml } from '../src/mfm/from-html';
+import { toHtml } from '../src/mfm/to-html';
+import { extractMentions } from '../src/mfm/extract-mentions';
+import { extractHashtags } from '../src/mfm/extract-hashtags';
+import { extractEmojis } from '../src/mfm/extract-emojis';
 
 function text(text: string): MfmNode {
 	return createMfmNode('text', { text });
@@ -151,7 +156,7 @@ describe('removeOrphanedBrackets', () => {
 	});
 });
 
-describe('MFM', () => {
+describe('parse', () => {
 	it('can be analyzed', () => {
 		const tokens = parseFull('@himawari @hima_sub@namori.net お腹ペコい :cat: #yryr');
 		assert.deepStrictEqual(tokens, [
@@ -1123,7 +1128,7 @@ describe('MFM', () => {
 				]);
 			});
 
-			// https://misskey.io/notes/7u1kv5dmia
+			// docker~~~~~~
 			it('ignore internal tilde', () => {
 				const tokens = parseFull('~~~~~');
 				assert.deepStrictEqual(tokens, [
@@ -1163,7 +1168,7 @@ describe('MFM', () => {
 			it('exlude emotes', () => {
 				const tokens = parseFull('*.*');
 				assert.deepStrictEqual(tokens, [
-					text("*.*"),
+					text('*.*'),
 				]);
 			});
 
@@ -1259,5 +1264,149 @@ describe('MFM', () => {
 			], {}),
 			leaf('blockCode', { code: 'after', lang: null })
 		]);
+	});
+});
+
+describe('fromHtml', () => {
+	it('br', () => {
+		assert.deepStrictEqual(fromHtml('<p>abc<br><br/>d</p>'), 'abc\n\nd');
+	});
+
+	it('link with different text', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a href="https://example.com/b">c</a> d</p>'), 'a [c](https://example.com/b) d');
+	});
+
+	it('link with different text, but not encoded', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a href="https://example.com/ä">c</a> d</p>'), 'a [c](<https://example.com/ä>) d');
+	});
+
+	it('link with same text', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a href="https://example.com/b">https://example.com/b</a> d</p>'), 'a https://example.com/b d');
+	});
+
+	it('link with same text, but not encoded', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a href="https://example.com/ä">https://example.com/ä</a> d</p>'), 'a <https://example.com/ä> d');
+	});
+
+	it('link with no url', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a href="b">c</a> d</p>'), 'a [c](b) d');
+	});
+
+	it('link without href', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a>c</a> d</p>'), 'a c d');
+	});
+
+	it('link without text', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a href="https://example.com/b"></a> d</p>'), 'a https://example.com/b d');
+	});
+
+	it('link without both', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a></a> d</p>'), 'a  d');
+	});
+
+	it('mention', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a href="https://example.com/@user" class="u-url mention">@user</a> d</p>'), 'a @user@example.com d');
+	});
+
+	it('hashtag', () => {
+		assert.deepStrictEqual(fromHtml('<p>a <a href="https://example.com/tags/a">#a</a> d</p>', ['#a']), 'a #a d');
+	});
+});
+
+describe('toHtml', () => {
+	it('br', () => {
+		const input = 'foo\nbar\nbaz';
+		const output = '<p><span>foo<br>bar<br>baz</span></p>';
+		assert.equal(toHtml(parseFull(input)!), output);
+	});
+
+	it('br alt', () => {
+		const input = 'foo\r\nbar\rbaz';
+		const output = '<p><span>foo<br>bar<br>baz</span></p>';
+		assert.equal(toHtml(parseFull(input)!), output);
+	});
+});
+
+describe('Extract mentions', () => {
+	it('simple', () => {
+		const ast = parseBasic('@foo @bar @baz')!;
+		const mentions = extractMentions(ast);
+		assert.deepStrictEqual(mentions, [{
+			username: 'foo',
+			acct: '@foo',
+			canonical: '@foo',
+			host: null
+		}, {
+			username: 'bar',
+			acct: '@bar',
+			canonical: '@bar',
+			host: null
+		}, {
+			username: 'baz',
+			acct: '@baz',
+			canonical: '@baz',
+			host: null
+		}]);
+	});
+
+	it('装飾の下', () => {
+		const ast = parseBasic('@foo **@bar** @baz')!;
+		const mentions = extractMentions(ast);
+		assert.deepStrictEqual(mentions, [{
+			username: 'foo',
+			acct: '@foo',
+			canonical: '@foo',
+			host: null
+		}, {
+			username: 'bar',
+			acct: '@bar',
+			canonical: '@bar',
+			host: null
+		}, {
+			username: 'baz',
+			acct: '@baz',
+			canonical: '@baz',
+			host: null
+		}]);
+	});
+});
+
+describe('Extract hashtags', () => {
+	it('simple', () => {
+		const ast = parseBasic('#あ #いいい #ううう')!;
+		const mentions = extractHashtags(ast);
+		assert.deepStrictEqual(mentions, ['あ', 'いいい', 'ううう']);
+	});
+
+	it('duplicate', () => {
+		const ast = parseBasic('#あ #いいい #あ')!;
+		const mentions = extractHashtags(ast);
+		assert.deepStrictEqual(mentions, ['あ', 'いいい']);
+	});
+});
+
+describe('Extract emojis', () => {
+	it('simple', () => {
+		const ast = parseBasic(':aaa: :bbb:')!;
+		const emojis = extractEmojis(ast);
+		assert.deepStrictEqual(emojis, ['aaa', 'bbb']);
+	});
+
+	it('装飾内', () => {
+		const ast = parseBasic(':aaa: ***:bbb:***')!;
+		const emojis = extractEmojis(ast);
+		assert.deepStrictEqual(emojis, ['aaa', 'bbb']);
+	});
+
+	it('リンク内', () => {
+		const ast = parseBasic(':aaa: [a :bbb: c](https://example.com)')!;
+		const emojis = extractEmojis(ast);
+		assert.deepStrictEqual(emojis, ['aaa', 'bbb']);
+	});
+
+	it('duplicate', () => {
+		const ast = parseBasic(':aaa: :bbb: :aaa:')!;
+		const emojis = extractEmojis(ast);
+		assert.deepStrictEqual(emojis, ['aaa', 'bbb']);
 	});
 });
