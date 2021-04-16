@@ -598,20 +598,6 @@ describe('parse', () => {
 				]);
 			});
 
-			it('disallow number only', () => {
-				const tokens = parseFull('#123');
-				assert.deepStrictEqual(tokens, [
-					text('#123'),
-				]);
-			});
-
-			it('disallow number only (with brackets)', () => {
-				const tokens = parseFull('(#123)');
-				assert.deepStrictEqual(tokens, [
-					text('(#123)'),
-				]);
-			});
-
 			it('ignore slash', () => {
 				const tokens = parseFull('#foo/bar');
 				assert.deepStrictEqual(tokens, [
@@ -1317,13 +1303,13 @@ describe('toHtml', () => {
 	it('br', () => {
 		const input = 'foo\nbar\nbaz';
 		const output = '<p><span>foo<br>bar<br>baz</span></p>';
-		assert.equal(toHtml(parseFull(input)!), output);
+		assert.equal(toHtml(parseBasic(input)!), output);
 	});
 
 	it('br alt', () => {
 		const input = 'foo\r\nbar\rbaz';
 		const output = '<p><span>foo<br>bar<br>baz</span></p>';
-		assert.equal(toHtml(parseFull(input)!), output);
+		assert.equal(toHtml(parseBasic(input)!), output);
 	});
 });
 
