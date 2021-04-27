@@ -16,6 +16,7 @@
 		</div>
 		<div class="accepted" v-if="state == 'accepted'">
 			<h1>{{ session.app.isAuthorized ? this.$t('already-authorized') : this.$t('allowed') }}</h1>
+			<p>{{ session.token }}</p>
 			<p v-if="session.app.callbackUrl">{{ $t('callback-url') }}<mk-ellipsis/></p>
 			<p v-if="!session.app.callbackUrl">{{ $t('please-go-back') }}</p>
 		</div>
