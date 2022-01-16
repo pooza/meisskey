@@ -216,10 +216,10 @@
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-"@redocly/openapi-core@1.0.0-beta.76":
-  version "1.0.0-beta.76"
-  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.0.0-beta.76.tgz#c7799d6c382240ed4b74ebb730abef934f31482c"
-  integrity sha512-iQ0YbUR7HhSAypqIwVrTMznkEU6kjVI9vyRdm2MYDKQcDyECgcraxkx0i9Lb4dOIuZGp3vDGvRH9fhybHbjlug==
+"@redocly/openapi-core@1.0.0-beta.78":
+  version "1.0.0-beta.78"
+  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.0.0-beta.78.tgz#3e0ab6b3813a01d9996e76303c3cda11ab501cce"
+  integrity sha512-yZEJa5dPUP6kjq2M1hZm+YQU0kVZRTZkED3H6pmJNlueRTu5C5KlZPhHTn9xx37xHB0iYpSLw6Ajtcx055EAhA==
   dependencies:
     "@redocly/ajv" "^8.6.4"
     "@types/node" "^14.11.8"
@@ -836,10 +836,10 @@
   dependencies:
     "@types/undertaker-registry" "*"
 
-"@types/uuid@8.3.3":
-  version "8.3.3"
-  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.3.tgz#c6a60686d953dbd1b1d45e66f4ecdbd5d471b4d0"
-  integrity sha512-0LbEEx1zxrYB3pgpd1M5lEhLcXjKJnYghvhTRgaBeUivLHMDM1TzF3IJ6hXU2+8uA4Xz+5BA63mtZo5DjVT8iA==
+"@types/uuid@8.3.4":
+  version "8.3.4"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.4.tgz#bd86a43617df0594787d38b735f55c805becf1bc"
+  integrity sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==
 
 "@types/vinyl-fs@*":
   version "2.4.11"
@@ -1523,10 +1523,10 @@ autwh@0.1.0:
   dependencies:
     oauth "0.9.15"
 
-aws-sdk@2.1050.0:
-  version "2.1050.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1050.0.tgz#172e80839a3c1bed82e7c42db2fbe7d46fbb90ca"
-  integrity sha512-xXY3wAZQyh/d6vk5oClyB3ViFENc1OOrsB/HUu/g+wnMzMLp+ea+OpZwRM5+g90mAiJ1eLOxje0Sgnbe7fP2oA==
+aws-sdk@2.1052.0:
+  version "2.1052.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1052.0.tgz#ae51421884b1228a2e48588e6b2628036f35f090"
+  integrity sha512-GtCjW/1yzyJaTavcd22W8aptq2jVyGwXiJXPDLzyqTi0Q34EijSWYIlLk2C8dzIO7L1qnnVvva6u8XL+W0zwLw==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"

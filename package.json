@@ -1,7 +1,7 @@
 {
 	"name": "misskey",
 	"author": "pooza <tkoishi@b-shock.co.jp>",
-	"version": "10.102.550-m544-reco",
+	"version": "10.102.551-m544-reco",
 	"codename": "m544",
 	"repository": {
 		"type": "git",
@@ -81,7 +81,7 @@
 		"@types/speakeasy": "2.0.7",
 		"@types/tinycolor2": "1.4.3",
 		"@types/tmp": "0.2.3",
-		"@types/uuid": "8.3.3",
+		"@types/uuid": "8.3.4",
 		"@types/web-push": "3.3.2",
 		"@types/webpack": "5.28.0",
 		"@types/websocket": "1.0.4",
@@ -92,7 +92,7 @@
 		"autobind-decorator": "2.4.0",
 		"autosize": "4.0.2",
 		"autwh": "0.1.0",
-		"aws-sdk": "2.1050.0",
+		"aws-sdk": "2.1052.0",
 		"bcryptjs": "2.4.3",
 		"bootstrap-vue": "2.21.2",
 		"browser-image-resizer": "2.2.1",
@@ -227,7 +227,7 @@
 		"xmlbuilder": "15.1.1"
 	},
 	"devDependencies": {
-		"@redocly/openapi-core": "1.0.0-beta.76",
+		"@redocly/openapi-core": "1.0.0-beta.78",
 		"tslint": "6.1.3",
 		"tslint-sonarts": "1.9.0"
 	}
