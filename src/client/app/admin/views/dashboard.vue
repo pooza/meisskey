@@ -6,7 +6,6 @@
 		<p><b>OS</b><span>{{ meta.os }}</span></p>
 		<p><b>Arch</b><span>{{ meta.arch }}</span></p>
 		<p><b>Node</b><span>{{ meta.node }}</span></p>
-		<p>{{ $t('@.ai-chan-kawaii') }}</p>
 	</header>
 
 	<div v-if="stats" class="stats">
