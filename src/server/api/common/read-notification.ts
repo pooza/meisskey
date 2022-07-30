@@ -39,7 +39,7 @@ export default (
 	const mutedUserIds = mute.map(m => m.muteeId);
 
 	// Update documents
-	await Notification.update({
+	const readResult = await Notification.update({
 		_id: { $in: ids },
 		isRead: false
 	}, {
@@ -49,6 +49,8 @@ export default (
 		}, {
 			multi: true
 		});
+
+	if (readResult.nModified === 0) return;
 
 	// Calc count of my unread notifications
 	const count = await Notification
