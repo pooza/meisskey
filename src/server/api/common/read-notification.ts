@@ -29,15 +29,6 @@ export default (
 				? [new mongo.ObjectID(message)]
 				: [(message as INotification)._id];
 
-	const mute = await Mute.find({
-		$or: [
-			{ expiresAt: null },
-			{ expiresAt: { $gt: new Date() }}
-		],
-		muterId: userId
-	});
-	const mutedUserIds = mute.map(m => m.muteeId);
-
 	// Update documents
 	const readResult = await Notification.update({
 		_id: { $in: ids },
@@ -51,6 +42,15 @@ export default (
 		});
 
 	if (readResult.nModified === 0) return;
+
+	const mute = await Mute.find({
+		$or: [
+			{ expiresAt: null },
+			{ expiresAt: { $gt: new Date() }}
+		],
+		muterId: userId
+	});
+	const mutedUserIds = mute.map(m => m.muteeId);
 
 	// Calc count of my unread notifications
 	const count = await Notification
