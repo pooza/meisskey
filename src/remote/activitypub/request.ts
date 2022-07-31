@@ -26,7 +26,7 @@ export default async (user: ThinUserWithKey, url: string, object: any) => {
 		body,
 	});
 
-	return res.body;
+	return `${res.statusCode} ${res.statusMessage} ${res.body}`;
 };
 
 /**
