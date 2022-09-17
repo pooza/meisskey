@@ -1,5 +1,6 @@
 import Vue from 'vue';
 
+// widget/index/common
 Vue.component('mkw-analog-clock', () => import('./analog-clock.vue').then(m => m.default));
 Vue.component('mkw-nav', () => import('./nav.vue').then(m => m.default));
 Vue.component('mkw-calendar', () => import('./calendar.vue').then(m => m.default));
