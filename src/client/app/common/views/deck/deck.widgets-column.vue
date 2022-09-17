@@ -5,6 +5,7 @@
 	<div class="gqpwvtwtprsbmnssnbicggtwqhmylhnq">
 		<template v-if="edit">
 			<header>
+				<!-- widget/adder/deck -->
 				<select v-model="widgetAdderSelected" @change="addWidget">
 					<option value="profile">{{ $t('@.widgets.profile') }}</option>
 					<option value="analog-clock">{{ $t('@.widgets.analog-clock') }}</option>

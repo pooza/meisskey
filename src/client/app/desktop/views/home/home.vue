@@ -6,6 +6,7 @@
 			<div>
 				<div class="adder">
 					<p>{{ $t('add-widget') }}</p>
+					<!-- widget/adder/desktop -->
 					<select v-model="widgetAdderSelected">
 						<option value="profile">{{ $t('@.widgets.profile') }}</option>
 						<option value="analog-clock">{{ $t('@.widgets.analog-clock') }}</option>
@@ -101,17 +102,15 @@ export default Vue.extend({
 	computed: {
 		home(): any[] {
 			if (this.$store.getters.isSignedIn) {
+				// widget/settings/desktop/login
 				return this.$store.state.settings.home || [];
 			} else {
+				// widget/settings/desktop/nologin
 				return [{
 					name: 'instance',
 					place: 'right'
 				}, {
 					name: 'broadcast',
-					place: 'right',
-					data: {}
-				}, {
-					name: 'hashtags',
 					place: 'right',
 					data: {}
 				}];
@@ -158,6 +157,7 @@ export default Vue.extend({
 	},
 
 	methods: {
+		// widget/settings/desktop/default
 		generateDefault() {
 			const defaultDesktopHomeWidgets = {
 				left: [
@@ -178,7 +178,7 @@ export default Vue.extend({
 			};
 
 			//#region Construct home data
-			const _defaultDesktopHomeWidgets = [];
+			const _defaultDesktopHomeWidgets: any[] = [];
 
 			for (const widget of defaultDesktopHomeWidgets.left) {
 				_defaultDesktopHomeWidgets.push({
