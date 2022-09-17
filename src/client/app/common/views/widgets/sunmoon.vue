@@ -18,7 +18,7 @@
 	import { defineComponent } from 'vue';
 	import moment from "moment";
 	import SunCalc from "suncalc";
-	import define from '../../../common/define-widget';
+	import define from '../../../common/define-widget';	// TODO: defineComponent版にする
 	import { twemojiSvgBase } from '../../../../../misc/twemoji-base';
 	import i18n from '../../../i18n';
 
