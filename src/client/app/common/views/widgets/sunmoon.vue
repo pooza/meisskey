@@ -711,7 +711,7 @@
 				const moonPhase = moonAge / 29.530589;
 
 				// 月齢画像
-				const moonFaceImg = ['1', '2', '3', '4', '5', '6', '7', '8'][Math.floor(8 * moonPhase) % 8];
+				const moonFaceImg = ['1', '2', '3', '4', '5', '6', '7', '8'][Math.round(8 * moonPhase) % 8];
 				this.moonFace = `${twemojiSvgBase}/1f31${moonFaceImg}.svg`;
 			}
 		}
