@@ -20,7 +20,7 @@
 					<option value="notifications">{{ $t('@.widgets.notifications') }}</option>
 					<option value="polls">{{ $t('@.widgets.polls') }}</option>
 					<option value="post-form">{{ $t('@.widgets.post-form') }}</option>
-					<option value="messaging">{{ $t('@.widgets.messaging') }}</option>
+					<option value="messaging">{{ $t('@.messaging') }}</option> 
 					<option value="memo">{{ $t('@.widgets.memo') }}</option>
 					<option value="hashtags">{{ $t('@.widgets.hashtags') }}</option>
 					<option value="words">{{ $t('@.widgets.words') }}</option>
