@@ -17,3 +17,4 @@ Vue.component('mkw-words', () => import('./words.vue').then(m => m.default));
 Vue.component('mkw-instance', () => import('./instance.vue').then(m => m.default));
 Vue.component('mkw-post-form', () => import('./post-form.vue').then(m => m.default));
 Vue.component('mkw-queue', () => import('./queue.vue').then(m => m.default));
+Vue.component('mkw-sunmoon', () => import('./sunmoon.vue').then(m => m.default));
