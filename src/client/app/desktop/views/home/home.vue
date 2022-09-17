@@ -164,8 +164,8 @@ export default Vue.extend({
 				left: [
 					'profile',
 					'calendar',
-					'sunmoon',
-					'hashtags',
+					'hashtag',
+					'word',
 					'version'
 				],
 				right: [

@@ -96,6 +96,7 @@
 	<style lang="stylus" scoped>
 	.mkw-sunmoon {
 		background: var(--face);
+		border-radius 6px
 		color: var(--text);
 		padding: 16px 0;
 		display: flex;
