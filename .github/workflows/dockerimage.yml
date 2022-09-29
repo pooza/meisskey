@@ -1,11 +1,6 @@
 name: Docker Image CI
 
-on:
-  push:
-    branches:
-      - mei-m544
-      - mei-one
-  pull_request:
+on: [push]
 
 jobs:
   build:
