@@ -11,7 +11,6 @@ import * as Router from '@koa/router';
 import * as send from 'koa-send';
 import * as glob from 'glob';
 import config from '../../config';
-import { licenseHtml } from '../../misc/license';
 import { copyright } from '../../const.json';
 import * as locales from '../../../locales';
 import * as nestedProperty from 'nested-property';
@@ -49,8 +48,6 @@ async function genVars(lang: string): Promise<{ [key: string]: any }> {
 	vars['config'] = config;
 
 	vars['copyright'] = copyright;
-
-	vars['license'] = licenseHtml;
 
 	vars['i18n'] = (key: string) => nestedProperty.get(locales[lang], key);
 
