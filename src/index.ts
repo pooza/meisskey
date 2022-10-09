@@ -5,7 +5,7 @@
 Error.stackTraceLimit = Infinity;
 
 require('events').EventEmitter.defaultMaxListeners = 128;
-process.env.UV_THREADPOOL_SIZE = `${Math.max(4, require('os').cpus().length)}`;
+process.env.UV_THREADPOOL_SIZE = `${Math.min(Math.max(4, require('os').cpus().length), 1024)}`;
 
 import * as os from 'os';
 import * as cluster from 'cluster';
