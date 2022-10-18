@@ -1,4 +1,4 @@
-import User, { IUser, isRemoteUser, isLocalUser, getMute } from '../../models/user';
+import User, { IUser, isRemoteUser, isLocalUser, getMute, getBlocks } from '../../models/user';
 import { IDriveFile } from '../../models/drive-file';
 import { publishMessagingStream, publishMessagingIndexStream, publishMainStream } from '../stream';
 import MessagingMessage, { pack as packMessage } from '../../models/messaging-message';
@@ -49,8 +49,10 @@ export async function createMessage(user: IUser, recipient: IUser, text: string 
 			if (freshMessage == null) return; // メッセージが削除されている場合もある
 			if (!freshMessage.isRead) {
 				//#region ただしミュートされているなら発行しない
-				const mute = await getMute(recipient._id, user._id);
+				const mute = await getMute(recipient._id, user._id); 
 				if (mute) return;
+				const blocks = await getBlocks(recipient, user);
+				if (blocks.length > 0) return;
 				//#endregion
 
 				publishMainStream(message.recipientId, 'unreadMessagingMessage', messageObj);
