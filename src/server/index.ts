@@ -3,7 +3,7 @@
  */
 
 import * as http from 'http';
-import * as cluster from 'cluster';
+import cluster from 'cluster';
 import * as Koa from 'koa';
 import * as Router from '@koa/router';
 import * as mount from 'koa-mount';
@@ -128,7 +128,7 @@ export const startServer = () => {
 	return server;
 };
 
-export default () => new Promise(resolve => {
+export default () => new Promise<void>(resolve => {
 	const server = createServer();
 
 	// Init stream server
@@ -156,7 +156,10 @@ export default () => new Promise(resolve => {
 	});
 
 	// Listen
-	server.listen(config.port, config.addr || undefined, resolve);
+	server.listen({
+		port: config.port,
+		host: config.addr || undefined
+	}, resolve);
 
 	//#region Network stats
 	let queue: any[] = [];
