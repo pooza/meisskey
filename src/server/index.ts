@@ -3,7 +3,7 @@
  */
 
 import * as http from 'http';
-import cluster from 'cluster';
+import * as cluster from 'cluster';
 import * as Koa from 'koa';
 import * as Router from '@koa/router';
 import * as mount from 'koa-mount';
