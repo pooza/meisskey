@@ -1,5 +1,5 @@
 import User, { IUser, isRemoteUser, isLocalUser, getMute, getBlocks } from '../../models/user';
-import { IDriveFile } from '../../models/drive-file';
+import DriveFile, { IDriveFile } from '../../models/drive-file';
 import { publishMessagingStream, publishMessagingIndexStream, publishMainStream } from '../stream';
 import MessagingMessage, { pack as packMessage } from '../../models/messaging-message';
 import pushNotification from '../push-notification';
@@ -20,6 +20,15 @@ export async function createMessage(user: IUser, recipient: IUser, text: string 
 		isRead: false,
 		uri,
 	});
+
+	// ファイルが添付されていた場合ドライブのファイルの「このファイルが添付されたチャットメッセージ一覧」プロパティにこの投稿を追加
+	if (file) {
+		DriveFile.update({ _id: file._id }, {
+			$push: {
+				'metadata.attachedMessageIds': message._id
+			}
+		});
+	}
 
 	const messageObj = await packMessage(message);
 
