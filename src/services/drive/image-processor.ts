@@ -58,7 +58,7 @@ export async function convertToWebp(path: string, width: number, height: number,
 
 export async function convertSharpToWebp(sharp: sharp.Sharp, width: number, height: number, webpOpts?: WebpOpts): Promise<IImage> {
 	const webpOptions: sharp.WebpOptions = {
-		quality: webpOpts?.quality || 72,
+		quality: webpOpts?.quality || 85,
 	};
 
 	const data = await sharp
@@ -87,7 +87,7 @@ export async function convertSharpToWebp(sharp: sharp.Sharp, width: number, heig
 
 export async function convertSharpToAvif(sharp: sharp.Sharp, width: number, height: number, avifOpts?: AvifOpts): Promise<IImage> {
 	const avifOptions: sharp.AvifOptions = {
-		quality: avifOpts?.quality || 54,
+		quality: avifOpts?.quality || 65,
 	};
 
 	const data = await sharp
