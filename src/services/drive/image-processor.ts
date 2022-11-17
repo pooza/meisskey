@@ -58,7 +58,7 @@ export async function convertToWebp(path: string, width: number, height: number,
 
 export async function convertSharpToWebp(sharp: sharp.Sharp, width: number, height: number, webpOpts?: WebpOpts): Promise<IImage> {
 	const webpOptions: sharp.WebpOptions = {
-		quality: webpOpts?.quality || 85,
+		quality: webpOpts?.quality || 72,
 	};
 
 	const data = await sharp
@@ -74,6 +74,35 @@ export async function convertSharpToWebp(sharp: sharp.Sharp, width: number, heig
 		data,
 		ext: 'webp',
 		type: 'image/webp'
+	};
+}
+
+/**
+ * Convert to AVIF
+ *   with resize, remove metadata, resolve orientation, stop animation
+ */
+ export async function convertToAvif(path: string, width: number, height: number, avifOpts?: AvifOpts): Promise<IImage> {
+	return convertSharpToAvif(await sharp(path), width, height);
+}
+
+export async function convertSharpToAvif(sharp: sharp.Sharp, width: number, height: number, avifOpts?: AvifOpts): Promise<IImage> {
+	const avifOptions: sharp.AvifOptions = {
+		quality: avifOpts?.quality || 54,
+	};
+
+	const data = await sharp
+		.resize(width, height, {
+			fit: 'inside',
+			withoutEnlargement: true
+		})
+		.rotate()
+		.avif(avifOptions)
+		.toBuffer();
+
+	return {
+		data,
+		ext: 'avif',
+		type: 'image/avif'
 	};
 }
 
