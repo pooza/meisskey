@@ -31,7 +31,7 @@
 						<span class="divider">|</span>
 						<span class="signin" @click="signin">{{ $t('@.signin') }}</span>
 						<span class="divider">|</span>
-						<span class="explore" onclick="window.location.href='/explore'">Explore</span>
+						<span class="explore" onclick="window.location.href='/explore'">{{ $t('@.explore') }}</span>
 					</p>
 
 					<img v-if="meta && meta.mascotImageUrl" :src="meta.mascotImageUrl" alt="" title="藍" class="char">
