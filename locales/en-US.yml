@@ -433,6 +433,7 @@ common:
     words: "Trend words"
     queue: "Queue"
     sunmoon: "Sun and moon"
+    aichan: "Ai-chan"
   dev: "Failed to create the application. Please try again."
   ai-chan-kawaii: "Ai-chan kawaii!"
   you: "You"

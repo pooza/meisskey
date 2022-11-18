@@ -458,6 +458,7 @@ common:
     words: "トレンドワード"
     queue: "キュー"
     sunmoon: "太陽と月"
+    aichan: "藍"
 
   dev: "アプリの作成に失敗しました。再度お試しください。"
   ai-chan-kawaii: "藍ちゃかわいい"

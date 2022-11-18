@@ -6,6 +6,8 @@ WORKDIR /misskey
 RUN apt-get update \
  && apt-get install -y --no-install-recommends build-essential
 
+RUN git init
+RUN git submodule update --init
 COPY package.json yarn.lock ./
 RUN yarn install
 COPY . ./
