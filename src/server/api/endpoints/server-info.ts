@@ -4,6 +4,7 @@ import define from '../define';
 
 export const meta = {
 	requireCredential: false,
+	allowGet: true,
 
 	desc: {
 	},
