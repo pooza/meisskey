@@ -10,7 +10,7 @@
 			<div>
 				<span class="username"><mk-acct :user="user" :detail="true" /></span>
 				<span v-if="user.movedToUser != null">moved to <router-link :to="user.movedToUser | userPage()"><mk-acct :user="user.movedToUser" :detail="true"/></router-link></span>
-				<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa icon="wrench"/></span>
+				<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa :icon="faCrown"/></span>
 				<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><fa icon="star"/></span>
 				<span class="is-bot" v-if="user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 			</div>
@@ -67,7 +67,7 @@ import XUserMenu from '../../../../common/views/components/user-menu.vue';
 import XListMenu from '../../../../common/views/components/list-menu.vue';
 import XIntegrations from '../../../../common/views/components/integrations.vue';
 import ImageViewer from '../../../../common/views/components/image-viewer.vue';
-import { faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { faUserTag, faCrown } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('desktop/views/pages/user/user.header.vue'),
@@ -77,7 +77,7 @@ export default Vue.extend({
 	props: ['user'],
 	data() {
 		return {
-			faUserTag
+			faUserTag, faCrown
 		}
 	},
 	computed: {
