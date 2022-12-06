@@ -335,7 +335,7 @@ export default define(meta, async (ps) => {
 	}
 
 	if (Array.isArray(ps.hidedTags)) {
-		set.hidedTags = ps.hidedTags.filter(Boolean);
+		set.hidedTags = ps.hidedTags.map(x => x.trim()).filter(x => x !== '');
 	}
 
 	if (ps.mascotImageUrl !== undefined) {
@@ -399,7 +399,7 @@ export default define(meta, async (ps) => {
 	}
 
 	if (Array.isArray(ps.langs)) {
-		set.langs = ps.langs.filter(Boolean);
+		set.langs = ps.langs.map(x => x.trim()).filter(x => x !== '');
 	}
 
 	if (ps.summalyProxy !== undefined) {
