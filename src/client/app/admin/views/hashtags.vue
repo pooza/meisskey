@@ -2,9 +2,10 @@
 <div>
 	<ui-card>
 		<template #title>{{ $t('hided-tags') }}</template>
-		<section>
-			<textarea class="jdnqwkzlnxcfftthoybjxrebyolvoucw" v-model="hidedTags"></textarea>
-			<ui-button @click="save">{{ $t('save') }}</ui-button>
+		<section class="fit-top">
+			<ui-textarea v-model="hidedTags">
+			</ui-textarea>
+			<ui-button @click="save">{{ $t('@._settings.save') }}</ui-button>
 		</section>
 	</ui-card>
 </div>
@@ -22,20 +23,33 @@ export default Vue.extend({
 		};
 	},
 	created() {
-		this.$root.api('admin/meta').then((meta: any) => {
-			this.hidedTags = meta.hidedTags.join('\n');
-		});
+		this.fetch();
 	},
 	methods: {
+		fetch() {
+			this.$root.api('admin/meta').then((meta: any) => {
+				this.hidedTags = meta.hidedTags.join('\n');
+			});
+		},
 		save() {
 			this.$root.api('admin/update-meta', {
 				hidedTags: this.hidedTags ? this.hidedTags.split('\n') : [],
 			}).then(() => {
-				//this.$root.os.apis.dialog({ text: `Saved` });
+				this.$root.dialog({
+					type: 'success',
+					splash: true
+				});
+				this.fetch();
 			}).catch(e => {
-				//this.$root.os.apis.dialog({ text: `Failed ${e}` });
+				console.error('e', e);
+				this.$root.dialog({
+					type: 'error',
+					text: e
+				});
 			});
-		}
+		},
 	}
 });
 </script>
+<style lang="stylus" scoped>
+</style>
