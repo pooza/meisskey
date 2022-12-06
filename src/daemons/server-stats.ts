@@ -35,13 +35,15 @@ export default function() {
 			cpu_speed: cpuSpeed,
 			mem,
 			disk,
-			os_uptime: config.hideServerInfo ? -1 : os.uptime(),
-			process_uptime: config.hideServerInfo ? -1 : process.uptime()
+			os_uptime:  os.uptime(),
+			process_uptime: process.uptime()
 		};
 		ev.emit('serverStats', stats);
 		log.unshift(stats);
 		if (log.length > 200) log.pop();
 	}
+
+	if (config.hideServerInfo) return;
 
 	tick();
 

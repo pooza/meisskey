@@ -101,7 +101,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 		return null;
 	}
 
-	const noteAudience = await parseAudience(actor, note.to, note.cc);
+	const noteAudience = await parseAudience(actor, note.to, note.cc, resolver);
 	let visibility = noteAudience.visibility;
 	const visibleUsers = noteAudience.visibleUsers;
 
@@ -113,7 +113,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 		}
 	}
 
-	const apMentions = await extractApMentions(note.tag);
+	const apMentions = await extractApMentions(note.tag, resolver);
 	const apHashtags = await extractApHashtags(note.tag);
 
 	let isTalk = note._misskey_talk && visibility === 'specified';
@@ -166,7 +166,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 	// 引用
 	let quote: INote | undefined | null;
 
-	if (note._misskey_quote || note.quoteUrl) {
+	if (note._misskey_quote || note.quoteUri || note.quoteUrl) {
 		const tryResolveNote = async (uri: string): Promise<{
 			status: 'ok' | 'permerror' | 'temperror';
 			res?: INote | null;
@@ -191,7 +191,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver | 
 			}
 		};
 
-		const uris = unique([note._misskey_quote, note.quoteUrl].filter(x => typeof x === 'string') as string[]);
+		const uris = unique([note._misskey_quote, note.quoteUri, note.quoteUrl].filter(x => typeof x === 'string') as string[]);
 		const results = await Promise.all(uris.map(uri => tryResolveNote(uri)));
 
 		quote = results.filter(x => x.status === 'ok').map(x => x.res).find(x => x);

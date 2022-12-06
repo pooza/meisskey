@@ -8,9 +8,12 @@
 			<small>{{ host }}</small>
 			<p v-html="description || this.$t('@.about')"></p>
 			<router-link class="signup" to="/signup">{{ $t('@.signup') }}</router-link>
-		</div>
-		<div class="signin">
-			<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
+			<div class="signin">
+				<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
+			</div>
+			<div class="explore">
+				<router-link class="explore" to="/explore">{{ $t('@.explore') }}</router-link>
+			</div>
 		</div>
 		<div class="tl">
 			<mk-welcome-timeline/>
@@ -77,7 +80,7 @@ export default Vue.extend({
 			this.stats = stats;
 		});
 
-		const image = ['image/jpeg','image/png','image/apng','image/gif','image/webp'];
+		const image = ['image/jpeg','image/png','image/apng','image/gif','image/webp', 'image/avif'];
 
 		this.$root.api('notes/featured', {
 			fileType: image,
@@ -146,10 +149,9 @@ export default Vue.extend({
 				margin 8px
 
 			> .signup
-				font-weight bold
-
-		> .signin
-			margin 16px 0
+			> .signin
+			> .explore
+				margin 0.5em
 
 		> .tl
 			margin 16px 0
