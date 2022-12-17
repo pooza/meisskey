@@ -377,7 +377,7 @@ export default defineComponent({
 		},
 
 		chosen(emoji: any, skinTone?: string) {
-			const getKey = (emoji: any) => emoji.char ? this.getSkinToneModifiedChar(emoji.char, skinTone) : `:${emoji.name}:`;
+			const getKey = (emoji: any) => emoji.char ? emoji.st === 1 ? this.getSkinToneModifiedChar(emoji.char, skinTone) : emoji.char : `:${emoji.name}:`;
 
 			let recents = this.$store.state.device.recentEmojis || [];
 			recents = recents.filter((e: any) => getKey(e) !== getKey(emoji));
