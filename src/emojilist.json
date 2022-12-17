@@ -1096,7 +1096,7 @@
   {"category":"objects","char":"⌛","name":"hourglass","keywords":["exam","quiz","test","time","clock","limit","oldschool"]},
   {"category":"objects","char":"📡","name":"satellite","keywords":["radio","space","future","communication"]},
   {"category":"objects","char":"🔋","name":"battery","keywords":["power","energy","sustain"]},
-  {"category":"objects","char":"🪫","name":"battery","keywords":[]},
+  {"category":"objects","char":"🪫","name":"low_battery","keywords":[]},
   {"category":"objects","char":"🔌","name":"electric_plug","keywords":["power","charger"]},
   {"category":"objects","char":"💡","name":"bulb","keywords":["idea","light","electricity"]},
   {"category":"objects","char":"🔦","name":"flashlight","keywords":["dark","night","sight","camping"]},
