@@ -232,19 +232,12 @@ export async function generateAlts(path: string, type: string, generateWeb: bool
 	const webpulicSafe = !metadata.exif && !metadata.iptc && !metadata.xmp && !metadata.tifftagPhotoshop	// has meta
 		&& metadata.width && metadata.width <= 2048 && metadata.height && metadata.height <= 2048;	// or over 2048
 
-	const subsamplingOff = metadata.format === 'jpeg' && metadata.chromaSubsampling === '4:4:4';
-
 	if (generateWeb) {
 		logger.debug(`creating web image`);
 
 		if (['image/jpeg'].includes(type) && !webpulicSafe) { 
-			if (subsamplingOff) {
-				// (Photoshopの書き出しのデフォルトのように) Chroma subsampling を行っていない場合は、意図を汲んで行わないようにする。
-				webpublic = await convertSharpToJpeg(img, 2048, 2048, { disableSubsampling: true });
-			} else {
-				// それ以外は、MozJPEGルーチンを使用する (このあたりのサイズだとWebPより強い)
-				webpublic = await convertSharpToJpeg(img, 2048, 2048, { useMozjpeg: true });
-			}
+			// MozJPEGルーチンを使用する (このあたりのサイズだとWebPより強い)
+			webpublic = await convertSharpToJpeg(img, 2048, 2048, { useMozjpeg: true });
 		} else if (['image/webp'].includes(type) && !webpulicSafe) {
 			webpublic = await convertSharpToWebp(img, 2048, 2048);
 		} else if (['image/avif'].includes(type) && !webpulicSafe) {
