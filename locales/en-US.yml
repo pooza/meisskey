@@ -1655,6 +1655,7 @@ admin/views/federation.vue:
   users: "Users"
   system: "System"
   softwareName: "Software"
+  softwareVersion: "Version"
   following: "Following"
   followers: "Followers"
   caught-at: "Created at"
