@@ -30,16 +30,6 @@ const router = new Router();
 async function inbox(ctx: Router.RouterContext) {
 	if (config.disableFederation) ctx.throw(404);
 
-	// hard limit by Content-Length
-	const len = ctx.headers['content-length']
-	if (typeof len === 'string' && len.match(/^\d+$/)) {
-		const length = Number(len);
-		if (length > 65536) {
-			ctx.status = 413;
-			return;
-		}
-	}
-
 	let signature;
 
 	try {
@@ -49,8 +39,6 @@ async function inbox(ctx: Router.RouterContext) {
 		ctx.status = 401;
 		return;
 	}
-
-	// TODO: この辺でも hard limit
 
 	const queue = await processInbox(ctx.request.body, signature, {
 		ip: ctx.request.ip
