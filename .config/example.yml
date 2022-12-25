@@ -104,8 +104,8 @@ drive:
 # Non-commercial use only
 #enableInstanceGeoIp: true
 
-# Sign to ActivityPub GET request (default: false)
-#signToActivityPubGet: true
+# Sign to ActivityPub GET request (default: true)
+#signToActivityPubGet: flase
 
 # 最初に作成したユーザーを管理者にする (default: false)
 autoAdmin: true
