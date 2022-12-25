@@ -34,7 +34,6 @@ async function inbox(ctx: Router.RouterContext) {
 	const len = ctx.headers['content-length']
 	if (typeof len === 'string' && len.match(/^\d+$/)) {
 		const length = Number(len);
-		console.log(length);
 		if (length > 65536) {
 			ctx.status = 413;
 			return;
