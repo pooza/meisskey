@@ -1457,7 +1457,7 @@ admin/views/instance.vue:
   disable-global-timeline: "Disable global timeline"
   showReplayInPublicTimeline: "Show replay in public timelines"
   disableTimelinePreview: "Disable Timeline when unauthenticated"
-  disableProfileDirectory: "Disable Profile Directory when unauthenticated"
+  disableProfileDirectory: "Disable Explore when unauthenticated"
   invite: "Invite"
   save: "Save"
   saved: "Saved"

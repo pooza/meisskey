@@ -60,7 +60,7 @@ export const meta = {
 		disableProfileDirectory: {
 			validator: $.optional.nullable.bool,
 			desc: {
-				'ja-JP': '未認証時のプロファイルディレクトリを無効にするか否か'
+				'ja-JP': '未認証時のみつけるを無効にするか否か'
 			}
 		},
 
