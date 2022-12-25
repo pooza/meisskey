@@ -100,6 +100,10 @@ drive:
 # Disable Posts (default: false)
 #disablePosts: true
 
+# リバースプロキシからのreal IP addressを取得するためのヘッダー
+# X-Forwarded-For, CF-Connecting-IP など
+proxyIpHeader: 'X-Forwarded-For'
+
 # Enable instance GeoIP lookup (default: false)
 # Non-commercial use only
 #enableInstanceGeoIp: true
