@@ -32,7 +32,6 @@ export default class extends Channel {
 		if (note.visibility !== 'public' && note.visibility !== 'home') return;
 		if (note.user!.host != null) return;
 		if (!this.showReplayInPublicTimeline && note.replyId) return;
-		if (note.hasRemoteMentions) return;
 
 		// Renoteなら再pack
 		if (note.renoteId != null) {
