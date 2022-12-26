@@ -599,7 +599,7 @@ async function notifyExtended(note: INote, nm: NotificationManager) {
 		}
 
 		try {
-			const words: string[] = u.clientSettings.highlightedWords.filter((q: string) => q != null && q.length > 0);
+			const words: string[] = u.clientSettings.highlightedWords.filter((q: string) => q != null && q.length > 0).slice(0, 5);
 
 			const match = words.some(word => text.toLowerCase().includes(word.toLowerCase()));
 
