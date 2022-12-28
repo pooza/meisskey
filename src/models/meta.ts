@@ -184,9 +184,12 @@ export type IMeta = {
 	disableLocalTimeline?: boolean;
 	disableGlobalTimeline?: boolean;
 	showReplayInPublicTimeline?: boolean;
+	disableTimelinePreview?: boolean;
+	disableProfileDirectory?: boolean;
 	enableEmojiReaction?: boolean;
 	useStarForReactionFallback?: boolean;
 	hidedTags?: string[];
+	blockedInstances?: string[];
 	mascotImageUrl?: string;
 	bannerUrl?: string;
 	iconUrl?: string;

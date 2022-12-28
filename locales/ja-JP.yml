@@ -1399,7 +1399,7 @@ common/views/components/mute-and-block.vue:
 common/views/components/settings/extended-notification.vue:
   extended-notification: "拡張通知"
   highlighted-words: "ハイライトワード"
-  highlighted-words-description: "通知したいワードを1行に1つずつ入力します"
+  highlighted-words-description: "通知したいワードを1行に1つずつ入力します。5つまで指定できます。"
   save: "保存"
 
 common/views/components/password-settings.vue:
@@ -1524,6 +1524,7 @@ admin/views/index.vue:
   abuse: "スパム報告"
   queue: "ジョブキュー"
   logs: "ログ"
+  instanceblocks: "インスタンスブロック"
   back-to-misskey: "Misskeyに戻る"
 
 admin/views/dashboard.vue:
@@ -1573,17 +1574,17 @@ admin/views/instance.vue:
   maintainer-config: "管理者情報"
   maintainer-name: "管理者名"
   maintainer-email: "管理者の連絡先"
+  note-and-tl: "投稿とタイムライン"
   drive-config: "ドライブの設定"
   cache-remote-files: "リモートのファイルをキャッシュする"
-  cache-remote-files-desc: "この設定を無効にすると、リモートファイルをキャッシュせず直リンクするようになります。そのためサーバーのストレージを節約できますが、プライバシー設定で直リンクを無効にしているユーザーにはファイルが見えなくなったり、サムネイルが生成されないので通信量が増加します。通常はこの設定をオンにしておくことをおすすめします。"
   local-drive-capacity-mb: "ローカルユーザーひとりあたりのドライブ容量"
   remote-drive-capacity-mb: "リモートユーザーひとりあたりのドライブ容量"
-  mb: "メガバイト単位"
-  recaptcha-config: "reCAPTCHAの設定"
+  captcha-config: "CAPTCHAの設定"
   recaptcha-info: "reCAPTCHAを有効にする場合、reCAPTCHAトークンを取得する必要があります。https://www.google.com/recaptcha/intro/ にアクセスしてトークンを取得してください。"
   enable-recaptcha: "reCAPTCHAを有効にする"
   recaptcha-site-key: "reCAPTCHA site key"
   recaptcha-secret-key: "reCAPTCHA secret key"
+  external-service-integration-config: "外部サービス連携"
   twitter-integration-config: "Twitter連携の設定"
   twitter-integration-info: "コールバックURLは {url} に設定します。"
   enable-twitter-integration: "Twitter連携を有効にする"
@@ -1609,6 +1610,8 @@ admin/views/instance.vue:
   disable-local-timeline: "ローカルタイムラインを無効にする"
   disable-global-timeline: "グローバルタイムラインを無効にする"
   showReplayInPublicTimeline: "公開タイムラインにリプライを表示する"
+  disableTimelinePreview: "未認証時のタイムラインを無効にする"
+  disableProfileDirectory: "未認証時のみつけるを無効にする"
   invite: "招待"
   save: "保存"
   saved: "保存しました"
@@ -1817,6 +1820,7 @@ admin/views/federation.vue:
   users: "ユーザー"
   system: "システム"
   softwareName: "ソフトウェア"
+  softwareVersion: "バージョン"
   following: "フォロー中"
   followers: "フォロワー"
   caught-at: "登録日時"
@@ -1871,6 +1875,10 @@ admin/views/federation.vue:
   chart-spans:
     hour: "1時間ごと"
     day: "1日ごと"
+
+admin/views/instanceblocks.vue:
+  instanceblocks: "インスタンスブロック"
+  blockedInstances-info: "1行に1ホスト記述します。/正規表現/ が使えます。"
 
 admin/views/relay.vue:
   add-relay: "リレーの追加"
@@ -2180,6 +2188,9 @@ mobile/views/pages/user.vue:
   timeline: "タイムライン"
   media: "メディア"
   years-old: "{age}歳"
+  year: "年"
+  month: "月"
+  day: "日"
 
 mobile/views/pages/user/home.vue:
   recent-notes: "最近の投稿"

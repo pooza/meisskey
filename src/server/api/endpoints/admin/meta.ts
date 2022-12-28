@@ -64,6 +64,14 @@ export const meta = {
 				type: 'boolean',
 				description: 'Whether enabled emoji reaction.',
 			},
+			disableTimelinePreview: {
+				type: 'boolean',
+				description: 'Whether disabled unauthenticated Timeline.',
+			},
+			disableProfileDirectory: {
+				type: 'boolean',
+				description: 'Whether disabled unauthenticated Explore.',
+			},
 		}
 	}
 };
@@ -106,6 +114,8 @@ export default define(meta, async (ps, me) => {
 		disableLocalTimeline: instance.disableLocalTimeline,
 		disableGlobalTimeline: instance.disableGlobalTimeline,
 		showReplayInPublicTimeline: instance.showReplayInPublicTimeline,
+		disableTimelinePreview: instance.disableTimelinePreview,
+		disableProfileDirectory: instance.disableProfileDirectory,
 		enableEmojiReaction: instance.enableEmojiReaction,
 		driveCapacityPerLocalUserMb: instance.localDriveCapacityMb,
 		driveCapacityPerRemoteUserMb: instance.remoteDriveCapacityMb,
@@ -129,6 +139,7 @@ export default define(meta, async (ps, me) => {
 
 	if (me && (me.isAdmin || me.isModerator)) {
 		response.hidedTags = instance.hidedTags;
+		response.blockedInstances = instance.blockedInstances;
 		response.recaptchaSecretKey = instance.recaptchaSecretKey;
 		response.proxyAccount = instance.proxyAccount;
 		response.twitterConsumerKey = instance.twitterConsumerKey;
