@@ -113,7 +113,10 @@ export default (os: MiOS) => new Vuex.Store({
 		isSignedIn: state => state.i != null,
 		isAdminOrModerator: state => state.i && (state.i.isAdmin || state.i.isModerator),
 		isAdmin: state => state.i && state.i.isAdmin,
-		role: state => state.i?.isAdmin ? 'Admin' : state.i?.isModerator ? 'Moderator' : null,
+		roles: state => [
+			...(state.i?.isAdmin ? ['admin'] : []),
+			...(state.i?.isModerator ? ['moderator'] : []),
+		],
 	},
 
 	mutations: {

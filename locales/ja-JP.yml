@@ -179,6 +179,10 @@ common:
     "_moderator_": "管理者またはモデレーター権限が必要"
     "_secure_": "サードパーティーアクセス不可"
 
+  roles:
+    admin: Admin
+    moderator: Moderator
+
   empty-timeline-info:
     follow-users-to-make-your-timeline: "ユーザーをフォローすると投稿がタイムラインに表示されます。"
     explore: "ユーザーを探索する"
