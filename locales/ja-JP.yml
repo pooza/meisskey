@@ -183,6 +183,11 @@ common:
     admin: Admin
     moderator: Moderator
 
+  userStatuses:
+    silenced: サイレンス済み
+    suspended: 凍結済み
+    deleted: 削除済み
+
   empty-timeline-info:
     follow-users-to-make-your-timeline: "ユーザーをフォローすると投稿がタイムラインに表示されます。"
     explore: "ユーザーを探索する"
