@@ -1596,6 +1596,7 @@ admin/views/users.vue:
       verified: "Verified account"
       silenced: "Already silenced"
       suspended: "Suspended"
+      deleted: "Deleted"
     origin:
       title: "Origin"
       combined: "Local + Remote"

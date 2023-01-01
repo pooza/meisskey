@@ -1755,6 +1755,7 @@ admin/views/users.vue:
       verified: "公式アカウント"
       silenced: "サイレンス済み"
       suspended: "凍結済み"
+      deleted: "削除済み"
     origin:
       title: "オリジン"
       combined: "ローカル+リモート"
