@@ -100,7 +100,6 @@ export type PackedUser = ThinPackedUser & {
 	usertags?: string[];
 
 	// local
-	isModerator?: boolean;
 	twoFactorEnabled?: boolean;
 	twitter?: {
 		screenName: string;
@@ -134,6 +133,7 @@ export type PackedUser = ThinPackedUser & {
 	hasUnreadSpecifiedNotes?: boolean;
 	hasUnreadMentions?: boolean;
 	pendingReceivedFollowRequestsCount?: number;
+	isModerator?: boolean;
 
 	// my secrets
 	email?: string | null;
