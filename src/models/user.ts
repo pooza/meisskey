@@ -510,6 +510,7 @@ export async function pack(
 			usertags: populateUserTags(),
 
 			...(isLocalUser(db) ? {
+				isModerator: !!db.isModerator,
 				twoFactorEnabled: !!db.twoFactorEnabled,
 
 				twitter: db.twitter ? {
@@ -530,7 +531,6 @@ export async function pack(
 
 		// detail && 自分を見てる
 		...((opts.detail && meId && oidEquals(meId, db._id) && isLocalUser(db)) ? {
-			isModerator: !!db.isModerator,
 			avatarId: toOidStringOrNull(db.avatarId),
 			bannerId: toOidStringOrNull(db.bannerId),
 			alwaysMarkNsfw: !!db.settings?.alwaysMarkNsfw,
