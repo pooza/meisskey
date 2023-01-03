@@ -127,7 +127,7 @@
 		"http-proxy-agent": "5.0.0",
 		"http-signature": "git+https://github.com/mei23/node-http-signature#v1.6.0-mei",
 		"https-proxy-agent": "5.0.1",
-		"iconv": "3.0.1",
+		"iconv-lite": "0.6.3",
 		"insert-text-at-cursor": "0.3.0",
 		"ioredis": "4.28.5",
 		"ip-cidr": "3.0.11",
