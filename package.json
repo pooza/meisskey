@@ -24,9 +24,6 @@
 		"test": "cross-env TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true TS_NODE_PROJECT=\"./test/tsconfig.json\" mocha",
 		"format": "gulp format"
 	},
-	"resolutions": {
-		"lodash": "^4.17.21"
-	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "1.2.36",
 		"@fortawesome/free-brands-svg-icons": "5.15.4",
