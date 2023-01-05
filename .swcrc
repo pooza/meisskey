@@ -17,7 +17,7 @@
 		},
 		"transform": {
 			"legacyDecorator": true,
-			"decoratorMetadata": false
+			"decoratorMetadata": true
 		},
 		"keepClassNames": true
 	},
