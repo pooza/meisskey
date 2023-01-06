@@ -1,3 +1,4 @@
+/* eslint-disable node/no-sync */
 /**
  * webpack configuration
  */
@@ -22,6 +23,7 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 const constants = require('./src/const.json');
 
+// eslint-disable-next-line node/no-unpublished-require
 const mods = fs.existsSync('./mods.json') ? require('./mods.json') : {};
 
 const locales = require('./locales');
