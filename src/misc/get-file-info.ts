@@ -183,22 +183,16 @@ export async function detectTypeWithCheck(path: string): Promise<Type> {
 		ext: ft.ext as string,
 	};
 
-	// quicktime/m4v/m4a だけど h264 と aac で構成されているのは、実際はSafari以外でも再生できちゃうのでmp4扱いにしてしまう
-	if (type.mime === 'video/quicktime' || type.mime === 'video/x-m4v' || type.mime === 'audio/x-m4a') {
+	// mp4系の例外処理
+	// 実際にストリームを含んでるかによってvideo/audioを分ける
+	// ブラウザで再生できるかもしれないので全部mp4扱いにしてしまう
+	if (['video/quicktime', 'video/mp4', 'audio/mp4', 'video/x-m4v', 'audio/x-m4a', 'video/3gpp', 'video/3gpp2'].includes(type.mime)) {
 		const props = await getVideoProps(path);
-		if (props.streams.filter(s => s.codec_type === 'video').length === 0 || props.streams.filter(s => s.codec_type === 'video').every(s => s.codec_name === 'h264')
-			&& (props.streams.filter(s => s.codec_type === 'audio').length === 0 || props.streams.filter(s => s.codec_type === 'audio').every(s => s.codec_name === 'aac'))
-		) {
-			type = TYPE_MP4;
-		}
-	}
+		const hasVideo = props.streams.filter(s => s.codec_type === 'video').length > 0;
 
-	// videoを持たないmp4 videoはaudio扱いにしてしまう
-	if (type.mime === 'video/mp4') {
-		const props = await getVideoProps(path);
-		if (props.streams.filter(s => s.codec_type === 'video').length === 0
-			&& props.streams.filter(s => s.codec_type === 'audio').length > 0
-		) {
+		if (hasVideo) {
+			type = TYPE_MP4;
+		} else {
 			type = TYPE_MP4_AS_AUDIO;
 		}
 	}
