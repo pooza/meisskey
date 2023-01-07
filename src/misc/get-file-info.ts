@@ -6,7 +6,7 @@ import * as FileType from 'file-type';
 import * as probeImageSize from 'probe-image-size';
 import * as FFmpeg from 'fluent-ffmpeg';
 
-// file-typeの出力のフィルタ用
+// 認識対象フィルタ
 const FILE_TYPE_DETECTS = [
 	// Images
 	'image/png',
@@ -45,11 +45,6 @@ const FILE_TYPE_DETECTS = [
 	'audio/x-flac',
 	'audio/vnd.wave',
 ];
-/*
-https://github.com/sindresorhus/file-type/blob/main/supported.js
-https://github.com/sindresorhus/file-type/blob/main/core.js
-https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers
-*/
 
 export const FILE_TYPE_BROWSERSAFE = [
 	// Images
