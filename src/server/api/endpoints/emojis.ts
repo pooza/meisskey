@@ -78,5 +78,7 @@ export default define(meta, async (ps, me) => {
 		});
 
 	// TODO: v13はemojisの下にあるのでなおすかも
-	return await Promise.all(emojis.map(emoji => packXEmoji(emoji)));
+	return {
+		emojis: await Promise.all(emojis.map(emoji => packXEmoji(emoji))),
+	};
 });
