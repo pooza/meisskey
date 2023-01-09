@@ -9,11 +9,13 @@ export const meta = {
 	tags: ['emojis'],
 
 	requireCredential: false,
+	allowGet: true,
+	cacheSec: 60,
 
 	params: {
 		limit: {
 			validator: $.optional.num.range(1, 5000),
-			default: 500
+			default: 5000
 		},
 
 		offset: {
@@ -75,5 +77,6 @@ export default define(meta, async (ps, me) => {
 			skip: ps.offset
 		});
 
+	// TODO: v13はemojisの下にあるのでなおすかも
 	return await Promise.all(emojis.map(emoji => packXEmoji(emoji)));
 });
