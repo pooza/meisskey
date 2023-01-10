@@ -8,11 +8,6 @@ If you find the existing issue, please add your reaction or comment to the issue
 
 ## Tips
 
-### endpoints
-
-基本的にendpointsの下のファイルを削除/移動するような改修は行わない  
-https://github.com/mei23/misskey/issues/86
-
 ### ローカルでテストを動かす方法
 ```
 cp test/test.yml .config/
