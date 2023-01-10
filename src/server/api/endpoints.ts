@@ -124,6 +124,7 @@ const endpoints = files.map(f => {
 		ep = require(`./endpoints/${f}`);
 	} catch (e) {
 		apiLogger.error(`Cannot load EP:${f}`);
+		return null;
 	}
 
 	return {
