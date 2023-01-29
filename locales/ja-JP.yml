@@ -110,6 +110,7 @@ common:
   image: "画像"
   video: "動画"
   audio: "音声"
+  application: "アプリケーション"
   desktop-mode: 'デスクトップ版'
   mobile-mode: 'モバイル版'
   empty: 'ありません！'
@@ -532,6 +533,7 @@ common/views/pages/about.vue:
   popularReactions: "人気のリアクション"
   localActive: "今のユーザー数"
   globalActive: "今のユーザー数 (グローバル)"
+  relays: "参加中のリレー"
   reacters: "よくリアクションするユーザー"
 
 common/views/components/url-preview.vue:
