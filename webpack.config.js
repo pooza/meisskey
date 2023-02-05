@@ -159,7 +159,7 @@ module.exports = {
 	],
 	output: {
 		path: __dirname + '/built/client/assets',
-		filename: `[name].${version}.js`,
+		filename: `[name].${version}.min.js`,
 		publicPath: `/assets/`
 	},
 	resolve: {
