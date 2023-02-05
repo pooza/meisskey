@@ -1,4 +1,5 @@
 import * as tmp from 'tmp';
+import * as fs from 'fs';
 import * as Router from '@koa/router';
 import { getJson } from '../../misc/fetch';
 import summaly from '../../misc/summaly';
@@ -84,6 +85,10 @@ async function convertDataUri(url: string | null | undefined, size = 128): Promi
 		if (['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif'].includes(imageSize.mime)) {
 			const image = await convertToWebp(path, size, size);
 			return `data:image/webp;base64,${image.data.toString('base64')}`;
+		}
+
+		if (['image/x-icon'].includes(imageSize.mime)) {
+			return `data:image/x-icon;base64,${(await fs.promises.readFile(path)).toString('base64')}`;
 		}
 
 		return null;
