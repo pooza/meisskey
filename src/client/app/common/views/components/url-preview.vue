@@ -2,7 +2,7 @@
 <div v-if="playerEnabled" class="player" :style="`padding: ${(player.height || 0) / (player.width || 1) * 100}% 0 0`">
 	<button class="disablePlayer" @click="playerEnabled = false" :title="$t('disable-player')"><fa icon="times"/></button>
 	<iframe :src="player.url + (player.url.match(/\?/) ? '&autoplay=1&auto_play=1' : '?autoplay=1&auto_play=1')" :width="player.width || '100%'" :heigth="player.height || 250" frameborder="0"
-		allow="autoplay; encrypted-media; fullscreen" referrerpolicy="no-referrer"
+		:allow="`autoplay; encrypted-media ${ allowFullscreen ? '; fullscreen' : ''}`" referrerpolicy="no-referrer"
 	/>
 </div>
 <div v-else-if="tweetId && tweetExpanded" class="twitter" ref="twitter">
@@ -169,6 +169,12 @@ export default Vue.extend({
 		// 300pxないと絶対右にはみ出るので左に移動してしまう
 		const areaWidth = (this.$el as HTMLElement)?.clientWidth;
 		if (areaWidth && areaWidth < 300) this.tweetLeft = areaWidth - 290;
+	},
+
+	computed: {
+		allowFullscreen() {
+			return true;	// TODO: 困ったら設定とか出来るようにする
+		},
 	},
 
 	methods: {
