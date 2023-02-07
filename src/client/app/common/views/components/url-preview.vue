@@ -173,7 +173,7 @@ export default Vue.extend({
 
 	computed: {
 		allowFullscreen() {
-			return true;	// TODO: 困ったら設定とか出来るようにする
+			return false;	// TODO: 困ったら設定とか出来るようにする
 		},
 	},
 
