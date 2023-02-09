@@ -38,6 +38,7 @@ module.exports = async (ctx: Router.RouterContext) => {
 		summary.thumbnail = await wrap(summary.thumbnail, 128);
 
 		if (summary.player) summary.player.url = sanitizeUrl(summary.player.url);
+		summary.url = sanitizeUrl(summary.url);
 
 		// Cache 7days
 		ctx.set('Cache-Control', 'max-age=604800');
