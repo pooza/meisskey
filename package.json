@@ -28,7 +28,6 @@
 		"source-map": "^0.7.4"
 	},
 	"dependencies": {
-		"@braintree/sanitize-url": "6.0.2",
 		"@fortawesome/fontawesome-svg-core": "1.2.36",
 		"@fortawesome/free-brands-svg-icons": "5.15.4",
 		"@fortawesome/free-regular-svg-icons": "5.15.4",
