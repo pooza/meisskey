@@ -420,7 +420,9 @@ router.get('/othello', async ctx => ctx.redirect(override(ctx.URL.pathname, 'gam
 router.get('/reversi', async ctx => ctx.redirect(override(ctx.URL.pathname, 'games')));
 
 router.get('/flush', async ctx => {
-	await ctx.render('flush');
+	await ctx.render('flush', {
+		version: config.version
+	});
 });
 
 // streamingに非WebSocketリクエストが来た場合にbase htmlをキャシュ付きで返すと、Proxy等でそのパスがキャッシュされておかしくなる
