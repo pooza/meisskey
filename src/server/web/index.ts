@@ -25,7 +25,7 @@ import { getJSONFeed } from './feed/json';
 import { buildMeta } from '../../misc/build-meta';
 import Page, { packPage } from '../../models/page';
 import { fromHtml } from '../../mfm/from-html';
-import rndstr from 'rndstr';
+import * as crypto from 'crypto';
 const htmlescape = require('htmlescape');
 
 const env = process.env.NODE_ENV;
@@ -34,7 +34,8 @@ const staticAssets = `${__dirname}/../../../assets/`;
 const client = `${__dirname}/../../client/`;
 
 export function genCsp() {
-	const nonce = rndstr(16);
+	const nonce = crypto.randomBytes(16).toString('base64');
+
 	const csp
 	= `base-uri 'none'; `
 	+ `default-src 'none'; `
