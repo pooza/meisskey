@@ -1161,11 +1161,13 @@ desktop/views/components/note-detail.vue:
   location: "Location"
   reply: "Reply"
   renote: "Renote"
+  quote: "Quote"
   add-reaction: "Add a reaction"
   undo-reaction: "Reverse reaction"
 desktop/views/components/note.vue:
   reply: "Reply"
   renote: "Renote"
+  quote: "Quote"
   add-reaction: "Add a reaction"
   undo-reaction: "Reverse reaction"
   detail: "Details"

@@ -1265,12 +1265,14 @@ desktop/views/components/note-detail.vue:
   location: "位置情報"
   reply: "返信"
   renote: "Renote"
+  quote: "引用"
   add-reaction: "リアクション"
   undo-reaction: "リアクション解除"
 
 desktop/views/components/note.vue:
   reply: "返信"
   renote: "Renote"
+  quote: "引用"
   add-reaction: "リアクション"
   undo-reaction: "リアクション解除"
   detail: "詳細"
