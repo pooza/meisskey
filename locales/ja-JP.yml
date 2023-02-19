@@ -1514,10 +1514,7 @@ desktop/views/home/featured.vue:
   all: "すべて"
   excludeNsfw: "閲覧注意を除く"
   excludeSfw: "閲覧注意のみ"
-  days: "集計期間"
-  hour: "時間"
-  day: "日間"
-  years: "年間"
+  minScore: "最低スコア"
 
 admin/views/index.vue:
   dashboard: "ダッシュボード"
@@ -2155,10 +2152,7 @@ mobile/views/pages/featured.vue:
   all: "すべて"
   excludeNsfw: "閲覧注意を除く"
   excludeSfw: "閲覧注意のみ"
-  days: "集計期間"
-  hour: "時間"
-  day: "日間"
-  years: "年間"
+  minScore: "最低スコア"
 
 mobile/views/pages/followers.vue:
   followers-of: "{name}のフォロワー"

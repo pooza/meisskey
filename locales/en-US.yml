@@ -1376,10 +1376,8 @@ desktop/views/home/featured.vue:
   all: "All"
   excludeNsfw: "Exclude NSFW"
   excludeSfw: "NSFW only"
-  days: "Duration"
-  hour: "hours"
-  day: "days"
-  years: "years"
+  minScore: "Min score"
+
 admin/views/index.vue:
   dashboard: "Dashboard"
   instance: "Instance"
@@ -1954,10 +1952,7 @@ mobile/views/pages/featured.vue:
   all: "All"
   excludeNsfw: "Exclude NSFW"
   excludeSfw: "NSFW only"
-  days: "Duration"
-  hour: "hours"
-  day: "days"
-  years: "years"
+  minScore: "Min score"
 mobile/views/pages/followers.vue:
   followers-of: "{name}'s followers"
 mobile/views/pages/following.vue:
