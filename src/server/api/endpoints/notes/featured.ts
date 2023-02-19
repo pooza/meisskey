@@ -123,6 +123,7 @@ export default define(meta, async (ps, user) => {
 	const notes = await Note.find(query, {
 		limit: ps.limit,
 		skip: ps.offset,
+		sort: { _id: -1 }
 	});
 
 	return await packMany(notes, user);
