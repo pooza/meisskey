@@ -142,6 +142,7 @@ common:
   poll_finished: "アンケートが完了しました"
   flush: "キャッシュをクリア"
   signinOrUsePostUrl: "それをするにはサインインするかURLをあなたのインスタンスの検索ボックスに入れてやっていってください。"
+  renoted: "Renoteしました"
 
   permissions:
     "read:account": "アカウントの情報を見る"

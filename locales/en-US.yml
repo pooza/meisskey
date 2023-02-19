@@ -140,6 +140,8 @@ common:
   poll_finished: "Poll finished"
   flush: "Clear cache"
   signinOrUsePostUrl: "To do so, either signin or put the URL into your instance's search box and do it."
+  renoted: "Renoted"
+
   permissions:
     "read:account": "View your account information"
     "write:account": "Edit your account information"
