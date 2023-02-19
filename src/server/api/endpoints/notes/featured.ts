@@ -121,6 +121,7 @@ export default define(meta, async (ps, user) => {
 	}
 
 	const notes = await Note.find(query, {
+		maxTimeMS: 20000,
 		limit: ps.limit,
 		skip: ps.offset,
 		sort: { _id: -1 }
