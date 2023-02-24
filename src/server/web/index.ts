@@ -102,8 +102,8 @@ router.get('/twemoji/*', async ctx => {
 	ctx.set('Content-Security-Policy', `default-src 'none'; style-src 'unsafe-inline'`);
 
 	await send(ctx as any, path, {
-		root: `${__dirname}/../../../node_modules/memoji/dist/svg/`,	
-		maxage: ms('30 days'),
+		root: `${__dirname}/../../../node_modules/memoji/dist/svg/`,
+		maxage: ms('1 days'),
 	});
 });
 
