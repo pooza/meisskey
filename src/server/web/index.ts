@@ -28,8 +28,6 @@ import { fromHtml } from '../../mfm/from-html';
 import * as crypto from 'crypto';
 const htmlescape = require('htmlescape');
 
-const env = process.env.NODE_ENV;
-
 const staticAssets = `${__dirname}/../../../assets/`;
 const client = `${__dirname}/../../client/`;
 
