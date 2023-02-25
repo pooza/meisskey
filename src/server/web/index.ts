@@ -101,7 +101,7 @@ router.get('/twemoji/*', async ctx => {
 
 	await send(ctx as any, path, {
 		root: `${__dirname}/../../../node_modules/memoji/dist/svg/`,
-		maxage: ms('1 days'),
+		maxage: ms('7 days'),
 	});
 });
 
