@@ -189,8 +189,6 @@ export default define(meta, async (ps, user) => {
 	const filterQuery = [{
 		userId: { $in: followingIds }
 	}, {
-		'_reply.userId': user._id
-	}, {
 		mentions: { $in: [ user._id ] }
 	}];
 
