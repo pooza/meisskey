@@ -186,8 +186,12 @@ export default define(meta, async (ps, user) => {
 	const sort = {
 		_id: -1
 	};
-	const followQuery = [{
+	const filterQuery = [{
 		userId: { $in: followingIds }
+	}, {
+		'_reply.userId': user._id
+	}, {
+		mentions: { $in: [ user._id ] }
 	}];
 
 	const visibleQuery = user == null ? [{
@@ -208,8 +212,7 @@ export default define(meta, async (ps, user) => {
 
 			$or: [{
 				$and: [{
-					// フォローしている人の投稿
-					$or: followQuery
+					$or: filterQuery
 				}, {
 					// visible for me
 					$or: visibleQuery
