@@ -4,7 +4,6 @@ import { ILocalUser } from '../../../models/user';
 import { apiLogger } from '../logger';
 import { performance } from 'perf_hooks';
 import { genMeid7 } from '../../../misc/id/meid7';
-import { inspect } from 'util';
 
 function getStages(query: any, sort: Record<string, number>, limit: number) {
 	return [
