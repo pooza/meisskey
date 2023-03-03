@@ -33,6 +33,7 @@ export type Source = {
 
 	disableFederation?: boolean;
 	ignoreApForwarded?: boolean;
+	ignoreForeignLike?: boolean;
 	disableUrlPreview?: boolean;
 	disablePosts?: boolean;
 
