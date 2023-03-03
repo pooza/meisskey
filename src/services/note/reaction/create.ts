@@ -7,26 +7,12 @@ import { renderLike } from '../../../remote/activitypub/renderer/like';
 import { deliverToUser, deliverToFollowers } from '../../../remote/activitypub/deliver-manager';
 import { renderActivity } from '../../../remote/activitypub/renderer';
 import { toDbReaction, decodeReaction } from '../../../misc/reaction-lib';
-import deleteReaction from './delete';
 import { packEmojis } from '../../../misc/pack-emojis';
 import Meta from '../../../models/meta';
+import { IdentifiableError } from '../../../misc/identifiable-error';
 
 export default async (user: IUser, note: INote, reaction?: string, dislike = false): Promise<INoteReaction> => {
 	reaction = await toDbReaction(reaction, true, user.host);
-
-	const exist = await NoteReaction.findOne({
-		noteId: note._id,
-		userId: user._id,
-		deletedAt: { $exists: false }
-	});
-
-	if (exist) {
-		if (exist.reaction !== reaction) {
-			await deleteReaction(user, note);
-		} else {
-			return exist;
-		}
-	}
 
 	const inserted = await NoteReaction.insert({
 		createdAt: new Date(),
@@ -34,6 +20,12 @@ export default async (user: IUser, note: INote, reaction?: string, dislike = fal
 		userId: user._id,
 		reaction,
 		dislike
+	}).catch(e => {
+		if (e.code === 11000) {
+			throw new IdentifiableError('51c42bb4-931a-456b-bff7-e5a8a70dd298', 'already reacted');
+		} else {
+			throw e;
+		}
 	});
 
 	// Increment reactions count

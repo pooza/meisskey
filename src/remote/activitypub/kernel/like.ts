@@ -11,6 +11,12 @@ export default async (actor: IRemoteUser, activity: ILike): Promise<string> => {
 
 	await extractEmojis(activity.tag, actor.host).catch(() => null);
 
-	await create(actor, note, activity._misskey_reaction || activity.content || activity.name, getApType(activity) === 'Dislike');
+	await create(actor, note, activity._misskey_reaction || activity.content || activity.name, getApType(activity) === 'Dislike').catch(e => {
+		if (e.id === '51c42bb4-931a-456b-bff7-e5a8a70dd298') {
+			// ignore duplicated
+		} else {
+			throw e;
+		}
+	});
 	return `ok`;
 };
