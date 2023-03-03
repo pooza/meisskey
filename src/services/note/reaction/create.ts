@@ -10,6 +10,7 @@ import { toDbReaction, decodeReaction } from '../../../misc/reaction-lib';
 import { packEmojis } from '../../../misc/pack-emojis';
 import Meta from '../../../models/meta';
 import { IdentifiableError } from '../../../misc/identifiable-error';
+import config from '../../../config';
 
 export default async (user: IUser, note: INote, reaction?: string, dislike = false): Promise<INoteReaction> => {
 	reaction = await toDbReaction(reaction, true, user.host);
@@ -66,7 +67,7 @@ export default async (user: IUser, note: INote, reaction?: string, dislike = fal
 	if (isLocalUser(user) && !note.localOnly && !user.noFederation) {
 		const content = renderActivity(await renderLike(inserted, note), user);
 		if (isRemoteUser(note._user)) deliverToUser(user, content, note._user);
-		deliverToFollowers(user, content, true);
+		if (!config.disableLikeBroadcast) deliverToFollowers(user, content, true);
 		//deliverToRelays(user, content);
 	}
 	//#endregion

@@ -99,6 +99,9 @@ drive:
 # 自インスタンスが関係してないLike (リアクション) を無視する (default: false)
 #ignoreForeignLike: true
 
+# Like (リアクション) を直接した相手のインスタンス以外に配信しない (default: false)
+#disableLikeBroadcast: true
+
 # Disable URL Preview (default: false)
 #disableUrlPreview: true
 
