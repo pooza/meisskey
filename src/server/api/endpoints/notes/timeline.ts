@@ -1,5 +1,4 @@
 import $ from 'cafy';
-import * as mongo from 'mongodb';
 import ID, { transform } from '../../../../misc/cafy-id';
 import { getFriendIds } from '../../common/get-friends';
 import define from '../../define';
@@ -176,8 +175,6 @@ export default define(meta, async (ps, user) => {
 
 	const filterQuery = [{
 		userId: { $in: followingIds }
-	}, {
-		'_reply.userId': user._id
 	}, {
 		mentions: { $in: [ user._id ] }
 	}];
