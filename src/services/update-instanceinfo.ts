@@ -2,7 +2,7 @@ import { getJson, getHtml } from '../misc/fetch';
 import Instance, { IInstance } from '../models/instance';
 import { toApHost } from '../misc/convert-host';
 import Logger from './logger';
-import { InboxRequestData } from '../queue';
+import { InboxRequestData } from '../queue/types';
 import { geoIpLookup } from './geoip';
 import { JSDOM } from 'jsdom';
 import config from '../config';
