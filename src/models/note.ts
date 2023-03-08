@@ -21,6 +21,7 @@ import { extractMfmTypes } from '../mfm/extract-mfm-types';
 import { nyaize } from '../misc/nyaize';
 import { extractEmojis } from '../mfm/extract-emojis';
 import { sanitizeUrl } from '../misc/sanitize-url';
+import { getHideUserIdsById } from '../server/api/common/get-hide-users';
 
 const Note = db.get<INote>('notes');
 Note.createIndex('uri', { sparse: true, unique: true });
@@ -296,7 +297,33 @@ export const pack = async (
 		return null;
 	}
 
-	const reactionCounts = db.reactionCounts ? decodeReactionCounts(db.reactionCounts) : {};
+	const populateReactions = async () => {
+		const hideUserIds = await getHideUserIdsById(meId, true, true);
+
+		const reactions = await NoteReaction.aggregate([
+			{
+				$match: {
+					noteId: db!._id,
+					userId: { $nin: hideUserIds },
+				}
+			},
+			{
+				$group: {
+					_id: '$reaction',
+					count: { $sum: 1 }
+				}
+			}
+		]) as { _id: string, count: number }[];
+
+		const reactionCounts = {} as Record<string, number>;
+		for (const reaction of reactions) {
+			reactionCounts[reaction._id] = reaction.count;
+		}
+
+		return decodeReactionCounts(reactionCounts);
+	};
+
+	const reactionCounts = await populateReactions();
 
 	const populateEmojis = async () => {
 		// _note._userを消す前か、_note.userを解決した後でないとホストがわからない
