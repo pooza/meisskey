@@ -104,7 +104,7 @@ export default define(meta, async (ps, user) => {
 	}
 
 	if (user) {
-		const hideUserIds = await getHideUserIdsById(user._id, false, true);
+		const hideUserIds = await getHideUserIdsById(user._id, true, true);
 		query.userId = { $nin: hideUserIds };
 	}
 
