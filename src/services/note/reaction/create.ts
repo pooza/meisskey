@@ -11,8 +11,20 @@ import { packEmojis } from '../../../misc/pack-emojis';
 import Meta from '../../../models/meta';
 import { IdentifiableError } from '../../../misc/identifiable-error';
 import config from '../../../config';
+import Blocking from '../../../models/blocking';
 
 export default async (user: IUser, note: INote, reaction?: string, dislike = false): Promise<INoteReaction> => {
+	if (note.userId !== user._id) {
+		const blocked = await Blocking.findOne({
+			blockeeId: user._id,
+			blockerId: note.userId,
+		});
+
+		if (blocked) {
+			throw new IdentifiableError('e70412a4-7197-4726-8e74-f3e0deb92aa7');
+		}
+	}
+
 	reaction = await toDbReaction(reaction, true, user.host);
 
 	const inserted = await NoteReaction.insert({
