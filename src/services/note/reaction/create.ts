@@ -1,10 +1,10 @@
-import { IUser, isLocalUser, isRemoteUser } from '../../../models/user';
+import User, { IUser, isLocalUser, isRemoteUser, IRemoteUser } from '../../../models/user';
 import Note, { INote, pack } from '../../../models/note';
 import NoteReaction, { INoteReaction } from '../../../models/note-reaction';
 import { publishNoteStream, publishHotStream } from '../../stream';
 import { createNotification } from '../../create-notification';
 import { renderLike } from '../../../remote/activitypub/renderer/like';
-import { deliverToUser, deliverToFollowers } from '../../../remote/activitypub/deliver-manager';
+import DeliverManager from '../../../remote/activitypub/deliver-manager';
 import { renderActivity } from '../../../remote/activitypub/renderer';
 import { toDbReaction, decodeReaction } from '../../../misc/reaction-lib';
 import { packEmojis } from '../../../misc/pack-emojis';
@@ -78,12 +78,19 @@ export default async (user: IUser, note: INote, reaction?: string, dislike = fal
 	//#region 配信
 	if (isLocalUser(user) && !note.localOnly && !user.noFederation) {
 		const content = renderActivity(await renderLike(inserted, note), user);
-		if (config.disableLikeBroadcast) {
-			if (isRemoteUser(note._user)) deliverToUser(user, content, note._user);
-		} else {
-			deliverToFollowers(user, content, true);
+
+		const dm = new DeliverManager(user, content)
+
+		if (isRemoteUser(note._user)) {
+			const reactee = await User.findOne({ _id: note.userId });
+			if (isRemoteUser(reactee)) dm.addDirectRecipe(reactee);
 		}
-		//deliverToRelays(user, content);
+
+		if (!config.disableLikeBroadcast) {
+			dm.addFollowersRecipe();
+		}
+
+		dm.execute();
 	}
 	//#endregion
 
