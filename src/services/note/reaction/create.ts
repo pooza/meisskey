@@ -90,7 +90,7 @@ export default async (user: IUser, note: INote, reaction?: string, dislike = fal
 			dm.addFollowersRecipe();
 		}
 
-		dm.execute();
+		dm.execute(true);
 	}
 	//#endregion
 
