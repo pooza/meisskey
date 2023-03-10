@@ -200,6 +200,12 @@ router.get(['/@:user', '/@:user/:sub'], async (ctx, next) => {
 		const meta = await fetchMeta();
 		const builded = await buildMeta(meta, false);
 
+		const me = user.fields
+			? user.fields
+				.filter(filed => filed.value != null && filed.value.match(/^https?:/))
+				.map(field => field.value)
+			: [];
+
 		const { csp, nonce } = genCsp();
 	
 		await ctx.render('user', {
@@ -207,6 +213,7 @@ router.get(['/@:user', '/@:user/:sub'], async (ctx, next) => {
 			nonce,
 			initialMeta: htmlescape(builded),
 			user,
+			me,
 			sub: ctx.params.sub,
 			instanceName: meta.name,
 			icon: config.icons?.favicon?.url,

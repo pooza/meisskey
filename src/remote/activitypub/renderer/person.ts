@@ -33,7 +33,7 @@ export default async (user: ILocalUser) => {
 				type: 'PropertyValue',
 				name: field.name,
 				value: (field.value != null && field.value.match(/^https?:/))
-					? `<a href="${new URL(field.value).href}" rel="nofollow noopener" target="_blank">${new URL(field.value).href}</a>`
+					? `<a href="${new URL(field.value).href}" rel="me nofollow noopener" target="_blank">${new URL(field.value).href}</a>`
 					: field.value
 			});
 		}
