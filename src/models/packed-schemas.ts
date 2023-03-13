@@ -91,8 +91,8 @@ export type PackedUser = ThinPackedUser & {
 		name: string;
 		value: string;
 	}[];
-	followersCount?: number;
-	followingCount?: number;
+	followersCount?: number | null;
+	followingCount?: number | null;
 	notesCount?: number;
 	pinnedNoteIds?: string[];
 	pinnedNotes?: PackedNote[]
