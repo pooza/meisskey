@@ -556,26 +556,24 @@ async function insertNote(user: IUser, data: Option, tags: string[], emojis: str
 }
 
 function index(note: INote) {
+	if (note.visibility !== 'public') return;
+
 	if (config.mecabSearch) {
 		// for search
 		getIndexer(note).then(mecabWords => {
-			if (note.visibility === 'public' || note.visibility === 'home') {
-				console.log(`Index: ${note._id} ${JSON.stringify(mecabWords)}`);
-			}
+			console.log(`Index: ${note._id} ${JSON.stringify(mecabWords)}`);
 			Note.findOneAndUpdate({ _id: note._id }, {
 				$set: { mecabWords }
 			});
 		});
 
 		// for trend
-		if (note.visibility === 'public' || note.visibility === 'home') {
-			getWordIndexer(note).then(trendWords => {
-				console.log(`WordIndex: ${note._id} ${JSON.stringify(trendWords)}`);
-				Note.findOneAndUpdate({ _id: note._id }, {
-					$set: { trendWords }
-				});
+		getWordIndexer(note).then(trendWords => {
+			console.log(`WordIndex: ${note._id} ${JSON.stringify(trendWords)}`);
+			Note.findOneAndUpdate({ _id: note._id }, {
+				$set: { trendWords }
 			});
-		}
+		});
 	}
 }
 
