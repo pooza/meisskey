@@ -106,6 +106,7 @@ common:
   deck: "デッキ"
   undeck: "デッキ解除"
   timeline: "タイムライン"
+  top: "トップ"
   explore: "みつける"
   new-post: "新規投稿"
   featured: "ハイライト"

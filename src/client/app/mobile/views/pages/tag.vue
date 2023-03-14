@@ -10,7 +10,7 @@
 		<div class="search-area">
 			<x-search-box :word="`#${$route.params.tag}`"/>
 		</div>
-		<mk-post-form class="form" :fixedTag="$route.params.tag"/>
+		<mk-post-form v-if="$store.getters.isSignedIn" class="form" :fixedTag="$route.params.tag"/>
 		<mk-notes ref="timeline" :make-promise="makePromise" @inited="inited"/>
 	</main>
 </mk-ui>

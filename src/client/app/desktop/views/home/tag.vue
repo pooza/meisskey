@@ -1,7 +1,7 @@
 <template>
 <div class="tagtl513">
 	<header>{{ `#${$route.params.tag}` }}</header>
-	<mk-post-form class="form" :fixedTag="$route.params.tag"/>
+	<mk-post-form v-if="$store.getters.isSignedIn" class="form" :fixedTag="$route.params.tag"/>
 	<mk-notes ref="timeline" :make-promise="makePromise" @inited="inited">
 	</mk-notes>
 </div>

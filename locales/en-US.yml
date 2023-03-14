@@ -104,6 +104,7 @@ common:
   deck: "Deck"
   undeck: "Leave Deck"
   timeline: "Timeline"
+  top: "Top"
   explore: "Explore"
   new-post: "New post"
   featured: "Featured notes"
