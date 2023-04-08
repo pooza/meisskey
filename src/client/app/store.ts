@@ -94,7 +94,6 @@ const defaultDeviceSettings = Object.assign({
 	showDislikeInPicker: false,
 	enableRandomReactionPicker: false,
 	appType: 'auto',
-	emojiFlavor: 'default',
 	emojiSkinTone: null,
 	nitter: '',
 }, mods.defaultDeviceSettings || {});
