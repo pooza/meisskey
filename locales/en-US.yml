@@ -207,6 +207,7 @@ common:
     explore: "Find users"
   post-form:
     enter-username: "Please enter username"
+    tweet-question: "Paste as Tweet?"
   weekday-short:
     sunday: "S"
     monday: "M"

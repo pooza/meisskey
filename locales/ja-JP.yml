@@ -214,6 +214,7 @@ common:
 
   post-form:
     enter-username: "ユーザー名を入力してください"
+    tweet-question: "ツイートとして貼り付けますか？"
 
   weekday-short:
     sunday: "日"
