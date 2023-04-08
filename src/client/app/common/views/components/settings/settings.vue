@@ -89,6 +89,14 @@
 				<ui-radio v-model="visibilityColoring" value="bg">{{ $t('@._settings.visibilityColoring-bg') }}</ui-radio>
 				<ui-radio v-model="visibilityColoring" value="left">{{ $t('@._settings.visibilityColoring-left') }}</ui-radio>
 			</section>
+
+			<section>
+				<header>{{ $t('@._settings.customEmojiStyle') }}</header>
+				<ui-radio v-model="customEmojiStyle" value="large">{{ $t('@._settings.customEmojiStyle-large') }}</ui-radio>
+				<ui-radio v-model="customEmojiStyle" value="normal">{{ $t('@._settings.customEmojiStyle-normal') }}</ui-radio>
+				<ui-radio v-model="customEmojiStyle" value="stamp">{{ $t('@._settings.customEmojiStyle-stamp') }}</ui-radio>
+			</section>
+
 			<section v-if="isAdvanced">
 				<ui-switch v-model="games_reversi_showBoardLabels">{{ $t('@._settings.show-reversi-board-labels') }}</ui-switch>
 				<ui-switch v-model="games_reversi_useAvatarStones">{{ $t('@._settings.use-avatar-reversi-stones') }}</ui-switch>
@@ -434,6 +442,11 @@ export default Vue.extend({
 		visibilityColoring: {
 			get() { return this.$store.state.device.visibilityColoring || 'left'; },
 			set(value) { this.$store.commit('device/set', { key: 'visibilityColoring', value }); }
+		},
+
+		customEmojiStyle: {
+			get() { return this.$store.state.device.customEmojiStyle || 'stamp'; },
+			set(value) { this.$store.commit('device/set', { key: 'customEmojiStyle', value }); }
 		},
 
 		enableSounds: {
