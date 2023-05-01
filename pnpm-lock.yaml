@@ -55,7 +55,7 @@ specifiers:
   '@types/request-stats': 3.0.0
   '@types/seedrandom': 3.0.5
   '@types/sharp': 0.31.1
-  '@types/showdown': 2.0.0
+  '@types/showdown': 2.0.1
   '@types/speakeasy': 2.0.7
   '@types/suncalc': 1.9.0
   '@types/tinycolor2': 1.4.3
@@ -396,7 +396,7 @@ devDependencies:
   '@types/request-stats': 3.0.0
   '@types/seedrandom': 3.0.5
   '@types/sharp': 0.31.1
-  '@types/showdown': 2.0.0
+  '@types/showdown': 2.0.1
   '@types/speakeasy': 2.0.7
   '@types/suncalc': 1.9.0
   '@types/tinycolor2': 1.4.3
@@ -2284,8 +2284,8 @@ packages:
       '@types/node': 18.11.18
     dev: true
 
-  /@types/showdown/2.0.0:
-    resolution: {integrity: sha512-70xBJoLv+oXjB5PhtA8vo7erjLDp9/qqI63SRHm4REKrwuPOLs8HhXwlZJBJaB4kC18cCZ1UUZ6Fb/PLFW4TCA==}
+  /@types/showdown/2.0.1:
+    resolution: {integrity: sha512-xdnAw2nFqomkaL0QdtEk0t7yz26UkaVPl4v1pYJvtE1T0fmfQEH3JaxErEhGByEAl3zUZrkNBlneuJp0WJGqEA==}
     dev: true
 
   /@types/speakeasy/2.0.7:
