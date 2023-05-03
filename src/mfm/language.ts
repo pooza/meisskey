@@ -332,7 +332,7 @@ export const mfmLanguage = P.createLanguage({
 				return createMfmNode('link',
 				{
 					silent: false,
-					url: `https://www.dlsite.com/home/announce/=/product_id/${x}.html`,
+					url: `https://www.dlsite.com/home/work/=/product_id/${x}.html`,
 				}, [createMfmNode('text', { text: x })]);
 			}),
 			P.regexp(/([RVB][G](\d{5}))/, 1).map((x: any) => {

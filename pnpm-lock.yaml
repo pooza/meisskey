@@ -168,7 +168,7 @@ specifiers:
   stringz: 2.1.0
   stylus: 0.59.0
   stylus-loader: 7.1.0
-  summaly: mei23/summaly#3.3.0
+  summaly: mei23/summaly#3.4.0
   suncalc: 1.9.0
   systeminformation: 5.17.12
   syuilo-password-strength: 0.0.1
@@ -318,7 +318,7 @@ dependencies:
   stringz: 2.1.0
   stylus: 0.59.0
   stylus-loader: 7.1.0_nekjw7fijtqu3qyocafh57c5qi
-  summaly: github.com/mei23/summaly/812bb61a2be3794a9cbce72efb7dcce3002e72cf
+  summaly: github.com/mei23/summaly/cc381e443350046c46e5b3508eac0984f93cecea
   suncalc: 1.9.0
   systeminformation: 5.17.12
   syuilo-password-strength: 0.0.1
@@ -5980,18 +5980,18 @@ packages:
       '@sinclair/typebox': 0.25.23
       ajv: 8.12.0
       ajv-formats: 2.1.1
-      h3: 1.5.0
+      h3: 1.6.4
     dev: false
 
-  /h3/1.5.0:
-    resolution: {integrity: sha512-M+T6P4iOB0ipkC/ZCdw2w8iTF7yY6phmkILOwlrtcPuVv+KW9BilOspYlvnblpKx1nnNl+3iBsZIvZ8pvKM8Nw==}
+  /h3/1.6.4:
+    resolution: {integrity: sha512-uoDNeaoeDRwWBtwwi4siZ6l5sBmDJpnpcBssuAbvsaPBonl8vP7Ym4tFPe+tAvGM0GbUoC24wYcloCG+J9hqmA==}
     dependencies:
       cookie-es: 0.5.0
       defu: 6.1.2
       destr: 1.2.2
-      iron-webcrypto: 0.5.0
-      radix3: 1.0.0
-      ufo: 1.1.0
+      iron-webcrypto: 0.6.0
+      radix3: 1.0.1
+      ufo: 1.1.1
       uncrypto: 0.1.2
     dev: false
 
@@ -6386,8 +6386,8 @@ packages:
     engines: {node: '>= 10'}
     dev: false
 
-  /iron-webcrypto/0.5.0:
-    resolution: {integrity: sha512-9m0tDUIo+GPwDYi1CNlAW3ToIFTS9y88lf41KsEwbBsL4PKNjhrNDGoA0WlB6WWaJ6pgp+FOP1+6ls0YftivyA==}
+  /iron-webcrypto/0.6.0:
+    resolution: {integrity: sha512-WYgEQttulX/+JTv1BTJFYY3OsAb+ZnCuA53IjppZMyiRsVdGeEuZ/k4fJrg77Rzn0pp9/PgWtXUF+5HndDA5SQ==}
     dev: false
 
   /is-absolute/1.0.0:
@@ -9141,8 +9141,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /radix3/1.0.0:
-    resolution: {integrity: sha512-6n3AEXth91ASapMVKiEh2wrbFJmI+NBilrWE0AbiGgfm0xet0QXC8+a3K19r1UVYjUjctUgB053c3V/J6V0kCQ==}
+  /radix3/1.0.1:
+    resolution: {integrity: sha512-y+AcwZ3HcUIGc9zGsNVf5+BY/LxL+z+4h4J3/pp8jxSmy1STaCocPS3qrj4tA5ehUSzqtqK+0Aygvz/r/8vy4g==}
     dev: false
 
   /randombytes/2.1.0:
@@ -10629,8 +10629,8 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
 
-  /ufo/1.1.0:
-    resolution: {integrity: sha512-LQc2s/ZDMaCN3QLpa+uzHUOQ7SdV0qgv3VBXOolQGXTaaZpIur6PwUclF5nN2hNkiTRcUugXd1zFOW3FLJ135Q==}
+  /ufo/1.1.1:
+    resolution: {integrity: sha512-MvlCc4GHrmZdAllBc0iUDowff36Q9Ndw/UzqmEKyrfSzokTd9ZCy1i+IIk5hrYKkjoYVQyNbrw7/F8XJ2rEwTg==}
     dev: false
 
   /unbox-primitive/1.0.2:
@@ -11556,15 +11556,15 @@ packages:
       sshpk: 1.17.0
     dev: false
 
-  github.com/mei23/summaly/812bb61a2be3794a9cbce72efb7dcce3002e72cf:
-    resolution: {tarball: https://codeload.github.com/mei23/summaly/tar.gz/812bb61a2be3794a9cbce72efb7dcce3002e72cf}
+  github.com/mei23/summaly/cc381e443350046c46e5b3508eac0984f93cecea:
+    resolution: {tarball: https://codeload.github.com/mei23/summaly/tar.gz/cc381e443350046c46e5b3508eac0984f93cecea}
     name: summaly
-    version: 3.3.0
+    version: 3.4.0
     dependencies:
       cheerio: 1.0.0-rc.12
       escape-regexp: 0.0.1
       got: 11.8.6
-      h3: 1.5.0
+      h3: 1.6.4
       h3-typebox: 0.6.0
       html-entities: 2.3.3
       iconv-lite: 0.6.3
