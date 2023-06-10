@@ -68,9 +68,7 @@ module.exports = (server: http.Server) => {
 		// init lastActive
 		let lastActive = Date.now();
 		const updateLastActive = () => {
-			streamLogger.debug(`[${userHash}] active`);
 			lastActive = Date.now();
-			if (client.user) activeUsersChart.update(client.user);
 		};
 		updateLastActive();
 
@@ -117,23 +115,32 @@ module.exports = (server: http.Server) => {
 
 		const main = new MainStreamConnection(ws, ev, client.user, client.app);
 
+		// 定期的にpingと無応答切断をする
+		const intervalId = setInterval(() => {
+			streamLogger.debug(`[${userHash}] send ping`);
+			ws.ping();
+
+			if (Date.now() - lastActive > 10 * 60 * 1000) {
+				streamLogger.debug(`[${userHash}] timeout`);
+				ws.terminate();
+			}
+		}, 1 * 60 * 1000);
+
+		// 定期的にアクティブユーザーを更新する
+		const intervalId2 = setInterval(() => {
+			if (client.user) {
+				streamLogger.debug(`[${userHash}] update active user`);
+				activeUsersChart.update(client.user);
+			}
+		}, 5 * 60 * 1000);
+
 		ws.once('close', () => {
 			streamLogger.debug(`[${userHash}] close`);
 			ev.removeAllListeners();
 			main.dispose();
 			clearInterval(intervalId);
+			clearInterval(intervalId2);
 		});
-
-		// maintain connection
-		const intervalId = setInterval(() => {
-			streamLogger.debug(`[${userHash}] send ping`);
-			ws.ping();
-
-			if (Date.now() - lastActive > 30 * 60 * 1000) {
-				streamLogger.debug(`[${userHash}] timeout`);
-				ws.terminate();
-			}
-		}, 1 * 60 * 1000);
 	});
 }
 
