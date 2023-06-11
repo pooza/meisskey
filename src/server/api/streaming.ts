@@ -80,6 +80,7 @@ module.exports = (server: http.Server) => {
 
 			// implement app layer ping
 			if (data.toString() === 'ping') {
+				streamLogger.debug(`[${userHash}] app pong`);
 				ws.send('pong');
 			}
 		});
@@ -121,7 +122,7 @@ module.exports = (server: http.Server) => {
 			ws.ping();
 
 			if (Date.now() - lastActive > 10 * 60 * 1000) {
-				streamLogger.debug(`[${userHash}] timeout`);
+				streamLogger.warn(`[${userHash}] user=${client.user?.username} timeout`);
 				ws.terminate();
 			}
 		}, 1 * 60 * 1000);
