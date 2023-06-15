@@ -82,7 +82,7 @@ specifiers:
   content-disposition: 0.5.4
   crc-32: 1.2.2
   cross-env: 7.0.3
-  css-loader: 6.7.3
+  css-loader: 6.8.1
   cssnano: 5.1.15
   date-fns: 2.30.0
   deepcopy: 0.6.3
@@ -144,7 +144,7 @@ specifiers:
   parse5: 6.0.1
   parsimmon: 1.18.1
   postcss: 8.4.24
-  postcss-loader: 7.3.0
+  postcss-loader: 7.3.3
   private-ip: 2.3.4
   probe-image-size: 7.2.3
   progress-bar-webpack-plugin: 2.1.0
@@ -177,7 +177,7 @@ specifiers:
   three: 0.131.3
   tinycolor2: 1.4.2
   tmp: 0.2.1
-  ts-loader: 9.4.2
+  ts-loader: 9.4.3
   ts-node: 10.9.1
   twemoji-parser: git+https://github.com/mei23/twemoji-parser.git#15.0.1
   typescript: 4.9.5
@@ -235,7 +235,7 @@ dependencies:
   chalk: 4.1.2
   content-disposition: 0.5.4
   crc-32: 1.2.2
-  css-loader: 6.7.3_webpack@5.81.0
+  css-loader: 6.8.1_webpack@5.81.0
   cssnano: 5.1.15_postcss@8.4.24
   date-fns: 2.30.0
   deepcopy: 0.6.3
@@ -294,7 +294,7 @@ dependencies:
   parse5: 6.0.1
   parsimmon: 1.18.1
   postcss: 8.4.24
-  postcss-loader: 7.3.0_yvo6edax6mswwefc5ilktoyk4e
+  postcss-loader: 7.3.3_yvo6edax6mswwefc5ilktoyk4e
   private-ip: 2.3.4
   probe-image-size: 7.2.3
   progress-bar-webpack-plugin: 2.1.0_webpack@5.81.0
@@ -327,7 +327,7 @@ dependencies:
   three: 0.131.3
   tinycolor2: 1.4.2
   tmp: 0.2.1
-  ts-loader: 9.4.2_ybtdev5u3uq5lbn65ob7n63pkm
+  ts-loader: 9.4.3_ybtdev5u3uq5lbn65ob7n63pkm
   ts-node: 10.9.1_svwln7mkps5vyg6vi63jqa2k6q
   twemoji-parser: github.com/mei23/twemoji-parser/75831bfddb415cefc1e89ac5232e883daf91a624
   typescript: 4.9.5
@@ -339,7 +339,7 @@ dependencies:
   vue-content-loading: 1.6.0
   vue-i18n: 8.28.2_vue@2.7.14
   vue-js-modal: 1.3.35_vue@2.7.14
-  vue-loader: 15.10.1_zaahi2bxwjsggfikste5vdhghu
+  vue-loader: 15.10.1_vxcan43kcw762hlc5egcu7d6iy
   vue-router: 3.6.5_vue@2.7.14
   vue-sequential-entrance: 1.1.3
   vue-style-loader: 4.1.3
@@ -4251,8 +4251,8 @@ packages:
   /core-util-is/1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
-  /cosmiconfig/8.1.3:
-    resolution: {integrity: sha512-/UkO2JKI18b5jVMJUp0lvKFMpa/Gye+ZgZjKD+DGEN9y7NRcf/nK1A0sp67ONmKtnDCNMS44E6jrk0Yc3bDuUw==}
+  /cosmiconfig/8.2.0:
+    resolution: {integrity: sha512-3rTMnFJA1tCOPwRxtgF4wd7Ab2qvDbL8jX+3smjIbS4HlZBagTlpERbdN7iAbWlrfxE3M8c27kTwTawQ7st+OQ==}
     engines: {node: '>=14'}
     dependencies:
       import-fresh: 3.3.0
@@ -4303,8 +4303,8 @@ packages:
       postcss: 8.4.24
     dev: false
 
-  /css-loader/6.7.3_webpack@5.81.0:
-    resolution: {integrity: sha512-qhOH1KlBMnZP8FzRO6YCH9UHXQhVMcEGLyNdb7Hv2cpcmJbW0YrddO+tG1ab5nT41KpHIYGsbeHqxB9xPu1pKQ==}
+  /css-loader/6.8.1_webpack@5.81.0:
+    resolution: {integrity: sha512-xDAXtEVGlD0gJ07iclwWVkLoZOpEvAWaSyf6W18S2pOC//K8+qUDIx8IIT3D+HjnmkJPQeesOPv5aiUaJsCM2g==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
@@ -4312,11 +4312,11 @@ packages:
       icss-utils: 5.1.0_postcss@8.4.24
       postcss: 8.4.24
       postcss-modules-extract-imports: 3.0.0_postcss@8.4.24
-      postcss-modules-local-by-default: 4.0.0_postcss@8.4.24
+      postcss-modules-local-by-default: 4.0.3_postcss@8.4.24
       postcss-modules-scope: 3.0.0_postcss@8.4.24
       postcss-modules-values: 4.0.0_postcss@8.4.24
       postcss-value-parser: 4.2.0
-      semver: 7.3.8
+      semver: 7.5.0
       webpack: 5.81.0_r7gxib5pjp6kfhl7p7ay64x7oe
     dev: false
 
@@ -4905,14 +4905,6 @@ packages:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
     dependencies:
       once: 1.4.0
-    dev: false
-
-  /enhanced-resolve/5.12.0:
-    resolution: {integrity: sha512-QHTXI/sZQmko1cbDoNAa3mJ5qhWUUNAq3vR0/YiD379fWQrcfuoX1+HW2S0MTt7XmoPLapdaDKUtelUSPic7hQ==}
-    engines: {node: '>=10.13.0'}
-    dependencies:
-      graceful-fs: 4.2.10
-      tapable: 2.2.1
     dev: false
 
   /enhanced-resolve/5.13.0:
@@ -7015,11 +7007,6 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
 
-  /klona/2.0.6:
-    resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
-    engines: {node: '>= 8'}
-    dev: false
-
   /koa-bodyparser/4.4.0:
     resolution: {integrity: sha512-AXPY7wwKZUmbgb8VkTEUFoRNOlx6aWRJwEnQD+zfNf33/7KSAkN4Oo9BqlIk80D+5TvuqlhpQT5dPVcyxl5Zsw==}
     engines: {node: '>=8.0.0'}
@@ -8561,18 +8548,17 @@ packages:
       yaml: 1.10.2
     dev: false
 
-  /postcss-loader/7.3.0_yvo6edax6mswwefc5ilktoyk4e:
-    resolution: {integrity: sha512-qLAFjvR2BFNz1H930P7mj1iuWJFjGey/nVhimfOAAQ1ZyPpcClAxP8+A55Sl8mBvM+K2a9Pjgdj10KpANWrNfw==}
+  /postcss-loader/7.3.3_yvo6edax6mswwefc5ilktoyk4e:
+    resolution: {integrity: sha512-YgO/yhtevGO/vJePCQmTxiaEwER94LABZN0ZMT4A0vsak9TpO+RvKRs7EmJ8peIlB9xfXCsS7M8LjqncsUZ5HA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       postcss: ^7.0.0 || ^8.0.1
       webpack: ^5.0.0
     dependencies:
-      cosmiconfig: 8.1.3
+      cosmiconfig: 8.2.0
       jiti: 1.18.2
-      klona: 2.0.6
       postcss: 8.4.24
-      semver: 7.3.8
+      semver: 7.5.0
       webpack: 5.81.0_r7gxib5pjp6kfhl7p7ay64x7oe
     dev: false
 
@@ -8653,8 +8639,8 @@ packages:
       postcss: 8.4.24
     dev: false
 
-  /postcss-modules-local-by-default/4.0.0_postcss@8.4.24:
-    resolution: {integrity: sha512-sT7ihtmGSF9yhm6ggikHdV0hlziDTX7oFoXtuVWeDd3hHObNkcHRo9V3yg7vCAY7cONyxJC/XXCmmiHHcvX7bQ==}
+  /postcss-modules-local-by-default/4.0.3_postcss@8.4.24:
+    resolution: {integrity: sha512-2/u2zraspoACtrbFRnTijMiQtb4GW4BvatjaG/bCjYQo8kLTdevCUlwuBHx2sCnSyrI3x3qj4ZK1j5LQBgzmwA==}
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
@@ -10496,17 +10482,17 @@ packages:
       punycode: 2.3.0
     dev: false
 
-  /ts-loader/9.4.2_ybtdev5u3uq5lbn65ob7n63pkm:
-    resolution: {integrity: sha512-OmlC4WVmFv5I0PpaxYb+qGeGOdm5giHU7HwDDUjw59emP2UYMHy9fFSDcYgSNoH8sXcj4hGCSEhlDZ9ULeDraA==}
+  /ts-loader/9.4.3_ybtdev5u3uq5lbn65ob7n63pkm:
+    resolution: {integrity: sha512-n3hBnm6ozJYzwiwt5YRiJZkzktftRpMiBApHaJPoWLA+qetQBAXkHqCLM6nwSdRDimqVtA5ocIkcTRLMTt7yzA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       typescript: '*'
       webpack: ^5.0.0
     dependencies:
       chalk: 4.1.2
-      enhanced-resolve: 5.12.0
+      enhanced-resolve: 5.13.0
       micromatch: 4.0.5
-      semver: 7.3.8
+      semver: 7.5.0
       typescript: 4.9.5
       webpack: 5.81.0_r7gxib5pjp6kfhl7p7ay64x7oe
     dev: false
@@ -10939,7 +10925,7 @@ packages:
       vue: 2.7.14
     dev: false
 
-  /vue-loader/15.10.1_zaahi2bxwjsggfikste5vdhghu:
+  /vue-loader/15.10.1_vxcan43kcw762hlc5egcu7d6iy:
     resolution: {integrity: sha512-SaPHK1A01VrNthlix6h1hq4uJu7S/z0kdLUb6klubo738NeQoLbS6V9/d8Pv19tU0XdQKju3D1HSKuI8wJ5wMA==}
     peerDependencies:
       '@vue/compiler-sfc': ^3.0.8
@@ -10956,7 +10942,7 @@ packages:
         optional: true
     dependencies:
       '@vue/component-compiler-utils': 3.3.0_lodash@4.17.21+pug@3.0.2
-      css-loader: 6.7.3_webpack@5.81.0
+      css-loader: 6.8.1_webpack@5.81.0
       hash-sum: 1.0.2
       loader-utils: 1.4.2
       vue-hot-reload-api: 2.3.4
