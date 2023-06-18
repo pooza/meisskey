@@ -13,7 +13,7 @@ import UserList from '../models/user-list';
 import Blocking from '../models/blocking';
 import Mute from '../models/mute';
 
-export async function doPostSuspend(user: IUser, isDelete = true) {
+export async function doPostSuspend(user: IUser, isDelete = false) {
 	await unFollowAll(user).catch(() => {});
 	await rejectFollowAll(user).catch(() => {});
 	await removeFollowingRequestAll(user).catch(() => {});
