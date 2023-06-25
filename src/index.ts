@@ -5,11 +5,17 @@
 Error.stackTraceLimit = Infinity;
 
 require('events').EventEmitter.defaultMaxListeners = 128;
-process.env.UV_THREADPOOL_SIZE = process.env.UV_THREADPOOL_SIZE || `${Math.min(Math.max(4, require('os').cpus().length), 1024)}`;
+
+if (process.env.UV_THREADPOOL_SIZE == null) {
+	let uvThreadpoolSize = 4;
+	const cpus = require('os').cpus().length;	// some environments returns 0
+	if (cpus > uvThreadpoolSize) uvThreadpoolSize = cpus;
+	if (uvThreadpoolSize > 1024) uvThreadpoolSize = 1024;
+	process.env.UV_THREADPOOL_SIZE = uvThreadpoolSize.toString();
+}
 
 import * as os from 'os';
 import * as cluster from 'cluster';
-import * as chalk from 'chalk';
 import Xev from 'xev';
 
 import Logger from './services/logger';
@@ -114,17 +120,20 @@ function greet(config: Config) {
 	if (!envOption.quiet && process.env.NODE_ENV !== 'test') {
 		//#region Meisskey logo
 		const v = `v${config.version}`;
-		console.log(chalk.red(' '));
-		console.log(chalk.red(' • ▌ ▄ ·. ▄▄▄ .▪  .▄▄ · .▄▄ · ▄ •▄ ▄▄▄ . ▄· ▄▌'));
-		console.log(chalk.red(' ·██ ▐███▪▀▄.▀·██ ▐█ ▀. ▐█ ▀. █▌▄▌▪▀▄.▀·▐█▪██▌'));
-		console.log(chalk.red(` ▐█ ▌▐▌▐█·▐▀▀▪▄▐█·▄▀▀▀█▄▄▀▀▀█▄▐▀▀▄·▐▀▀▪▄▐█▌▐█▪`));
-		console.log(chalk.red(' ██ ██▌▐█▌▐█▄▄▌▐█▌▐█▄▪▐█▐█▄▪▐█▐█.█▌▐█▄▄▌ ▐█▀·.'));
-		console.log(chalk.red(' ▀▀  █▪▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀▀  ▀▀▀▀ ·▀  ▀ ▀▀▀   ▀ • '));
-		console.log(' ' + chalk.redBright(v));
+
+		console.log(` 
+ ______        _           _                
+|  ___ \\      (_)         | |               
+| | _ | | ____ _  ___  ___| |  _ ____ _   _ 
+| || || |/ _  ) |/___)/___) | / ) _  ) | | |
+| || || ( (/ /| |___ |___ | |< ( (/ /| |_| |
+|_||_||_|\\____)_(___/(___/|_| \\_)____)\\__  |
+                                     (____/ `);
+		console.log(' ' + v);
 		//#endregion
 
 		console.log('');
-		console.log(chalk`< ${os.hostname()} {gray (PID: ${process.pid.toString()})} >`);
+		console.log(`< ${os.hostname()} (PID: ${process.pid.toString()}) >`);
 	}
 
 	bootLogger.info('Welcome to Meisskey!');
@@ -186,10 +195,6 @@ async function workerMain(config: Config) {
 			process.send('ready');
 		}
 	}
-
-	setInterval(() => {
-		clusterLogger.info(`memoryUsage(${workerType}:${process.pid}): ${JSON.stringify(process.memoryUsage())}`);
-	}, 60 * 60 * 1000);
 
 	setInterval(() => {
 		const restartMin =
@@ -315,10 +320,10 @@ cluster.on('online', worker => {
 cluster.on('exit', worker => {
 	// Replace the dead worker,
 	// we're not sentimental
-	clusterLogger.error(chalk.red(`[${worker.id}:${worker.process.pid}] died :(`));
 	const type = workerIndex[worker.id] || 'worker';
 	const w = cluster.fork({ WORKER_TYPE: type });
 	workerIndex[w.id] = type;
+	clusterLogger.error(`[${worker.id}:${worker.process.pid}] died :(`);
 });
 
 // Display detail of unhandled promise rejection
