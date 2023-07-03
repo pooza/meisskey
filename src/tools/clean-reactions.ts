@@ -88,7 +88,7 @@ async function main(c: string) {
 		cursor = datas[datas.length - 1]._id;
 
 		for (const data of datas) {
-			const del = data.user.host == null && data.note._user.host == null;
+			const del = data.user.host != null && data.note._user.host != null;
 			console.log(`${del ? 'DEL' : 'SKP' } ${data._id} ${data.createdAt?.toISOString()} ${data.user.host} => ${data.note._user.host}`);
 			if (del) {
 				await NoteReaction.remove({
