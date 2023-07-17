@@ -5,8 +5,9 @@ export type Source = {
 	repository_url?: string;
 	feedback_url?: string;
 	url: string;
-	port: number;
+	port?: number;
 	addr?: string;
+	socket?: string;
 	disableHsts?: boolean;
 	disableApiCors?: boolean;
 	mongodb: {
