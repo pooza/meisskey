@@ -82,7 +82,7 @@ async function inbox(ctx: Router.RouterContext) {
 			await limiter(ep, undefined, undefined);
 		} catch (e) {
 			console.log(`InboxLimit: ${actor}`);
-			ctx.status = 503;
+			ctx.status = 429;
 			return;
 		}
 	}
