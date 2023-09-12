@@ -68,12 +68,12 @@ async function inbox(ctx: Router.RouterContext) {
 
 	if (actor) {
 		const ep = {
-			name: `inboxx300-${actor}`,
+			name: `inboxx120-${actor}`,
 			exec: null,
 			meta: {
 				limit: {
-					duration: 300 * 1000,
-					max: 100,
+					duration: 120 * 1000,
+					max: 120,
 				}
 			}
 		} as IEndpoint;
