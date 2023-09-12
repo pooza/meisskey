@@ -15,7 +15,7 @@ import Outbox, { packActivity } from './activitypub/outbox';
 import Followers from './activitypub/followers';
 import Following from './activitypub/following';
 import Featured from './activitypub/featured';
-import { inbox as processInbox } from '../queue';
+import { inbox as processInbox, inboxLazy as processInboxLazy } from '../queue';
 import { isSelfHost } from '../misc/convert-host';
 import NoteReaction from '../models/note-reaction';
 import { renderLike } from '../remote/activitypub/renderer/like';
@@ -27,6 +27,8 @@ import { toUnicode } from 'punycode/';
 import Logger from '../services/logger';
 import limiter from './api/limiter';
 import { IEndpoint } from './api/endpoints';
+import { IActivity } from '../remote/activitypub/type';
+import { toSingle } from '../prelude/array';
 
 const logger = new Logger('activitypub');
 
@@ -65,15 +67,18 @@ async function inbox(ctx: Router.RouterContext) {
 	}
 
 	const actor = signature.keyId.replace(/[^0-9A-Za-z]/g, '_');
+	const activity = ctx.request.body as IActivity;
 
-	if (actor) {
+	let lazy = false;
+
+	if (actor && ['Delete', 'Undo'].includes(toSingle(activity.type)!)) {
 		const ep = {
-			name: `inboxx120-${actor}`,
+			name: `inboxDeletex60-${actor}`,
 			exec: null,
 			meta: {
 				limit: {
-					duration: 120 * 1000,
-					max: 120,
+					duration: 60 * 1000,
+					max: 10, //TODO
 				}
 			}
 		} as IEndpoint;
@@ -82,12 +87,11 @@ async function inbox(ctx: Router.RouterContext) {
 			await limiter(ep, undefined, undefined);
 		} catch (e) {
 			console.log(`InboxLimit: ${actor}`);
-			ctx.status = 429;
-			return;
+			lazy = true;
 		}
 	}
 	
-	const queue = await processInbox(ctx.request.body, signature, {
+	const queue = await (lazy ? processInboxLazy : processInbox)(activity, signature, {
 		ip: ctx.request.ip
 	});
 
