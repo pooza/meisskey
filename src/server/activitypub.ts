@@ -25,6 +25,8 @@ import fetchMeta from '../misc/fetch-meta';
 import { isBlockedHost } from '../services/instance-moderation';
 import { toUnicode } from 'punycode/';
 import Logger from '../services/logger';
+import limiter from './api/limiter';
+import { IEndpoint } from './api/endpoints';
 
 const logger = new Logger('activitypub');
 
@@ -62,6 +64,27 @@ async function inbox(ctx: Router.RouterContext) {
 		return;
 	}
 
+	const actor = (ctx.request.body as any).actor.replace(/[^0-9A-Za-z]/g, '_');
+
+	if (actor) {
+		const ep = {
+			name: `inboxx300-${actor}`,
+			exec: null,
+			meta: {
+				limit: {
+					duration: 300 * 1000,
+					max: 100,
+				}
+			}
+		} as IEndpoint;
+
+		await limiter(ep, undefined, undefined).catch(e => {
+			console.log(`InboxLimit: ${actor}`);
+			ctx.status = 503;
+			return;
+		});
+	}
+	
 	const queue = await processInbox(ctx.request.body, signature, {
 		ip: ctx.request.ip
 	});
