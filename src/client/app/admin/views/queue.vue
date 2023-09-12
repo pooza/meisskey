@@ -125,7 +125,7 @@
 					<template #label>{{ $t('queue') }}</template>
 					<option value="deliver">{{ $t('domains.deliver') }}</option>
 					<option value="inbox">{{ $t('domains.inbox') }}</option>
-					<option value="inboxLazy">{{ $t('domains.inboxLazy') }}</option>
+					<option value="inboxLazy">Inbox (Lazy)</option>
 					<option value="db">{{ $t('domains.db') }}</option>
 				</ui-select>
 				<ui-select v-model="state">
