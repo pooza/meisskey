@@ -34,21 +34,24 @@ export default function() {
 	deliverQueue.on('global:active', async (jobId) => {
 		activeDeliverJobs++;
 		if (activeDeliverJobs === 1) {	// 各tickの最初でサンプリング
-			deliverDelay ??= await getDelay(deliverQueue, jobId);
+			const delay = await getDelay(deliverQueue, jobId);
+			if (delay != null) deliverDelay = delay;
 		}
 	});
 
 	inboxQueue.on('global:active', async (jobId) => {
 		activeInboxJobs++;
 		if (activeInboxJobs === 1) {
-			inboxDelay ??= await getDelay(inboxQueue, jobId);
+			const delay = await getDelay(inboxQueue, jobId);
+			if (delay != null) inboxDelay = delay;
 		}
 	});
 
 	inboxLazyQueue.on('global:active', async (jobId) => {
 		activeInboxLazyJobs++;
 		if (activeInboxLazyJobs === 1) {
-			inboxLazyDelay ??= await getDelay(inboxLazyQueue, jobId);
+			const delay = await getDelay(inboxLazyQueue, jobId);
+			if (delay != null) inboxLazyDelay = delay;
 		}
 	});
 
