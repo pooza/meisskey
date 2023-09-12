@@ -78,11 +78,13 @@ async function inbox(ctx: Router.RouterContext) {
 			}
 		} as IEndpoint;
 
-		await limiter(ep, undefined, undefined).catch(e => {
+		try {
+			await limiter(ep, undefined, undefined);
+		} catch (e) {
 			console.log(`InboxLimit: ${actor}`);
 			ctx.status = 503;
 			return;
-		});
+		}
 	}
 	
 	const queue = await processInbox(ctx.request.body, signature, {
