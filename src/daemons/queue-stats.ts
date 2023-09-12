@@ -34,21 +34,21 @@ export default function() {
 	deliverQueue.on('global:active', async (jobId) => {
 		activeDeliverJobs++;
 		if (activeDeliverJobs === 1) {	// 各tickの最初でサンプリング
-			deliverDelay = await getDelay(deliverQueue, jobId);
+			deliverDelay ??= await getDelay(deliverQueue, jobId);
 		}
 	});
 
 	inboxQueue.on('global:active', async (jobId) => {
 		activeInboxJobs++;
 		if (activeInboxJobs === 1) {
-			inboxDelay = await getDelay(inboxQueue, jobId);
+			inboxDelay ??= await getDelay(inboxQueue, jobId);
 		}
 	});
 
 	inboxLazyQueue.on('global:active', async (jobId) => {
 		activeInboxLazyJobs++;
 		if (activeInboxLazyJobs === 1) {
-			inboxLazyDelay = await getDelay(inboxLazyQueue, jobId);
+			inboxLazyDelay ??= await getDelay(inboxLazyQueue, jobId);
 		}
 	});
 
