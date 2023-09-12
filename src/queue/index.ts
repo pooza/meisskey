@@ -378,6 +378,7 @@ export function destroy(domain?: string) {
 			deliverLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		deliverQueue.clean(0, 'delayed');
+		deliverQueue.clean(0, 'wait');
 	}
 
 	if (domain == null || domain === 'inbox') {
@@ -385,6 +386,7 @@ export function destroy(domain?: string) {
 			inboxLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		inboxQueue.clean(0, 'delayed');
+		inboxQueue.clean(0, 'wait');
 	}
 
 	if (domain == null || domain === 'inboxLazy') {
@@ -392,6 +394,7 @@ export function destroy(domain?: string) {
 			inboxLazyLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		inboxLazyQueue.clean(0, 'delayed');
+		inboxLazyQueue.clean(0, 'wait');
 	}
 
 	if (domain === 'db') {
@@ -399,5 +402,6 @@ export function destroy(domain?: string) {
 			dbLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		dbQueue.clean(0, 'delayed');
+		dbQueue.clean(0, 'wait');
 	}
 }
