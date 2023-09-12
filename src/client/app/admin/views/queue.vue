@@ -27,6 +27,11 @@
 					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
+				<ui-input :value="latestStats.deliver.delay | number" type="text" readonly>
+					<span>Delay</span>
+					<template #prefix><fa :icon="faStopwatch"/></template>
+					<template #suffix>ms</template>
+				</ui-input>
 			</ui-horizon-group>
 			<div ref="deliverChart" class="chart"></div>
 			<ui-horizon-group v-if="$store.getters.isAdminOrModerator" inputs class="fit-bottom">
@@ -59,6 +64,11 @@
 					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
 				</ui-input>
+				<ui-input :value="latestStats.inbox.delay | number" type="text" readonly>
+					<span>Delay</span>
+					<template #prefix><fa :icon="faStopwatch"/></template>
+					<template #suffix>ms</template>
+				</ui-input>
 			</ui-horizon-group>
 			<div ref="inboxChart" class="chart"></div>
 			<ui-horizon-group v-if="$store.getters.isAdminOrModerator" inputs class="fit-bottom">
@@ -90,6 +100,11 @@
 					<span>Delayed</span>
 					<template #prefix><fa :icon="faStopwatch"/></template>
 					<template #suffix>jobs</template>
+				</ui-input>
+				<ui-input :value="latestStats.inboxLazy.delay | number" type="text" readonly>
+					<span>Delay</span>
+					<template #prefix><fa :icon="faStopwatch"/></template>
+					<template #suffix>ms</template>
 				</ui-input>
 			</ui-horizon-group>
 			<div ref="inboxLazyChart" class="chart"></div>
