@@ -64,7 +64,7 @@ async function inbox(ctx: Router.RouterContext) {
 		return;
 	}
 
-	const actor = (ctx.request.body as any).actor.replace(/[^0-9A-Za-z]/g, '_');
+	const actor = signature.keyId.replace(/[^0-9A-Za-z]/g, '_');
 
 	if (actor) {
 		const ep = {
