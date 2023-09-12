@@ -184,6 +184,7 @@ themeColor: '#fb4e4e'
 # Job concurrency per worker (Default: deliver=cpu x 8, inbox=cpu x 1)
 # deliverJobConcurrency: 128
 # inboxJobConcurrency: 16
+# inboxLazyJobConcurrency: 1
 
 # Job late limiter (Default: nolimit, 変更しないことを推奨)
 # deliverJobPerSec: 128

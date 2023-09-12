@@ -27,6 +27,7 @@ let inboxDeltaCounts = 0;
 
 export const deliverJobConcurrency = config.deliverJobConcurrency || ((cpus().length || 4) * 8);
 export const inboxJobConcurrency = config.inboxJobConcurrency || ((cpus().length || 4) * 1);
+export const inboxLazyJobConcurrency = config.inboxLazyJobConcurrency || 1;
 
 deliverQueue
 	.on('waiting', (jobId) => {
@@ -368,7 +369,7 @@ export default function() {
 	deliverQueue.process(deliverJobConcurrency, processDeliver);
 	webpushDeliverQueue.process(8, processWebpushDeliver);
 	inboxQueue.process(inboxJobConcurrency, processInbox);
-	inboxLazyQueue.process(1, processInbox);
+	inboxLazyQueue.process(inboxLazyJobConcurrency, processInbox);
 	processDb(dbQueue);
 }
 

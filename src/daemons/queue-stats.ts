@@ -3,7 +3,7 @@ import Xev from 'xev';
 import { deliverQueue, inboxQueue, inboxLazyQueue } from '../queue/queues';
 import config from '../config';
 import { getWorkerStrategies } from '..';
-import { deliverJobConcurrency, inboxJobConcurrency } from '../queue';
+import { deliverJobConcurrency, inboxJobConcurrency, inboxLazyJobConcurrency } from '../queue';
 
 const ev = new Xev();
 
@@ -59,7 +59,7 @@ export default function() {
 				delayed: inboxJobCounts.delayed
 			},
 			inboxLazy: {
-				limit: 1 * workers,
+				limit: inboxLazyJobConcurrency * workers,
 				activeSincePrevTick: activeInboxLazyJobs,
 				active: inboxLazyJobCounts.active,
 				waiting: inboxLazyJobCounts.waiting,

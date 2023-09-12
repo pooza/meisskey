@@ -72,6 +72,7 @@ export type Source = {
 
 	deliverJobConcurrency?: number;
 	inboxJobConcurrency?: number;
+	inboxLazyJobConcurrency?: number;
 	deliverJobPerSec?: number;
 	inboxJobPerSec?: number;
 	deliverJobMaxAttempts?: number;
