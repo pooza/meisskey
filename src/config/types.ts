@@ -77,6 +77,7 @@ export type Source = {
 	inboxJobPerSec?: number;
 	deliverJobMaxAttempts?: number;
 	inboxJobMaxAttempts?: number;
+	inboxMassDelOpeMode?: 'lazy' | 'ignore';
 
 	mecabSearch?: {
 		mecabBin?: string;

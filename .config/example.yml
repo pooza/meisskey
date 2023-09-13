@@ -186,6 +186,9 @@ themeColor: '#fb4e4e'
 # inboxJobConcurrency: 16
 # inboxLazyJobConcurrency: 1
 
+# lazy / ignore
+# inboxMassDelOpeMode: lazy
+
 # Job late limiter (Default: nolimit, 変更しないことを推奨)
 # deliverJobPerSec: 128
 # inboxJobPerSec: 16
