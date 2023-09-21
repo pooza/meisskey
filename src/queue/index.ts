@@ -1,7 +1,7 @@
 import * as httpSignature from 'http-signature';
 import config from '../config';
 import { InboxInfo, InboxRequestData, WebpushDeliverJobData } from './types';
-import { deliverQueue, webpushDeliverQueue, inboxQueue, dbQueue } from './queues';
+import { deliverQueue, webpushDeliverQueue, inboxQueue, inboxLazyQueue, dbQueue } from './queues';
 import { getJobInfo } from './get-job-info';
 import processDeliver from './processors/deliver';
 import processWebpushDeliver from './processors/webpushDeliver';
@@ -14,14 +14,20 @@ import { INote } from '../models/note';
 import { IMute } from '../models/mute';
 import { IActivity } from '../remote/activitypub/type';
 import queueChart from '../services/chart/queue';
+import { cpus } from 'os';
 
 const deliverLogger = queueLogger.createSubLogger('deliver');
 const webpushDeliverLogger = queueLogger.createSubLogger('webpushDeliver');
 const inboxLogger = queueLogger.createSubLogger('inbox');
+const inboxLazyLogger = queueLogger.createSubLogger('inboxLazy');
 const dbLogger = queueLogger.createSubLogger('db');
 
 let deliverDeltaCounts = 0;
 let inboxDeltaCounts = 0;
+
+export const deliverJobConcurrency = config.deliverJobConcurrency || ((cpus().length || 4) * 8);
+export const inboxJobConcurrency = config.inboxJobConcurrency || ((cpus().length || 4) * 1);
+export const inboxLazyJobConcurrency = config.inboxLazyJobConcurrency || 1;
 
 deliverQueue
 	.on('waiting', (jobId) => {
@@ -32,7 +38,7 @@ deliverQueue
 	.on('completed', (job, result) => deliverLogger.info(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.to}`))
 	.on('failed', (job, err) => {
 		const msg = `failed(${err}) ${getJobInfo(job)} to=${job.data.to}`;
-		job.log(msg);
+		if (job.opts.attempts && (job.opts.attempts > job.attemptsMade)) job.log(msg);
 		deliverLogger.warn(msg);
 	})
 	.on('error', (error) => deliverLogger.error(`error ${error}`))
@@ -46,7 +52,7 @@ webpushDeliverQueue
 	.on('completed', (job, result) => webpushDeliverLogger.info(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.pushSubscription.endpoint}`))
 	.on('failed', (job, err) => {
 		const msg = `failed(${err}) ${getJobInfo(job)} to=${job.data.pushSubscription.endpoint}`;
-		job.log(msg);
+		if (job.opts.attempts && (job.opts.attempts > job.attemptsMade)) job.log(msg);
 		webpushDeliverLogger.warn(msg);
 	})
 	.on('error', (error) => webpushDeliverLogger.error(`error ${error}`))
@@ -61,11 +67,25 @@ inboxQueue
 	.on('completed', (job, result) => inboxLogger.info(`completed(${result}) ${getJobInfo(job, true)} activity=${job.data.activity ? job.data.activity.id : 'none'}`))
 	.on('failed', (job, err) => {
 		const msg = `failed(${err}) ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`;
-		job.log(msg);
+		if (job.opts.attempts && (job.opts.attempts > job.attemptsMade)) job.log(msg);
 		inboxLogger.warn(msg);
 	})
 	.on('error', (error) => inboxLogger.error(`error ${error}`))
 	.on('stalled', (job) => inboxLogger.warn(`stalled ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`));
+
+inboxLazyQueue
+	.on('waiting', (jobId) => {
+		inboxLazyLogger.debug(`waiting id=${jobId}`);
+	})
+	.on('active', (job) => inboxLazyLogger.info(`active ${getJobInfo(job, true)} activity=${job.data.activity ? job.data.activity.id : 'none'}`))
+	.on('completed', (job, result) => inboxLazyLogger.info(`completed(${result}) ${getJobInfo(job, true)} activity=${job.data.activity ? job.data.activity.id : 'none'}`))
+	.on('failed', (job, err) => {
+		const msg = `failed(${err}) ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`;
+		if (job.opts.attempts && (job.opts.attempts > job.attemptsMade)) job.log(msg);
+		inboxLazyLogger.warn(msg);
+	})
+	.on('error', (error) => inboxLazyLogger.error(`error ${error}`))
+	.on('stalled', (job) => inboxLazyLogger.warn(`stalled ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`));
 
 dbQueue
 	.on('waiting', (jobId) => dbLogger.debug(`waiting id=${jobId}`))
@@ -154,6 +174,25 @@ export function inbox(activity: IActivity, signature: httpSignature.IParsedSigna
 		removeOnFail: true
 	});
 }
+
+export function inboxLazy(activity: IActivity, signature: httpSignature.IParsedSignature, request: InboxRequestData) {
+	const data = {
+		activity,
+		signature,
+		request,
+	};
+
+	return inboxLazyQueue.add(data, {
+		attempts: 1,
+		timeout: 1 * 60 * 1000,	// 1min
+		backoff: {
+			type: 'apBackoff'
+		},
+		removeOnComplete: true,
+		removeOnFail: true
+	});
+}
+
 
 export function createDeleteNotesJob(user: IUser) {
 	return dbQueue.add('deleteNotes', {
@@ -327,9 +366,10 @@ export function createImportUserListsJob(user: ILocalUser, fileId: IDriveFile['_
 }
 
 export default function() {
-	deliverQueue.process(config.deliverJobConcurrency || 128, processDeliver);
+	deliverQueue.process(deliverJobConcurrency, processDeliver);
 	webpushDeliverQueue.process(8, processWebpushDeliver);
-	inboxQueue.process(config.inboxJobConcurrency || 16, processInbox);
+	inboxQueue.process(inboxJobConcurrency, processInbox);
+	inboxLazyQueue.process(inboxLazyJobConcurrency, processInbox);
 	processDb(dbQueue);
 }
 
@@ -339,6 +379,7 @@ export function destroy(domain?: string) {
 			deliverLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		deliverQueue.clean(0, 'delayed');
+		deliverQueue.clean(0, 'wait');
 	}
 
 	if (domain == null || domain === 'inbox') {
@@ -346,6 +387,15 @@ export function destroy(domain?: string) {
 			inboxLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		inboxQueue.clean(0, 'delayed');
+		inboxQueue.clean(0, 'wait');
+	}
+
+	if (domain == null || domain === 'inboxLazy') {
+		inboxLazyQueue.once('cleaned', (jobs, status) => {
+			inboxLazyLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
+		});
+		inboxLazyQueue.clean(0, 'delayed');
+		inboxLazyQueue.clean(0, 'wait');
 	}
 
 	if (domain === 'db') {
@@ -353,5 +403,6 @@ export function destroy(domain?: string) {
 			dbLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
 		});
 		dbQueue.clean(0, 'delayed');
+		dbQueue.clean(0, 'wait');
 	}
 }
