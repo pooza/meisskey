@@ -1,0 +1,1 @@
+{"version":3,"sources":["prelude/maybe.js"],"names":["just","nothing","value","isJust","get"],"mappings":";;;;;;;;IAQgBA,IAAI;eAAJA;;IAOAC,OAAO;eAAPA;;;AAPT,SAASD,KAAQE,KAAQ;IAC/B,OAAO;QACNC,QAAQ,IAAM;QACdC,KAAK,IAAMF;IACZ;AACD;AAEO,SAASD;IACf,OAAO;QACNE,QAAQ,IAAM;IACf;AACD","file":"maybe.js","sourceRoot":"../../built"}

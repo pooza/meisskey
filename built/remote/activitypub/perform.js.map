@@ -1,0 +1,1 @@
+{"version":3,"sources":["remote/activitypub/perform.js"],"names":["actor","activity","performActivity"],"mappings":";+BAIA;;;eAAA;;;wBAFgC;MAEhC,WAAe,OAAOA,OAAoBC;IACzC,OAAO,MAAMC,IAAAA,uBAAe,EAACF,OAAOC;AACrC","file":"perform.js","sourceRoot":"../../../built"}

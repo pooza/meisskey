@@ -1,0 +1,1 @@
+{"version":3,"sources":["server/web/feed/util.js"],"names":["objectToXml","xmlbuilder","obj","xml","create","encoding","end","pretty"],"mappings":";+BAMgBA;;;eAAAA;;;AANhB,MAAOC,qBAAqB;AAMrB,SAASD,YAAYE,GAAO;IAClC,MAAMC,MAAMF,WAAWG,MAAM,CAACF,KAAK;QAAEG,UAAU;IAAQ;IACvD,OAAOF,IAAIG,GAAG,CAAC;QAAEC,QAAQ;IAAK;AAC/B","file":"util.js","sourceRoot":"../../../../built"}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["server/api/common/is-native-token.js"],"names":["token","startsWith"],"mappings":";+BAAA;;;eAAA;;;MAAA,WAAe,CAACA,QAAkBA,MAAMC,UAAU,CAAC","file":"is-native-token.js","sourceRoot":"../../../../built"}

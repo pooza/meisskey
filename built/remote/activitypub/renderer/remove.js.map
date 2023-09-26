@@ -1,0 +1,1 @@
+{"version":3,"sources":["remote/activitypub/renderer/remove.js"],"names":["user","target","object","type","actor","config","url","_id"],"mappings":";+BAGA;;;eAAA;;;wBAHmB;MAGnB,WAAe,CAACA,MAAkBC,QAAaC,SAAiB,CAAA;QAC/DC,MAAM;QACNC,OAAO,CAAC,EAAEC,eAAM,CAACC,GAAG,CAAC,OAAO,EAAEN,KAAKO,GAAG,CAAC,CAAC;QACxCN;QACAC;IACD,CAAA","file":"remove.js","sourceRoot":"../../../../built"}

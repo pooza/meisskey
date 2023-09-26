@@ -1,0 +1,1 @@
+{"version":3,"sources":["remote/activitypub/renderer/tombstone.js"],"names":["id","formerType","object","type"],"mappings":";+BAAA;;;eAAA;;;MAAA,WAAe,CAACA,IAAYC;IAC3B,MAAMC,SAAS;QACdF;QACAG,MAAM;IACP;IAMA,IAAIF,YAAYC,OAAOD,UAAU,GAAGA;IAEpC,OAAOC;AACR","file":"tombstone.js","sourceRoot":"../../../../built"}

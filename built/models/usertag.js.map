@@ -1,0 +1,1 @@
+{"version":3,"sources":["models/usertag.js"],"names":["Usertag","db","get","createIndex","unique"],"mappings":";+BAOA;;;eAAA;;;yBANe;AAEf,MAAMA,UAAUC,gBAAE,CAACC,GAAG,CAAW;AACjCF,QAAQG,WAAW,CAAC;IAAC;IAAW;CAAW,EAAE;IAAEC,QAAQ;AAAK;AAC5DJ,QAAQG,WAAW,CAAC;MAEpB,WAAeH","file":"usertag.js","sourceRoot":"../../built"}

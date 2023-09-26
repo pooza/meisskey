@@ -1,0 +1,1 @@
+{"version":3,"sources":["remote/activitypub/renderer/reject.js"],"names":["object","user","type","actor","config","url","_id"],"mappings":";+BAGA;;;eAAA;;;wBAHmB;MAGnB,WAAe,CAACA,QAAaC,OAAsB,CAAA;QAClDC,MAAM;QACNC,OAAO,CAAC,EAAEC,eAAM,CAACC,GAAG,CAAC,OAAO,EAAEJ,KAAKK,GAAG,CAAC,CAAC;QACxCN;IACD,CAAA","file":"reject.js","sourceRoot":"../../../../built"}

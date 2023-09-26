@@ -1,0 +1,1 @@
+{"version":3,"sources":["services/note/unwatch.js"],"names":["me","note","Watching","remove","noteId","_id","userId"],"mappings":";+BAGA;;;eAAA;;;8BAFqB;MAErB,WAAe,OAAOA,IAAsBC;IAC3C,MAAMC,qBAAQ,CAACC,MAAM,CAAC;QACrBC,QAAQ,AAACH,KAAaI,GAAG;QACzBC,QAAQN;IACT;AACD","file":"unwatch.js","sourceRoot":"../../../built"}

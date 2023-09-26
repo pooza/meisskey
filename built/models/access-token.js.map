@@ -1,0 +1,1 @@
+{"version":3,"sources":["models/access-token.js"],"names":["AccessToken","db","get","createIndex"],"mappings":";+BAMA;;;eAAA;;;yBALe;AAEf,MAAMA,cAAcC,gBAAE,CAACC,GAAG,CAAe;AACzCF,YAAYG,WAAW,CAAC;AACxBH,YAAYG,WAAW,CAAC;MACxB,WAAeH","file":"access-token.js","sourceRoot":"../../built"}

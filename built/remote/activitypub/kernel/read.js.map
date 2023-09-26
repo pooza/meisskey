@@ -1,0 +1,1 @@
+{"version":3,"sources":["remote/activitypub/kernel/read.js"],"names":["performReadActivity","actor","activity"],"mappings":";+BAGaA;;;eAAAA;;;AAAN,MAAMA,sBAAsB,OAAOC,OAAoBC;IAC7D,OAAO,CAAC,IAAI,CAAC;AACd","file":"read.js","sourceRoot":"../../../../built"}

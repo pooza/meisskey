@@ -1,0 +1,1 @@
+{"version":3,"sources":["models/note-unread.js"],"names":["NoteUnread","db","get","createIndex","unique"],"mappings":";+BAOA;;;eAAA;;;yBANe;AAEf,MAAMA,aAAaC,gBAAE,CAACC,GAAG,CAAc;AACvCF,WAAWG,WAAW,CAAC;AACvBH,WAAWG,WAAW,CAAC;AACvBH,WAAWG,WAAW,CAAC;IAAC;IAAU;CAAS,EAAE;IAAEC,QAAQ;AAAK;MAC5D,WAAeJ","file":"note-unread.js","sourceRoot":"../../built"}

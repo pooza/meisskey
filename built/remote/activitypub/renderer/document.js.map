@@ -1,0 +1,1 @@
+{"version":3,"sources":["remote/activitypub/renderer/document.js"],"names":["file","type","mediaType","contentType","url","getDriveFileUrl"],"mappings":";+BAGA;;;eAAA;;;iCAF4B;MAE5B,WAAe,CAACA,OAAsB,CAAA;QACrCC,MAAM;QACNC,WAAWF,KAAKG,WAAW;QAC3BC,KAAKC,IAAAA,wBAAe,EAACL;IACtB,CAAA","file":"document.js","sourceRoot":"../../../../built"}
