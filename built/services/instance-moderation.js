@@ -26,26 +26,26 @@ let selfSilencedHosts;
 let selfSilencedHostsRegExp;
 let closedHosts;
 async function isBlockedHost(host) {
-    var _blockedHosts_has, _this;
+    var _blockedHosts;
     if (host == null) return false;
     if (!blockedHosts) await Update();
-    if ((_this = blockedHosts) === null || _this === void 0 ? void 0 : (_blockedHosts_has = _this.has) === null || _blockedHosts_has === void 0 ? void 0 : _blockedHosts_has.call(_this, (0, _converthost.toApHost)(host))) return true;
+    if ((_blockedHosts = blockedHosts) === null || _blockedHosts === void 0 ? void 0 : _blockedHosts.has((0, _converthost.toApHost)(host))) return true;
     if (blockedHostsRegExp && Array.from(blockedHostsRegExp).some((x)=>x.test((0, _converthost.toApHost)(host)))) return true;
     return false;
 }
 async function isSelfSilencedHost(host) {
-    var _selfSilencedHosts_has, _this;
+    var _selfSilencedHosts;
     if (host == null) return false;
     if (!selfSilencedHosts) await Update();
-    if ((_this = selfSilencedHosts) === null || _this === void 0 ? void 0 : (_selfSilencedHosts_has = _this.has) === null || _selfSilencedHosts_has === void 0 ? void 0 : _selfSilencedHosts_has.call(_this, (0, _converthost.toApHost)(host))) return true;
+    if ((_selfSilencedHosts = selfSilencedHosts) === null || _selfSilencedHosts === void 0 ? void 0 : _selfSilencedHosts.has((0, _converthost.toApHost)(host))) return true;
     if (selfSilencedHostsRegExp && Array.from(selfSilencedHostsRegExp).some((x)=>x.test((0, _converthost.toApHost)(host)))) return true;
     return false;
 }
 async function isClosedHost(host) {
-    var _closedHosts_has, _this;
+    var _closedHosts;
     if (host == null) return false;
     if (!closedHosts) await Update();
-    return (_this = closedHosts) === null || _this === void 0 ? void 0 : (_closedHosts_has = _this.has) === null || _closedHosts_has === void 0 ? void 0 : _closedHosts_has.call(_this, (0, _converthost.toApHost)(host));
+    return (_closedHosts = closedHosts) === null || _closedHosts === void 0 ? void 0 : _closedHosts.has((0, _converthost.toApHost)(host));
 }
 async function Update() {
     const meta = await (0, _fetchmeta.default)();

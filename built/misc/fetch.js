@@ -30,7 +30,7 @@ _export(exports, {
 });
 const _http = require("http");
 const _https = require("https");
-const _dns = require("./dns");
+const _cacheablelookup = require("cacheable-lookup");
 const _got = require("got");
 const _httpproxyagent = require("http-proxy-agent");
 const _httpsproxyagent = require("https-proxy-agent");
@@ -155,19 +155,24 @@ function lcObjectKey(src) {
 function objectAssignWithLcKey(a, b) {
     return Object.assign(lcObjectKey(a), lcObjectKey(b));
 }
+const cache = new _cacheablelookup.default({
+    maxTtl: 3600,
+    errorTtl: 30,
+    lookup: false
+});
 /**
  * Get http non-proxy agent
  */ const _http1 = new _http.Agent({
     keepAlive: true,
     keepAliveMsecs: 30 * 1000,
-    lookup: _dns.lookup
+    lookup: cache.lookup
 });
 /**
  * Get https non-proxy agent
  */ const _https1 = new _https.Agent({
     keepAlive: true,
     keepAliveMsecs: 30 * 1000,
-    lookup: _dns.lookup
+    lookup: cache.lookup
 });
 const httpAgent = _config.default.proxy ? new _httpproxyagent.HttpProxyAgent(_config.default.proxy) : _http1;
 const httpsAgent = _config.default.proxy ? new _httpsproxyagent.HttpsProxyAgent(_config.default.proxy) : _https1;

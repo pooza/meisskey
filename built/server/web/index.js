@@ -178,9 +178,9 @@ router.get([
             me,
             sub: ctx.params.sub,
             instanceName: meta.name,
-            icon: (_config_icons_favicon = (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : _config_icons.favicon) === null || _config_icons_favicon === void 0 ? void 0 : _config_icons_favicon.url,
-            iconType: (_config_icons_favicon1 = (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : _config_icons1.favicon) === null || _config_icons_favicon1 === void 0 ? void 0 : _config_icons_favicon1.type,
-            appleTouchIcon: (_config_icons_appleTouchIcon = (_config_icons2 = _config.default.icons) === null || _config_icons2 === void 0 ? void 0 : _config_icons2.appleTouchIcon) === null || _config_icons_appleTouchIcon === void 0 ? void 0 : _config_icons_appleTouchIcon.url,
+            icon: (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : (_config_icons_favicon = _config_icons.favicon) === null || _config_icons_favicon === void 0 ? void 0 : _config_icons_favicon.url,
+            iconType: (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : (_config_icons_favicon1 = _config_icons1.favicon) === null || _config_icons_favicon1 === void 0 ? void 0 : _config_icons_favicon1.type,
+            appleTouchIcon: (_config_icons2 = _config.default.icons) === null || _config_icons2 === void 0 ? void 0 : (_config_icons_appleTouchIcon = _config_icons2.appleTouchIcon) === null || _config_icons_appleTouchIcon === void 0 ? void 0 : _config_icons_appleTouchIcon.url,
             noindex: user.host || user.avoidSearchIndex
         });
         ctx.set('Content-Security-Policy', csp);
@@ -228,7 +228,7 @@ router.get('/notes/:note', async (ctx, next)=>{
         ctx.status = 404;
         return;
     }
-    if (((_note1 = _note4) === null || _note1 === void 0 ? void 0 : _note1.isHidden) || ((_note_user = (_note2 = _note4) === null || _note2 === void 0 ? void 0 : _note2.user) === null || _note_user === void 0 ? void 0 : _note_user.host) || ![
+    if (((_note1 = _note4) === null || _note1 === void 0 ? void 0 : _note1.isHidden) || ((_note2 = _note4) === null || _note2 === void 0 ? void 0 : (_note_user = _note2.user) === null || _note_user === void 0 ? void 0 : _note_user.host) || ![
         'public',
         'home'
     ].includes(note.visibility)) {
@@ -259,9 +259,9 @@ router.get('/notes/:note', async (ctx, next)=>{
         summary: (0, _getnotesummary.default)(_note4),
         imageUrl,
         instanceName: meta.name,
-        icon: (_config_icons_favicon = (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : _config_icons.favicon) === null || _config_icons_favicon === void 0 ? void 0 : _config_icons_favicon.url,
-        iconType: (_config_icons_favicon1 = (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : _config_icons1.favicon) === null || _config_icons_favicon1 === void 0 ? void 0 : _config_icons_favicon1.type,
-        appleTouchIcon: (_config_icons_appleTouchIcon = (_config_icons2 = _config.default.icons) === null || _config_icons2 === void 0 ? void 0 : _config_icons2.appleTouchIcon) === null || _config_icons_appleTouchIcon === void 0 ? void 0 : _config_icons_appleTouchIcon.url,
+        icon: (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : (_config_icons_favicon = _config_icons.favicon) === null || _config_icons_favicon === void 0 ? void 0 : _config_icons_favicon.url,
+        iconType: (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : (_config_icons_favicon1 = _config_icons1.favicon) === null || _config_icons_favicon1 === void 0 ? void 0 : _config_icons_favicon1.type,
+        appleTouchIcon: (_config_icons2 = _config.default.icons) === null || _config_icons2 === void 0 ? void 0 : (_config_icons_appleTouchIcon = _config_icons2.appleTouchIcon) === null || _config_icons_appleTouchIcon === void 0 ? void 0 : _config_icons_appleTouchIcon.url,
         noindex: (_note_user1 = _note4.user) === null || _note_user1 === void 0 ? void 0 : _note_user1.avoidSearchIndex,
         player,
         width,
@@ -280,7 +280,7 @@ router.get('/notes/:note/embed', async (ctx)=>{
             _id: ctx.params.note
         });
         if (note) {
-            var _video, _audio, _obj;
+            var _video, _audio, _this;
             const _note1 = await (0, _note.pack)(note);
             const video = _note1.files.filter((file)=>file.type.match(/^video/) && !file.isSensitive).shift();
             const audio = video ? undefined : _note1.files.filter((file)=>file.type.match(/^audio/) && !file.isSensitive).shift();
@@ -288,7 +288,7 @@ router.get('/notes/:note/embed', async (ctx)=>{
             await ctx.render('note-embed', {
                 video: (_video = video) === null || _video === void 0 ? void 0 : _video.url,
                 audio: (_audio = audio) === null || _audio === void 0 ? void 0 : _audio.url,
-                type: (_obj = video || audio) === null || _obj === void 0 ? void 0 : _obj.type,
+                type: (_this = video || audio) === null || _this === void 0 ? void 0 : _this.type,
                 autoplay: ctx.query.autoplay != null
             });
             ctx.set('Content-Security-Policy', csp);
@@ -330,9 +330,9 @@ router.get('/@:user/pages/:page', async (ctx)=>{
             initialMeta: htmlescape(builded),
             page: _page1,
             instanceName: meta.name || 'Misskey',
-            icon: (_config_icons_favicon = (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : _config_icons.favicon) === null || _config_icons_favicon === void 0 ? void 0 : _config_icons_favicon.url,
-            iconType: (_config_icons_favicon1 = (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : _config_icons1.favicon) === null || _config_icons_favicon1 === void 0 ? void 0 : _config_icons_favicon1.type,
-            appleTouchIcon: (_config_icons_appleTouchIcon = (_config_icons2 = _config.default.icons) === null || _config_icons2 === void 0 ? void 0 : _config_icons2.appleTouchIcon) === null || _config_icons_appleTouchIcon === void 0 ? void 0 : _config_icons_appleTouchIcon.url
+            icon: (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : (_config_icons_favicon = _config_icons.favicon) === null || _config_icons_favicon === void 0 ? void 0 : _config_icons_favicon.url,
+            iconType: (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : (_config_icons_favicon1 = _config_icons1.favicon) === null || _config_icons_favicon1 === void 0 ? void 0 : _config_icons_favicon1.type,
+            appleTouchIcon: (_config_icons2 = _config.default.icons) === null || _config_icons2 === void 0 ? void 0 : (_config_icons_appleTouchIcon = _config_icons2.appleTouchIcon) === null || _config_icons_appleTouchIcon === void 0 ? void 0 : _config_icons_appleTouchIcon.url
         });
         ctx.set('Content-Security-Policy', csp);
         if ([
@@ -413,13 +413,17 @@ router.get('*', async (ctx)=>{
         title: meta.name || 'Misskey',
         instanceName: meta.name || 'Misskey',
         desc,
-        icon: (_config_icons_favicon = (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : _config_icons.favicon) === null || _config_icons_favicon === void 0 ? void 0 : _config_icons_favicon.url,
-        iconType: (_config_icons_favicon1 = (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : _config_icons1.favicon) === null || _config_icons_favicon1 === void 0 ? void 0 : _config_icons_favicon1.type,
-        appleTouchIcon: (_config_icons_appleTouchIcon = (_config_icons2 = _config.default.icons) === null || _config_icons2 === void 0 ? void 0 : _config_icons2.appleTouchIcon) === null || _config_icons_appleTouchIcon === void 0 ? void 0 : _config_icons_appleTouchIcon.url,
+        icon: (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : (_config_icons_favicon = _config_icons.favicon) === null || _config_icons_favicon === void 0 ? void 0 : _config_icons_favicon.url,
+        iconType: (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : (_config_icons_favicon1 = _config_icons1.favicon) === null || _config_icons_favicon1 === void 0 ? void 0 : _config_icons_favicon1.type,
+        appleTouchIcon: (_config_icons2 = _config.default.icons) === null || _config_icons2 === void 0 ? void 0 : (_config_icons_appleTouchIcon = _config_icons2.appleTouchIcon) === null || _config_icons_appleTouchIcon === void 0 ? void 0 : _config_icons_appleTouchIcon.url,
         noindex
     });
     ctx.set('Content-Security-Policy', csp);
-    ctx.set('Cache-Control', 'public, max-age=60');
+    if (process.env.NODE_ENV === 'production') {
+        ctx.set('Cache-Control', 'public, max-age=60');
+    } else {
+        ctx.set('Cache-Control', 'private, max-age=0, must-revalidate');
+    }
 });
 // Register router
 app.use(router.routes());

@@ -126,9 +126,9 @@ function _object_spread(target) {
         }
         cursor = datas[datas.length - 1]._id;
         for (const data of datas){
-            var _data_createdAt_toISOString, _this;
+            var _data_createdAt;
             const del = data.user.host != null && data.note._user.host != null;
-            console.log(`${del ? 'DEL' : 'SKP'} ${data._id} ${(_this = data.createdAt) === null || _this === void 0 ? void 0 : (_data_createdAt_toISOString = _this.toISOString) === null || _data_createdAt_toISOString === void 0 ? void 0 : _data_createdAt_toISOString.call(_this)} ${data.user.host} => ${data.note._user.host}`);
+            console.log(`${del ? 'DEL' : 'SKP'} ${data._id} ${(_data_createdAt = data.createdAt) === null || _data_createdAt === void 0 ? void 0 : _data_createdAt.toISOString()} ${data.user.host} => ${data.note._user.host}`);
             if (del) {
                 await _notereaction.default.remove({
                     _id: data._id

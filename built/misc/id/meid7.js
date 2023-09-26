@@ -43,8 +43,8 @@ function genMeid7(date) {
     return '7' + getTime(date.getTime(), 16, 11) + getRandom(16, 12);
 }
 function meid7ToDate(id) {
-    var _id_match, _this;
-    const m = (_this = id) === null || _this === void 0 ? void 0 : (_id_match = _this.match) === null || _id_match === void 0 ? void 0 : _id_match.call(_this, /^7([0-9a-f]{11})([0-9a-f]{12})$/);
+    var _id;
+    const m = (_id = id) === null || _id === void 0 ? void 0 : _id.match(/^7([0-9a-f]{11})([0-9a-f]{12})$/);
     if (m == null) return null;
     const int = (0, _lodash.parseInt)(m[1], 16);
     return new Date(int);

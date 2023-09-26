@@ -60,7 +60,7 @@ const _default = (endpoint, ctx)=>new Promise((res)=>{
             res();
         };
         // Authentication
-        (0, _authenticate.default)(body['i']).then(([user, app])=>{
+        (0, _authenticate.default)(body['i'], ctx.ip).then(([user, app])=>{
             // API invoking
             (0, _call.default)(endpoint.name, user, app, body, ctx).then((res)=>{
                 if (ctx.method === 'GET' && endpoint.meta.cacheSec && !body['i'] && !user && !app) {
@@ -76,6 +76,12 @@ const _default = (endpoint, ctx)=>new Promise((res)=>{
                     message: 'Authentication failed. Please ensure your token is correct.',
                     code: 'AUTHENTICATION_FAILED',
                     id: 'b0a7f5f8-dc2f-4171-b91f-de88ad238e14'
+                }));
+            } else if (e instanceof _authenticate.AuthenticationLimitError) {
+                reply(423, new _error.ApiError({
+                    message: 'Authentication limit exceeded. Please try again later.',
+                    code: 'AUTHENTICATION_LIMIT_EXCEEDED',
+                    id: 'ab9c1e8e-771e-4363-92bd-c0864ae1d25f'
                 }));
             } else {
                 reply(500, new _error.ApiError());

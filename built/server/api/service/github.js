@@ -98,6 +98,7 @@ router.get('/signin/github', async (ctx)=>{
         secure: _config.default.url.startsWith('https'),
         httpOnly: true
     });
+    // Cache-Controlは/api/でprivateになっている
     _redis.default.set(sessid, JSON.stringify(params));
     const oauth2 = await getOath2();
     ctx.redirect(oauth2.getAuthorizeUrl(params));

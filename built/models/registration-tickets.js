@@ -21,12 +21,12 @@ RegistrationTicket.createIndex('code', {
 });
 const _default = RegistrationTicket;
 async function packRegistrationTicket(src) {
-    var _src_expiresAt_toISOString, _this;
+    var _src_expiresAt;
     return {
         id: src._id,
         code: src.code,
         createdAt: src.createdAt.toISOString(),
-        expiredAt: (_this = src.expiresAt) === null || _this === void 0 ? void 0 : (_src_expiresAt_toISOString = _this.toISOString) === null || _src_expiresAt_toISOString === void 0 ? void 0 : _src_expiresAt_toISOString.call(_this),
+        expiredAt: (_src_expiresAt = src.expiresAt) === null || _src_expiresAt === void 0 ? void 0 : _src_expiresAt.toISOString(),
         inviterId: src.inviterId,
         inviteeIds: src.inviterId,
         inviter: src.inviterId && await (0, _user.pack)(src.inviterId),

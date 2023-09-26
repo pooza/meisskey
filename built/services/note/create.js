@@ -388,7 +388,7 @@ function incQuoteCount(renote) {
     });
 }
 async function insertNote(user, data, tags, emojis, mentionedUsers) {
-    var _data_references_map, _this;
+    var _data_references;
     const insert = {
         _id: (0, _genid.genId)(data.createdAt),
         createdAt: data.createdAt,
@@ -411,7 +411,7 @@ async function insertNote(user, data, tags, emojis, mentionedUsers) {
         appId: data.app ? data.app._id : null,
         visibility: data.visibility,
         visibleUserIds: data.visibility == 'specified' ? data.visibleUsers ? data.visibleUsers.map((u)=>u._id) : [] : [],
-        referenceIds: ((_this = data.references) === null || _this === void 0 ? void 0 : (_data_references_map = _this.map) === null || _data_references_map === void 0 ? void 0 : _data_references_map.call(_this, (x)=>x._id)) || [],
+        referenceIds: ((_data_references = data.references) === null || _data_references === void 0 ? void 0 : _data_references.map((x)=>x._id)) || [],
         // 以下非正規化データ
         _reply: data.reply ? {
             userId: data.reply.userId,

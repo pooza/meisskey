@@ -9,6 +9,9 @@ _export(exports, {
     AuthenticationError: function() {
         return AuthenticationError;
     },
+    AuthenticationLimitError: function() {
+        return AuthenticationLimitError;
+    },
     default: function() {
         return _default;
     }
@@ -17,18 +20,40 @@ const _app = require("../../models/app");
 const _user = require("../../models/user");
 const _accesstoken = require("../../models/access-token");
 const _isnativetoken = require("./common/is-native-token");
+const _limiter = require("./limiter");
 let AuthenticationError = class AuthenticationError extends Error {
     constructor(message){
         super(message);
         this.name = 'AuthenticationError';
     }
 };
-const _default = async (token)=>{
+let AuthenticationLimitError = class AuthenticationLimitError extends Error {
+    constructor(message){
+        super(message);
+        this.name = 'AuthenticationLimitError';
+    }
+};
+const _default = async (token, ip)=>{
     if (token == null) {
         return [
             null,
             null
         ];
+    }
+    const ep = {
+        name: 'authx300',
+        exec: null,
+        meta: {
+            limit: {
+                duration: 300 * 1000,
+                max: 300 * 10
+            }
+        }
+    };
+    if (token != null && ip != null) {
+        await (0, _limiter.default)(ep, undefined, ip).catch((e)=>{
+            throw new AuthenticationLimitError('AuthenticationLimitError');
+        });
     }
     if ((0, _isnativetoken.default)(token)) {
         // Fetch user

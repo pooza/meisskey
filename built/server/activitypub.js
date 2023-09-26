@@ -39,6 +39,8 @@ const _fetchmeta = require("../misc/fetch-meta");
 const _instancemoderation = require("../services/instance-moderation");
 const _ = require("punycode/");
 const _logger = require("../services/logger");
+const _limiter = require("./api/limiter");
+const _array = require("../prelude/array");
 const logger = new _logger.default('activitypub');
 // Init router
 const router = new _router();
@@ -68,7 +70,35 @@ async function inbox(ctx) {
         ctx.status = 400;
         return;
     }
-    const queue = await (0, _queue.inbox)(ctx.request.body, signature, {
+    const actor = signature.keyId.replace(/[^0-9A-Za-z]/g, '_');
+    const activity = ctx.request.body;
+    let lazy = false;
+    if (actor && [
+        'Delete',
+        'Undo'
+    ].includes((0, _array.toSingle)(activity.type))) {
+        const ep = {
+            name: `inboxDeletex60-${actor}`,
+            exec: null,
+            meta: {
+                limit: {
+                    duration: 60 * 1000,
+                    max: 10
+                }
+            }
+        };
+        try {
+            await (0, _limiter.default)(ep, undefined, undefined);
+        } catch (e) {
+            console.log(`InboxLimit: ${actor}`);
+            if (_config.default.inboxMassDelOpeMode === 'ignore') {
+                ctx.status = 202;
+                return;
+            }
+            lazy = true;
+        }
+    }
+    const queue = await (lazy ? _queue.inboxLazy : _queue.inbox)(activity, signature, {
         ip: ctx.request.ip
     });
     ctx.status = 202;

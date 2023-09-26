@@ -166,7 +166,7 @@ async function fetchPerson(uri) {
     return await dbResolver.getUserFromApId(uri);
 }
 async function createPerson(uri, resolver) {
-    var _person_vcardbday_match, _this;
+    var _person_vcardbday;
     if (typeof uri !== 'string') throw 'uri is not string';
     if (uri.startsWith(_config.default.url)) {
         throw new _fetch.StatusError('cannot resolve local user', 400, 'cannot resolve local user');
@@ -187,7 +187,7 @@ async function createPerson(uri, resolver) {
         logger.warn(`Error in movedTo: ${e}`);
         return null;
     }) : null;
-    const bday = (_this = person['vcard:bday']) === null || _this === void 0 ? void 0 : (_person_vcardbday_match = _this.match) === null || _person_vcardbday_match === void 0 ? void 0 : _person_vcardbday_match.call(_this, /^[0-9]{4,8}-\d{2}-\d{2}/);
+    const bday = (_person_vcardbday = person['vcard:bday']) === null || _person_vcardbday === void 0 ? void 0 : _person_vcardbday.match(/^[0-9]{4,8}-\d{2}-\d{2}/);
     // Create user
     let user;
     try {
@@ -328,7 +328,7 @@ async function createPerson(uri, resolver) {
     return user;
 }
 async function updatePerson(uri, resolver, hint) {
-    var _person_vcardbday_match, _this, _movedTo;
+    var _person_vcardbday, _movedTo;
     if (typeof uri !== 'string') throw 'uri is not string';
     // URIがこのサーバーを指しているならスキップ
     if (uri.startsWith(_config.default.url + '/')) {
@@ -368,7 +368,7 @@ async function updatePerson(uri, resolver, hint) {
         logger.warn(`Error in movedTo: ${e}`);
         return null;
     }) : null;
-    const bday = (_this = person['vcard:bday']) === null || _this === void 0 ? void 0 : (_person_vcardbday_match = _this.match) === null || _person_vcardbday_match === void 0 ? void 0 : _person_vcardbday_match.call(_this, /^[0-9]{4,8}-\d{2}-\d{2}/);
+    const bday = (_person_vcardbday = person['vcard:bday']) === null || _person_vcardbday === void 0 ? void 0 : _person_vcardbday.match(/^[0-9]{4,8}-\d{2}-\d{2}/);
     const updates = _object_spread_props(_object_spread({
         lastFetchedAt: new Date(),
         inbox: person.inbox,

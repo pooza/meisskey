@@ -17,8 +17,8 @@ const _fetch = require("../../misc/fetch");
 const _config = require("../../config");
 const logger = new _logger.default('deliver');
 const _default = async (job)=>{
-    var _job_data_to_match, _this;
-    if (!((_this = job.data.to) === null || _this === void 0 ? void 0 : (_job_data_to_match = _this.match) === null || _job_data_to_match === void 0 ? void 0 : _job_data_to_match.call(_this, /^https?:/))) {
+    var _job_data_to;
+    if (!((_job_data_to = job.data.to) === null || _job_data_to === void 0 ? void 0 : _job_data_to.match(/^https?:/))) {
         return 'skip (invalid URL)';
     }
     const { host } = new URL(job.data.to);
@@ -33,7 +33,7 @@ const _default = async (job)=>{
         job.data.content = publicToHome(job.data.content, job.data.user);
     }
     try {
-        var _res_substring, _this1;
+        var _res;
         const res = await (0, _request.default)(job.data.user, job.data.to, job.data.content);
         // Update stats
         (0, _registerorfetchinstancedoc.registerOrFetchInstanceDoc)(host).then((i)=>{
@@ -50,7 +50,7 @@ const _default = async (job)=>{
             (0, _updateinstanceinfo.UpdateInstanceinfo)(i);
             _instance1.default.requestSent(i.host, true);
         });
-        return `ok: ${(_this1 = res) === null || _this1 === void 0 ? void 0 : (_res_substring = _this1.substring) === null || _res_substring === void 0 ? void 0 : _res_substring.call(_this1, 0, 256)}`;
+        return `ok: ${(_res = res) === null || _res === void 0 ? void 0 : _res.substring(0, 256)}`;
     } catch (res) {
         // Update stats
         (0, _registerorfetchinstancedoc.registerOrFetchInstanceDoc)(host).then((i)=>{

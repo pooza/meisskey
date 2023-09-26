@@ -127,7 +127,7 @@ function auth(request) {
         null,
         null
     ];
-    return (0, _authenticate.default)(q.i);
+    return (0, _authenticate.default)(q.i); // TODO: RealIP取れない
 }
 
 //# sourceMappingURL=streaming.js.map

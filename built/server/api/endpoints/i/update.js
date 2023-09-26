@@ -250,9 +250,9 @@ const _default = (0, _define.default)(meta, async (ps, user, app)=>{
     if (ps.location !== undefined) updates['profile.location'] = ps.location;
     if (ps.birthday !== undefined) {
         if (typeof _config.default.minimumAge === 'number' && ps.birthday != null) {
-            var _d_toString, _this;
+            var _d;
             const d = new Date(ps.birthday);
-            if (((_this = d) === null || _this === void 0 ? void 0 : (_d_toString = _this.toString) === null || _d_toString === void 0 ? void 0 : _d_toString.call(_this)) !== 'Invalid Date') {
+            if (((_d = d) === null || _d === void 0 ? void 0 : _d.toString()) !== 'Invalid Date') {
                 const a = (0, _calcage.calcAge)(d);
                 if (a < _config.default.minimumAge && a >= 0) {
                     ps.birthday = null;

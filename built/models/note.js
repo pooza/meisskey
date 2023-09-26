@@ -182,7 +182,7 @@ const packMany = async (notes, me, options)=>{
     return options && options.removeError ? items.filter((x)=>x != null) : items;
 };
 const pack = async (src, me, options)=>{
-    var _db_visibleUserIds, _db_mentions, _db_mentionedRemoteUsers, _db_referenceIds_reverse, _this, _packed_user;
+    var _db_visibleUserIds, _db_mentions, _db_mentionedRemoteUsers, _db_referenceIds, _packed_user;
     const opts = Object.assign({
         detail: true,
         skipHide: false
@@ -321,7 +321,7 @@ const pack = async (src, me, options)=>{
         renote: db.renoteId ? pack(db.renoteId, meId, {
             detail: true
         }) : null,
-        referenceIds: (_this = db.referenceIds) === null || _this === void 0 ? void 0 : (_db_referenceIds_reverse = _this.reverse) === null || _db_referenceIds_reverse === void 0 ? void 0 : _db_referenceIds_reverse.call(_this),
+        referenceIds: (_db_referenceIds = db.referenceIds) === null || _db_referenceIds === void 0 ? void 0 : _db_referenceIds.reverse(),
         references: db.referenceIds ? packMany(db.referenceIds.reverse(), meId, {
             detail: false,
             removeError: true

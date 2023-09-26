@@ -136,10 +136,10 @@ async function fetchInstanceinfo(host) {
     var _info_metadata, _info, _info_metadata1, _info1, _info_metadata2, _info2, _info_metadata3, _info3, _info_metadata_maintainer, _info_metadata4, _info4, _info_metadata_maintainer1, _info_metadata5, _info5, _info_software, _info6, _info_software1, _info7, _info8, _info_usage_users, _info_usage, _info9, _info_usage_users1, _info_usage1, _info10, _info_usage2, _info11, _info_usage3, _info12;
     // fetch nodeinfo
     const info = await fetchNodeinfo(host).catch(()=>null);
-    let name = ((_info_metadata = (_info = info) === null || _info === void 0 ? void 0 : _info.metadata) === null || _info_metadata === void 0 ? void 0 : _info_metadata.nodeName) || ((_info_metadata1 = (_info1 = info) === null || _info1 === void 0 ? void 0 : _info1.metadata) === null || _info_metadata1 === void 0 ? void 0 : _info_metadata1.name) || null;
-    let description = ((_info_metadata2 = (_info2 = info) === null || _info2 === void 0 ? void 0 : _info2.metadata) === null || _info_metadata2 === void 0 ? void 0 : _info_metadata2.nodeDescription) || ((_info_metadata3 = (_info3 = info) === null || _info3 === void 0 ? void 0 : _info3.metadata) === null || _info_metadata3 === void 0 ? void 0 : _info_metadata3.description) || null;
-    const maintainerName = ((_info_metadata_maintainer = (_info_metadata4 = (_info4 = info) === null || _info4 === void 0 ? void 0 : _info4.metadata) === null || _info_metadata4 === void 0 ? void 0 : _info_metadata4.maintainer) === null || _info_metadata_maintainer === void 0 ? void 0 : _info_metadata_maintainer.name) || null;
-    let maintainerEmail = ((_info_metadata_maintainer1 = (_info_metadata5 = (_info5 = info) === null || _info5 === void 0 ? void 0 : _info5.metadata) === null || _info_metadata5 === void 0 ? void 0 : _info_metadata5.maintainer) === null || _info_metadata_maintainer1 === void 0 ? void 0 : _info_metadata_maintainer1.email) || null;
+    let name = ((_info = info) === null || _info === void 0 ? void 0 : (_info_metadata = _info.metadata) === null || _info_metadata === void 0 ? void 0 : _info_metadata.nodeName) || ((_info1 = info) === null || _info1 === void 0 ? void 0 : (_info_metadata1 = _info1.metadata) === null || _info_metadata1 === void 0 ? void 0 : _info_metadata1.name) || null;
+    let description = ((_info2 = info) === null || _info2 === void 0 ? void 0 : (_info_metadata2 = _info2.metadata) === null || _info_metadata2 === void 0 ? void 0 : _info_metadata2.nodeDescription) || ((_info3 = info) === null || _info3 === void 0 ? void 0 : (_info_metadata3 = _info3.metadata) === null || _info_metadata3 === void 0 ? void 0 : _info_metadata3.description) || null;
+    const maintainerName = ((_info4 = info) === null || _info4 === void 0 ? void 0 : (_info_metadata4 = _info4.metadata) === null || _info_metadata4 === void 0 ? void 0 : (_info_metadata_maintainer = _info_metadata4.maintainer) === null || _info_metadata_maintainer === void 0 ? void 0 : _info_metadata_maintainer.name) || null;
+    let maintainerEmail = ((_info5 = info) === null || _info5 === void 0 ? void 0 : (_info_metadata5 = _info5.metadata) === null || _info_metadata5 === void 0 ? void 0 : (_info_metadata_maintainer1 = _info_metadata5.maintainer) === null || _info_metadata_maintainer1 === void 0 ? void 0 : _info_metadata_maintainer1.email) || null;
     // fetch Mastodon API
     if (!name) {
         const mastodon = await fetchMastodonInstance((0, _converthost.toApHost)(host)).catch(()=>{});
@@ -150,17 +150,17 @@ async function fetchInstanceinfo(host) {
         }
     }
     return {
-        softwareName: (_info_software = (_info6 = info) === null || _info6 === void 0 ? void 0 : _info6.software) === null || _info_software === void 0 ? void 0 : _info_software.name,
-        softwareVersion: (_info_software1 = (_info7 = info) === null || _info7 === void 0 ? void 0 : _info7.software) === null || _info_software1 === void 0 ? void 0 : _info_software1.version,
+        softwareName: (_info6 = info) === null || _info6 === void 0 ? void 0 : (_info_software = _info6.software) === null || _info_software === void 0 ? void 0 : _info_software.name,
+        softwareVersion: (_info7 = info) === null || _info7 === void 0 ? void 0 : (_info_software1 = _info7.software) === null || _info_software1 === void 0 ? void 0 : _info_software1.version,
         openRegistrations: (_info8 = info) === null || _info8 === void 0 ? void 0 : _info8.openRegistrations,
         name,
         description,
         maintainerName,
         maintainerEmail,
-        activeHalfyear: expectNumber((_info_usage_users = (_info_usage = (_info9 = info) === null || _info9 === void 0 ? void 0 : _info9.usage) === null || _info_usage === void 0 ? void 0 : _info_usage.users) === null || _info_usage_users === void 0 ? void 0 : _info_usage_users.activeHalfyear),
-        activeMonth: expectNumber((_info_usage_users1 = (_info_usage1 = (_info10 = info) === null || _info10 === void 0 ? void 0 : _info10.usage) === null || _info_usage1 === void 0 ? void 0 : _info_usage1.users) === null || _info_usage_users1 === void 0 ? void 0 : _info_usage_users1.activeMonth),
-        usersCount: expectNumber((_info_usage2 = (_info11 = info) === null || _info11 === void 0 ? void 0 : _info11.usage) === null || _info_usage2 === void 0 ? void 0 : _info_usage2.users.total),
-        notesCount: expectNumber((_info_usage3 = (_info12 = info) === null || _info12 === void 0 ? void 0 : _info12.usage) === null || _info_usage3 === void 0 ? void 0 : _info_usage3.localPosts)
+        activeHalfyear: expectNumber((_info9 = info) === null || _info9 === void 0 ? void 0 : (_info_usage = _info9.usage) === null || _info_usage === void 0 ? void 0 : (_info_usage_users = _info_usage.users) === null || _info_usage_users === void 0 ? void 0 : _info_usage_users.activeHalfyear),
+        activeMonth: expectNumber((_info10 = info) === null || _info10 === void 0 ? void 0 : (_info_usage1 = _info10.usage) === null || _info_usage1 === void 0 ? void 0 : (_info_usage_users1 = _info_usage1.users) === null || _info_usage_users1 === void 0 ? void 0 : _info_usage_users1.activeMonth),
+        usersCount: expectNumber((_info11 = info) === null || _info11 === void 0 ? void 0 : (_info_usage2 = _info11.usage) === null || _info_usage2 === void 0 ? void 0 : _info_usage2.users.total),
+        notesCount: expectNumber((_info12 = info) === null || _info12 === void 0 ? void 0 : (_info_usage3 = _info12.usage) === null || _info_usage3 === void 0 ? void 0 : _info_usage3.localPosts)
     };
 }
 async function fetchNodeinfo(host) {
@@ -182,19 +182,19 @@ async function fetchMastodonInstance(host) {
     return json;
 }
 async function fetchTop(instance) {
-    var _doc_querySelector_getAttribute, _this, _doc_querySelector_getAttribute1, _this1, _doc_querySelector_getAttribute2, _this2, _doc_querySelector_getAttribute3, _this3;
+    var _doc_querySelector, _doc_querySelector1, _doc_querySelector2, _doc_querySelector3;
     const host = (0, _converthost.toApHost)(instance.host);
     logger.info(`Fetching icon URL of ${host} ...`);
     const url = 'https://' + host;
     const html = await (0, _fetch.getHtml)(url);
     const { window } = new _jsdom.JSDOM(html);
     const doc = window.document;
-    const hrefAppleTouchIconPrecomposed = (_this = doc.querySelector('link[rel="apple-touch-icon-precomposed"]')) === null || _this === void 0 ? void 0 : (_doc_querySelector_getAttribute = _this.getAttribute) === null || _doc_querySelector_getAttribute === void 0 ? void 0 : _doc_querySelector_getAttribute.call(_this, 'href');
-    const hrefAppleTouchIcon = (_this1 = doc.querySelector('link[rel="apple-touch-icon"]')) === null || _this1 === void 0 ? void 0 : (_doc_querySelector_getAttribute1 = _this1.getAttribute) === null || _doc_querySelector_getAttribute1 === void 0 ? void 0 : _doc_querySelector_getAttribute1.call(_this1, 'href');
-    const hrefIcon = (_this2 = doc.querySelector('link[rel="icon"]')) === null || _this2 === void 0 ? void 0 : (_doc_querySelector_getAttribute2 = _this2.getAttribute) === null || _doc_querySelector_getAttribute2 === void 0 ? void 0 : _doc_querySelector_getAttribute2.call(_this2, 'href');
+    const hrefAppleTouchIconPrecomposed = (_doc_querySelector = doc.querySelector('link[rel="apple-touch-icon-precomposed"]')) === null || _doc_querySelector === void 0 ? void 0 : _doc_querySelector.getAttribute('href');
+    const hrefAppleTouchIcon = (_doc_querySelector1 = doc.querySelector('link[rel="apple-touch-icon"]')) === null || _doc_querySelector1 === void 0 ? void 0 : _doc_querySelector1.getAttribute('href');
+    const hrefIcon = (_doc_querySelector2 = doc.querySelector('link[rel="icon"]')) === null || _doc_querySelector2 === void 0 ? void 0 : _doc_querySelector2.getAttribute('href');
     const href = hrefIcon || hrefAppleTouchIconPrecomposed || hrefAppleTouchIcon || null;
     const iconUrl = href ? new URL(href, url).href : null;
-    const manifestHref = (_this3 = doc.querySelector('link[rel="manifest"]')) === null || _this3 === void 0 ? void 0 : (_doc_querySelector_getAttribute3 = _this3.getAttribute) === null || _doc_querySelector_getAttribute3 === void 0 ? void 0 : _doc_querySelector_getAttribute3.call(_this3, 'href');
+    const manifestHref = (_doc_querySelector3 = doc.querySelector('link[rel="manifest"]')) === null || _doc_querySelector3 === void 0 ? void 0 : _doc_querySelector3.getAttribute('href');
     const manifestUrl = manifestHref ? new URL(manifestHref, url).href : null;
     return {
         iconUrl,

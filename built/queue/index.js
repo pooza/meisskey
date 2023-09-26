@@ -6,6 +6,15 @@ function _export(target, all) {
     });
 }
 _export(exports, {
+    deliverJobConcurrency: function() {
+        return deliverJobConcurrency;
+    },
+    inboxJobConcurrency: function() {
+        return inboxJobConcurrency;
+    },
+    inboxLazyJobConcurrency: function() {
+        return inboxLazyJobConcurrency;
+    },
     deliver: function() {
         return deliver;
     },
@@ -14,6 +23,9 @@ _export(exports, {
     },
     inbox: function() {
         return inbox;
+    },
+    inboxLazy: function() {
+        return inboxLazy;
     },
     createDeleteNotesJob: function() {
         return createDeleteNotesJob;
@@ -76,25 +88,30 @@ const _inbox = require("./processors/inbox");
 const _db = require("./processors/db");
 const _logger = require("./logger");
 const _queue = require("../services/chart/queue");
+const _os = require("os");
 const deliverLogger = _logger.queueLogger.createSubLogger('deliver');
 const webpushDeliverLogger = _logger.queueLogger.createSubLogger('webpushDeliver');
 const inboxLogger = _logger.queueLogger.createSubLogger('inbox');
+const inboxLazyLogger = _logger.queueLogger.createSubLogger('inboxLazy');
 const dbLogger = _logger.queueLogger.createSubLogger('db');
 let deliverDeltaCounts = 0;
 let inboxDeltaCounts = 0;
+const deliverJobConcurrency = _config.default.deliverJobConcurrency || ((0, _os.cpus)().length || 4) * 8;
+const inboxJobConcurrency = _config.default.inboxJobConcurrency || ((0, _os.cpus)().length || 4) * 1;
+const inboxLazyJobConcurrency = _config.default.inboxLazyJobConcurrency || 1;
 _queues.deliverQueue.on('waiting', (jobId)=>{
     deliverDeltaCounts++;
     deliverLogger.debug(`waiting id=${jobId}`);
 }).on('active', (job)=>deliverLogger.info(`active ${(0, _getjobinfo.getJobInfo)(job, true)} to=${job.data.to}`)).on('completed', (job, result)=>deliverLogger.info(`completed(${result}) ${(0, _getjobinfo.getJobInfo)(job, true)} to=${job.data.to}`)).on('failed', (job, err)=>{
     const msg = `failed(${err}) ${(0, _getjobinfo.getJobInfo)(job)} to=${job.data.to}`;
-    job.log(msg);
+    if (job.opts.attempts && job.opts.attempts > job.attemptsMade) job.log(msg);
     deliverLogger.warn(msg);
 }).on('error', (error)=>deliverLogger.error(`error ${error}`)).on('stalled', (job)=>deliverLogger.warn(`stalled ${(0, _getjobinfo.getJobInfo)(job)} to=${job.data.to}`));
 _queues.webpushDeliverQueue.on('waiting', (jobId)=>{
     webpushDeliverLogger.debug(`waiting id=${jobId}`);
 }).on('active', (job)=>webpushDeliverLogger.info(`active ${(0, _getjobinfo.getJobInfo)(job, true)} to=${job.data.pushSubscription.endpoint}`)).on('completed', (job, result)=>webpushDeliverLogger.info(`completed(${result}) ${(0, _getjobinfo.getJobInfo)(job, true)} to=${job.data.pushSubscription.endpoint}`)).on('failed', (job, err)=>{
     const msg = `failed(${err}) ${(0, _getjobinfo.getJobInfo)(job)} to=${job.data.pushSubscription.endpoint}`;
-    job.log(msg);
+    if (job.opts.attempts && job.opts.attempts > job.attemptsMade) job.log(msg);
     webpushDeliverLogger.warn(msg);
 }).on('error', (error)=>webpushDeliverLogger.error(`error ${error}`)).on('stalled', (job)=>webpushDeliverLogger.warn(`stalled ${(0, _getjobinfo.getJobInfo)(job)} to=${job.data.pushSubscription.endpoint}`));
 _queues.inboxQueue.on('waiting', (jobId)=>{
@@ -102,9 +119,16 @@ _queues.inboxQueue.on('waiting', (jobId)=>{
     inboxLogger.debug(`waiting id=${jobId}`);
 }).on('active', (job)=>inboxLogger.info(`active ${(0, _getjobinfo.getJobInfo)(job, true)} activity=${job.data.activity ? job.data.activity.id : 'none'}`)).on('completed', (job, result)=>inboxLogger.info(`completed(${result}) ${(0, _getjobinfo.getJobInfo)(job, true)} activity=${job.data.activity ? job.data.activity.id : 'none'}`)).on('failed', (job, err)=>{
     const msg = `failed(${err}) ${(0, _getjobinfo.getJobInfo)(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`;
-    job.log(msg);
+    if (job.opts.attempts && job.opts.attempts > job.attemptsMade) job.log(msg);
     inboxLogger.warn(msg);
 }).on('error', (error)=>inboxLogger.error(`error ${error}`)).on('stalled', (job)=>inboxLogger.warn(`stalled ${(0, _getjobinfo.getJobInfo)(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`));
+_queues.inboxLazyQueue.on('waiting', (jobId)=>{
+    inboxLazyLogger.debug(`waiting id=${jobId}`);
+}).on('active', (job)=>inboxLazyLogger.info(`active ${(0, _getjobinfo.getJobInfo)(job, true)} activity=${job.data.activity ? job.data.activity.id : 'none'}`)).on('completed', (job, result)=>inboxLazyLogger.info(`completed(${result}) ${(0, _getjobinfo.getJobInfo)(job, true)} activity=${job.data.activity ? job.data.activity.id : 'none'}`)).on('failed', (job, err)=>{
+    const msg = `failed(${err}) ${(0, _getjobinfo.getJobInfo)(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`;
+    if (job.opts.attempts && job.opts.attempts > job.attemptsMade) job.log(msg);
+    inboxLazyLogger.warn(msg);
+}).on('error', (error)=>inboxLazyLogger.error(`error ${error}`)).on('stalled', (job)=>inboxLazyLogger.warn(`stalled ${(0, _getjobinfo.getJobInfo)(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`));
 _queues.dbQueue.on('waiting', (jobId)=>dbLogger.debug(`waiting id=${jobId}`)).on('active', (job)=>dbLogger.info(`${job.name} active ${(0, _getjobinfo.getJobInfo)(job, true)}`)).on('completed', (job, result)=>dbLogger.info(`${job.name} completed(${result}) ${(0, _getjobinfo.getJobInfo)(job, true)}`)).on('failed', (job, err)=>dbLogger.warn(`${job.name} failed(${err}) ${(0, _getjobinfo.getJobInfo)(job)}`)).on('error', (error)=>dbLogger.error(`error ${error}`)).on('stalled', (job)=>dbLogger.warn(`${job.name} stalled ${(0, _getjobinfo.getJobInfo)(job)}`));
 // Chart bulk write
 setInterval(()=>{
@@ -156,6 +180,22 @@ function inbox(activity, signature, request) {
     return _queues.inboxQueue.add(data, {
         attempts: _config.default.inboxJobMaxAttempts || 8,
         timeout: 5 * 60 * 1000,
+        backoff: {
+            type: 'apBackoff'
+        },
+        removeOnComplete: true,
+        removeOnFail: true
+    });
+}
+function inboxLazy(activity, signature, request) {
+    const data = {
+        activity,
+        signature,
+        request
+    };
+    return _queues.inboxLazyQueue.add(data, {
+        attempts: 1,
+        timeout: 1 * 60 * 1000,
         backoff: {
             type: 'apBackoff'
         },
@@ -337,9 +377,10 @@ function createImportUserListsJob(user, fileId) {
     });
 }
 function _default() {
-    _queues.deliverQueue.process(_config.default.deliverJobConcurrency || 128, _deliver.default);
+    _queues.deliverQueue.process(deliverJobConcurrency, _deliver.default);
     _queues.webpushDeliverQueue.process(8, _webpushDeliver.default);
-    _queues.inboxQueue.process(_config.default.inboxJobConcurrency || 16, _inbox.default);
+    _queues.inboxQueue.process(inboxJobConcurrency, _inbox.default);
+    _queues.inboxLazyQueue.process(inboxLazyJobConcurrency, _inbox.default);
     (0, _db.default)(_queues.dbQueue);
 }
 function destroy(domain) {
@@ -348,18 +389,28 @@ function destroy(domain) {
             deliverLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
         });
         _queues.deliverQueue.clean(0, 'delayed');
+        _queues.deliverQueue.clean(0, 'wait');
     }
     if (domain == null || domain === 'inbox') {
         _queues.inboxQueue.once('cleaned', (jobs, status)=>{
             inboxLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
         });
         _queues.inboxQueue.clean(0, 'delayed');
+        _queues.inboxQueue.clean(0, 'wait');
+    }
+    if (domain == null || domain === 'inboxLazy') {
+        _queues.inboxLazyQueue.once('cleaned', (jobs, status)=>{
+            inboxLazyLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
+        });
+        _queues.inboxLazyQueue.clean(0, 'delayed');
+        _queues.inboxLazyQueue.clean(0, 'wait');
     }
     if (domain === 'db') {
         _queues.dbQueue.once('cleaned', (jobs, status)=>{
             dbLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
         });
         _queues.dbQueue.clean(0, 'delayed');
+        _queues.dbQueue.clean(0, 'wait');
     }
 }
 

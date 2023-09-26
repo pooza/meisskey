@@ -24,6 +24,7 @@ const _queuestats = require("./daemons/queue-stats");
 const _load = require("./config/load");
 const _env = require("./env");
 const _showmachineinfo = require("./misc/show-machine-info");
+const _checkmongodb = require("./misc/check-mongodb");
 Error.stackTraceLimit = Infinity;
 require('events').EventEmitter.defaultMaxListeners = 128;
 if (process.env.UV_THREADPOOL_SIZE == null) {
@@ -33,6 +34,11 @@ if (process.env.UV_THREADPOOL_SIZE == null) {
     if (uvThreadpoolSize > 1024) uvThreadpoolSize = 1024;
     process.env.UV_THREADPOOL_SIZE = uvThreadpoolSize.toString();
 }
+process.on('SIGUSR2', ()=>{
+    console.log(JSON.stringify({
+        memoryUsage: process.memoryUsage()
+    }));
+});
 const logger = new _logger.default('core', 'cyan');
 const bootLogger = logger.createSubLogger('boot', 'magenta', false);
 const clusterLogger = logger.createSubLogger('cluster', 'orange');
@@ -203,6 +209,13 @@ function showEnvironment() {
     const nodejsLogger = bootLogger.createSubLogger('nodejs');
     nodejsLogger.info(`Version ${runningNodejsVersion.join('.')}`);
     await (0, _showmachineinfo.showMachineInfo)(bootLogger);
+    // Try to connect to MongoDB
+    try {
+        await (0, _checkmongodb.checkMongoDB)(config, bootLogger);
+    } catch (e) {
+        bootLogger.error('Cannot connect to database', null, true);
+        process.exit(1);
+    }
 }
 async function spawnWorkers(config) {
     const st = getWorkerStrategies(config);

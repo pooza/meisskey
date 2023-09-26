@@ -231,8 +231,8 @@ const meta = {
     }
 };
 const _default = (0, _define.default)(meta, async (ps, user, app)=>{
-    var _ps_text_trim, _this;
-    if (((_this = ps.text) === null || _this === void 0 ? void 0 : (_ps_text_trim = _this.trim) === null || _ps_text_trim === void 0 ? void 0 : _ps_text_trim.call(_this)) === '') ps.text = null;
+    var _ps_text;
+    if (((_ps_text = ps.text) === null || _ps_text === void 0 ? void 0 : _ps_text.trim()) === '') ps.text = null;
     if (ps.visibility == null) {
         ps.visibility = ps.renoteId ? 'home' : 'public';
     }

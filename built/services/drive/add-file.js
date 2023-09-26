@@ -466,7 +466,7 @@ async function addFile({ user, path, name = null, comment = null, folderId = nul
     }
     if (!driveFile) throw 'Failed to create drivefile ${e}';
     logger.succ(`drive file has been created ${driveFile._id}`);
-    if ((0, _user.isLocalUser)((_driveFile_metadata = (_driveFile = driveFile) === null || _driveFile === void 0 ? void 0 : _driveFile.metadata) === null || _driveFile_metadata === void 0 ? void 0 : _driveFile_metadata._user)) {
+    if ((0, _user.isLocalUser)((_driveFile = driveFile) === null || _driveFile === void 0 ? void 0 : (_driveFile_metadata = _driveFile.metadata) === null || _driveFile_metadata === void 0 ? void 0 : _driveFile_metadata._user)) {
         (0, _drivefile.pack)(driveFile, {
             self: true
         }).then((packedFile)=>{

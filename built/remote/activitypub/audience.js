@@ -66,7 +66,7 @@ function groupingAudience(ids, actor) {
 function isPublic(id) {
     return [
         'https://www.w3.org/ns/activitystreams#Public',
-        'as#Public',
+        'as:Public',
         'Public'
     ].includes(id);
 }

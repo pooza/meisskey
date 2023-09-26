@@ -18,7 +18,7 @@ function getSummaryInstance() {
     if (summaryInstance) return summaryInstance;
     summaryInstance = new _summaly.Summary({
         allowedPlugins: [
-            'twitter',
+            //'twitter',
             'youtube',
             'dlsite'
         ]
@@ -42,7 +42,7 @@ module.exports = async (ctx)=>{
     const lang = ctx.query.lang || 'ja-JP';
     logger.info(meta.summalyProxy ? `(Proxy) Getting preview of ${url}@${lang} ...` : `Getting preview of ${url}@${lang} ...`);
     try {
-        var _summary_player_url_startsWith, _this, _summary_player;
+        var _summary_player_url, _summary_player;
         const summary = meta.summalyProxy ? await (0, _fetch.getJson)(`${meta.summalyProxy}?${(0, _url.query)({
             url: url,
             lang: lang
@@ -54,7 +54,7 @@ module.exports = async (ctx)=>{
         summary.thumbnail = await wrap(summary.thumbnail, 128);
         if (summary.player) summary.player.url = (0, _sanitizeurl.sanitizeUrl)(summary.player.url);
         summary.url = (0, _sanitizeurl.sanitizeUrl)(summary.url);
-        if ((_this = (_summary_player = summary.player) === null || _summary_player === void 0 ? void 0 : _summary_player.url) === null || _this === void 0 ? void 0 : (_summary_player_url_startsWith = _this.startsWith) === null || _summary_player_url_startsWith === void 0 ? void 0 : _summary_player_url_startsWith.call(_this, 'https://player.twitch.tv/')) {
+        if ((_summary_player = summary.player) === null || _summary_player === void 0 ? void 0 : (_summary_player_url = _summary_player.url) === null || _summary_player_url === void 0 ? void 0 : _summary_player_url.startsWith('https://player.twitch.tv/')) {
             summary.player.url = summary.player.url.replace('parent=meta.tag', `parent=${_config.default.url.replace(/^https?:[/][/]/, '')}`);
         }
         // Cache 7days

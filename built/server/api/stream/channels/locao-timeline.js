@@ -58,7 +58,7 @@ let _class = class _class extends _channel.default {
                 detail: true
             });
         }
-        if ((_note_renote_user = (_note_renote = note.renote) === null || _note_renote === void 0 ? void 0 : _note_renote.user) === null || _note_renote_user === void 0 ? void 0 : _note_renote_user.host) return;
+        if ((_note_renote = note.renote) === null || _note_renote === void 0 ? void 0 : (_note_renote_user = _note_renote.user) === null || _note_renote_user === void 0 ? void 0 : _note_renote_user.host) return;
         // 流れてきたNoteがミュートしているユーザーが関わるものだったら無視する
         if ((0, _shouldmutethisnote.default)(note, this.mutedUserIds)) return;
         this.send('note', note);

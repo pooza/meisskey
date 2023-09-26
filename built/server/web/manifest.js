@@ -10,10 +10,10 @@ module.exports = async (ctx)=>{
     json.name = instance.name || 'Misskey';
     for (const x of json.icons){
         var _config_icons_manifest192, _config_icons, _config_icons_manifest512, _config_icons1;
-        if (x.sizes === '192x192' && ((_config_icons_manifest192 = (_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : _config_icons.manifest192) === null || _config_icons_manifest192 === void 0 ? void 0 : _config_icons_manifest192.url)) {
+        if (x.sizes === '192x192' && ((_config_icons = _config.default.icons) === null || _config_icons === void 0 ? void 0 : (_config_icons_manifest192 = _config_icons.manifest192) === null || _config_icons_manifest192 === void 0 ? void 0 : _config_icons_manifest192.url)) {
             x.src = _config.default.icons.manifest192.url;
         }
-        if (x.sizes === '512x512' && ((_config_icons_manifest512 = (_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : _config_icons1.manifest512) === null || _config_icons_manifest512 === void 0 ? void 0 : _config_icons_manifest512.url)) {
+        if (x.sizes === '512x512' && ((_config_icons1 = _config.default.icons) === null || _config_icons1 === void 0 ? void 0 : (_config_icons_manifest512 = _config_icons1.manifest512) === null || _config_icons_manifest512 === void 0 ? void 0 : _config_icons_manifest512.url)) {
             x.src = _config.default.icons.manifest512.url;
         }
     }

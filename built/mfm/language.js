@@ -244,13 +244,13 @@ const mfmLanguage = _parsimmon.createLanguage({
             })),
     mention: ()=>{
         return _parsimmon((input, i)=>{
-            var _input__match, _this;
+            var _input_;
             const text = input.substr(i);
             // eslint-disable-next-line no-useless-escape
             const match = text.match(/^@\w([\w-]*\w)?(?:@[\w\.\-]+\w)?/);
             if (!match) return _parsimmon.makeFailure(i, 'not a mention');
             // @ の前に何かあればハッシュタグ扱いしない
-            if ((_this = input[i - 1]) === null || _this === void 0 ? void 0 : (_input__match = _this.match) === null || _input__match === void 0 ? void 0 : _input__match.call(_this, /[^\s\u200b]/)) return _parsimmon.makeFailure(i, 'not a mention');
+            if ((_input_ = input[i - 1]) === null || _input_ === void 0 ? void 0 : _input_.match(/[^\s\u200b]/)) return _parsimmon.makeFailure(i, 'not a mention');
             return _parsimmon.makeSuccess(i + match[0].length, match[0]);
         }).map((x)=>{
             const { username, host } = (0, _parse.default)(x.substr(1));
@@ -264,7 +264,7 @@ const mfmLanguage = _parsimmon.createLanguage({
         });
     },
     hashtag: ()=>_parsimmon((input, i)=>{
-            var _input__match, _this;
+            var _input_;
             // ローカルサーバーでの新規投稿作成時 / クライアントでのパース時 共通で適用したいハッシュタグ条件はここで指定する
             // ローカルサーバーでの新規投稿作成時 に最終的にどれをハッシュタグとするかはisHashtag()に記述
             // クライアントでのパース時 に最終的にどれをハッシュタグとするかはタグとして添付されているかで決まる
@@ -276,7 +276,7 @@ const mfmLanguage = _parsimmon.createLanguage({
             // # + U+20E3 / # + U+FE0F + U+20E3 のような 合字/絵文字異体字セレクタ付きは ハッシュタグ扱いしない
             if (hashtag.match(/^(\u20e3|\ufe0f)/)) return _parsimmon.makeFailure(i, 'not a hashtag');
             // # の前に何かあればハッシュタグ扱いしない
-            if ((_this = input[i - 1]) === null || _this === void 0 ? void 0 : (_input__match = _this.match) === null || _input__match === void 0 ? void 0 : _input__match.call(_this, /[^\s\u200b]/)) return _parsimmon.makeFailure(i, 'not a hashtag');
+            if ((_input_ = input[i - 1]) === null || _input_ === void 0 ? void 0 : _input_.match(/[^\s\u200b]/)) return _parsimmon.makeFailure(i, 'not a hashtag');
             return _parsimmon.makeSuccess(i + ('#' + hashtag).length, (0, _utils.createMfmNode)('hashtag', {
                 hashtag: hashtag
             }));
@@ -355,7 +355,7 @@ const mfmLanguage = _parsimmon.createLanguage({
     },
     fn: (r)=>{
         return _parsimmon((input, i)=>{
-            var _argsPart_split, _this;
+            var _argsPart;
             const text = input.substr(i);
             const match = text.match(/^\$\[([0-9a-z]+)(?:\.([0-9a-z.,=]+))?\s+([^\n\[\]]+)\]/);
             if (!match) return _parsimmon.makeFailure(i, 'not a fn');
@@ -382,7 +382,7 @@ const mfmLanguage = _parsimmon.createLanguage({
                 return _parsimmon.makeFailure(i, 'unknown fn name');
             }
             const args = {};
-            for (const arg of ((_this = argsPart) === null || _this === void 0 ? void 0 : (_argsPart_split = _this.split) === null || _argsPart_split === void 0 ? void 0 : _argsPart_split.call(_this, ',')) || []){
+            for (const arg of ((_argsPart = argsPart) === null || _argsPart === void 0 ? void 0 : _argsPart.split(',')) || []){
                 const kv = arg.split('=');
                 if (kv[0] == '__proto__') return _parsimmon.makeFailure(i, 'prototype pollution');
                 if (kv.length === 1) {

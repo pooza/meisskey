@@ -109,6 +109,7 @@ router.get('/dc/cb', async (ctx)=>{
     const oauth2 = await getOAuth2();
     if (!userToken) {
         const sessid = ctx.cookies.get('signin_with_discord_sid');
+        // Cache-Controlは/api/でprivateになっている
         if (!sessid) {
             ctx.throw(400, 'invalid session');
             return;

@@ -10,7 +10,7 @@ const _reject = require("../../../../services/following/requests/reject");
 const _dbresolver = require("../../db-resolver");
 const _relay = require("../../../../services/relay");
 const _default = async (actor, activity)=>{
-    var _activity_id_match, _this;
+    var _activity_id;
     // ※ activityはこっちから投げたフォローリクエストなので、activity.actorは存在するローカルユーザーである必要がある
     const dbResolver = new _dbresolver.default();
     const follower = await dbResolver.getUserFromApId(activity.actor);
@@ -21,7 +21,7 @@ const _default = async (actor, activity)=>{
         return `skip: follower is not a local user`;
     }
     // relay
-    const match = (_this = activity.id) === null || _this === void 0 ? void 0 : (_activity_id_match = _this.match) === null || _activity_id_match === void 0 ? void 0 : _activity_id_match.call(_this, /follow-relay\/(\w+)/);
+    const match = (_activity_id = activity.id) === null || _activity_id === void 0 ? void 0 : _activity_id.match(/follow-relay\/(\w+)/);
     if (match) {
         return await (0, _relay.relayRejected)(match[1]);
     }

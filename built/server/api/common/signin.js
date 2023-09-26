@@ -20,6 +20,7 @@ function _default(ctx, user, redirect = false) {
             maxAge: expires
         });
         //#endregion
+        // Cache-Controlは/api/でprivateになっている
         ctx.redirect(_config.default.url);
     } else {
         ctx.body = {

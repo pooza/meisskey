@@ -125,9 +125,9 @@ async function toDbReactionNoResolve(reaction) {
 function decodeReaction(str) {
     const custom = str.match(/^:([\w+-]+)(?:@([\w.-]+))?:$/);
     if (custom) {
-        var _custom__replace, _this;
+        var _custom_;
         const name = custom[1];
-        const host = ((_this = custom[2]) === null || _this === void 0 ? void 0 : (_custom__replace = _this.replace) === null || _custom__replace === void 0 ? void 0 : _custom__replace.call(_this, /_/g, '.')) || '.'; // ローカルは.
+        const host = ((_custom_ = custom[2]) === null || _custom_ === void 0 ? void 0 : _custom_.replace(/_/g, '.')) || '.'; // ローカルは.
         return `:${name}@${host}:`;
     }
     return normalizeMap[str] || str;

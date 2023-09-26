@@ -24,7 +24,7 @@ const peer = path || `${_config.default.mongodb.host}:${_config.default.mongodb.
 const uri = `mongodb://${u && p ? `${u}:${p}@` : ''}${peer}/${_config.default.mongodb.db}`;
 const logger = (context)=>(next)=>(args, method)=>{
             var _args_col_s_namespace, _args_col_s, _args_col, _args;
-            console.log(method, (_args_col_s_namespace = (_args_col_s = (_args_col = (_args = args) === null || _args === void 0 ? void 0 : _args.col) === null || _args_col === void 0 ? void 0 : _args_col.s) === null || _args_col_s === void 0 ? void 0 : _args_col_s.namespace) === null || _args_col_s_namespace === void 0 ? void 0 : _args_col_s_namespace.collection);
+            console.log(method, (_args = args) === null || _args === void 0 ? void 0 : (_args_col = _args.col) === null || _args_col === void 0 ? void 0 : (_args_col_s = _args_col.s) === null || _args_col_s === void 0 ? void 0 : (_args_col_s_namespace = _args_col_s.namespace) === null || _args_col_s_namespace === void 0 ? void 0 : _args_col_s_namespace.collection);
             return next(args, method).then((res)=>{
                 //console.log(method + ' result', res)
                 return res;

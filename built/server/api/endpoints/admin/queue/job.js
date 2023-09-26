@@ -32,7 +32,7 @@ const meta = {
     }
 };
 const _default = (0, _define.default)(meta, async (ps)=>{
-    const queue = ps.domain === 'deliver' ? _queues.deliverQueue : ps.domain === 'inbox' ? _queues.inboxQueue : ps.domain === 'db' ? _queues.dbQueue : null;
+    const queue = ps.domain === 'deliver' ? _queues.deliverQueue : ps.domain === 'inbox' ? _queues.inboxQueue : ps.domain === 'inboxLazy' ? _queues.inboxLazyQueue : ps.domain === 'db' ? _queues.dbQueue : null;
     if (queue == null) throw `invalid domain`;
     const job = await queue.getJob(ps.jobId);
     const logs = await queue.getJobLogs(ps.jobId);

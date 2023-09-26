@@ -21,8 +21,8 @@ async function verifyRecaptcha(secret, response) {
         throw `recaptcha-request-failed: ${e}`;
     });
     if (result.success !== true) {
-        var _result_errorcodes_join, _this;
-        const errorCodes = result['error-codes'] ? (_this = result['error-codes']) === null || _this === void 0 ? void 0 : (_result_errorcodes_join = _this.join) === null || _result_errorcodes_join === void 0 ? void 0 : _result_errorcodes_join.call(_this, ', ') : '';
+        var _result_errorcodes;
+        const errorCodes = result['error-codes'] ? (_result_errorcodes = result['error-codes']) === null || _result_errorcodes === void 0 ? void 0 : _result_errorcodes.join(', ') : '';
         throw `recaptcha-failed: ${errorCodes}`;
     }
 }
@@ -31,8 +31,8 @@ async function verifyHcaptcha(secret, response) {
         throw `hcaptcha-request-failed: ${e}`;
     });
     if (result.success !== true) {
-        var _result_errorcodes_join, _this;
-        const errorCodes = result['error-codes'] ? (_this = result['error-codes']) === null || _this === void 0 ? void 0 : (_result_errorcodes_join = _this.join) === null || _result_errorcodes_join === void 0 ? void 0 : _result_errorcodes_join.call(_this, ', ') : '';
+        var _result_errorcodes;
+        const errorCodes = result['error-codes'] ? (_result_errorcodes = result['error-codes']) === null || _result_errorcodes === void 0 ? void 0 : _result_errorcodes.join(', ') : '';
         throw `hcaptcha-failed: ${errorCodes}`;
     }
 }

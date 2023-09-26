@@ -26,9 +26,11 @@ const meta = {
 const _default = (0, _define.default)(meta, async (ps)=>{
     const deliverJobCounts = await _queues.deliverQueue.getJobCounts();
     const inboxJobCounts = await _queues.inboxQueue.getJobCounts();
+    const inboxLazyJobCounts = await _queues.inboxLazyQueue.getJobCounts();
     return {
         deliver: deliverJobCounts,
-        inbox: inboxJobCounts
+        inbox: inboxJobCounts,
+        inboxLazy: inboxLazyJobCounts
     };
 });
 

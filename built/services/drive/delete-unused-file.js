@@ -12,7 +12,7 @@ const _oid = require("../../prelude/oid");
 async function deleteUnusedFile(fileId, detail = false) {
     var _file_metadata, _file;
     const file = await _drivefile.default.findOne(fileId);
-    if (!((_file_metadata = (_file = file) === null || _file === void 0 ? void 0 : _file.metadata) === null || _file_metadata === void 0 ? void 0 : _file_metadata.userId)) {
+    if (!((_file = file) === null || _file === void 0 ? void 0 : (_file_metadata = _file.metadata) === null || _file_metadata === void 0 ? void 0 : _file_metadata.userId)) {
         return;
     }
     const user = await _user.default.findOne(file.metadata.userId);
