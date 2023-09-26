@@ -1,0 +1,51 @@
+block vars
+
+doctype html
+
+html
+
+	head
+		meta(charset='utf-8')
+		meta(name='referrer' content='origin')
+		meta(name='theme-color' content='#5A0608')
+		link(rel='icon' href= icon || '/favicon.ico' type= iconType || 'image/x-icon')
+		link(rel='apple-touch-icon' href= appleTouchIcon || '/apple-touch-icon.png')
+		link(rel='manifest' href='/manifest.json')
+		meta(name='twitter:card' content= player ? 'player' : 'summary')
+		meta(property='og:site_name' content= instanceName || 'Misskey')
+
+		if noindex
+			meta(name='robots' content='noindex')
+
+		title
+			block title
+				= title || 'Misskey'
+
+		block desc
+			meta(name='description' content= desc || '✨🌎✨ A federated blogging platform ✨🚀✨')
+
+		block meta
+
+		block og
+			meta(property='og:title' content= instanceName || 'Misskey')
+			meta(property='og:description' content= desc || '✨🌎✨ A federated blogging platform ✨🚀✨')
+			meta(property='og:image'       content= img)
+
+		style
+			include ./../../../../built/client/assets/init.css
+
+		script(src=`/assets/boot.js?${version}`)
+
+		script(type='application/json' id='initial-meta').
+			!{initialMeta}
+
+	body
+		noscript: p
+			| JavaScriptを有効にしてください
+			br
+			| Please turn on your JavaScript
+		div#ini.
+			<svg viewBox="0 0 50 50">
+				<path fill=#fb4e4e d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" />
+			</svg>
+		block content

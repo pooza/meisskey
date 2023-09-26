@@ -1,0 +1,1 @@
+{"version":3,"sources":["models/log.js"],"names":["Log","db","get","createIndex","expireAfterSeconds"],"mappings":";+BAOA;;;eAAA;;;yBANe;AAEf,MAAMA,MAAMC,gBAAE,CAACC,GAAG,CAAO;AACzBF,IAAIG,WAAW,CAAC,aAAa;IAAEC,oBAAoB,OAAO,KAAK;AAAE;AACjEJ,IAAIG,WAAW,CAAC;AAChBH,IAAIG,WAAW,CAAC;MAChB,WAAeH","file":"log.js","sourceRoot":"../../built"}

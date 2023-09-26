@@ -1,0 +1,1 @@
+{"version":3,"sources":["misc/acct/parse.js"],"names":["acct","startsWith","substr","split","username","host"],"mappings":";+BAEA;;;eAAA;;;MAAA,WAAe,CAACA;IACf,IAAIA,KAAKC,UAAU,CAAC,MAAMD,OAAOA,KAAKE,MAAM,CAAC;IAC7C,MAAMC,QAAQH,KAAKG,KAAK,CAAC,KAAK;IAC9B,OAAO;QAAEC,UAAUD,KAAK,CAAC,EAAE;QAAEE,MAAMF,KAAK,CAAC,EAAE,IAAI;IAAK;AACrD","file":"parse.js","sourceRoot":"../../../built"}

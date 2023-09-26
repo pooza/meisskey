@@ -1,0 +1,1 @@
+{"version":3,"sources":["misc/normalize-tag.js"],"names":["normalizeTag","tag","normalize","toLowerCase"],"mappings":";+BAAgBA;;;eAAAA;;;AAAT,SAASA,aAAaC,GAAW;IACvC,OAAOA,IAAIC,SAAS,CAAC,QAAQC,WAAW;AACzC","file":"normalize-tag.js","sourceRoot":"../../built"}

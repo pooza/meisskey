@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 overrides:
   source-map: ^0.7.4
 
@@ -11815,3 +11811,7 @@ packages:
     name: twemoji-parser
     version: 15.0.1
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

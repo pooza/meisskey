@@ -1,0 +1,1 @@
+{"version":3,"sources":["misc/acct/render.js"],"names":["user","host","username"],"mappings":";+BAEA;;;eAAA;;;MAAA,WAAe,CAACA;IACf,OAAOA,KAAKC,IAAI,KAAK,OAAOD,KAAKE,QAAQ,GAAG,CAAC,EAAEF,KAAKE,QAAQ,CAAC,CAAC,EAAEF,KAAKC,IAAI,CAAC,CAAC;AAC5E","file":"render.js","sourceRoot":"../../../built"}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["models/instance.js"],"names":["Instance","db","get","createIndex","unique"],"mappings":";+BAKA;;;eAAA;;;yBAJe;AAEf,MAAMA,WAAWC,gBAAE,CAACC,GAAG,CAAY;AACnCF,SAASG,WAAW,CAAC,QAAQ;IAAEC,QAAQ;AAAK;MAC5C,WAAeJ","file":"instance.js","sourceRoot":"../../built"}

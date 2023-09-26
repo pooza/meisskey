@@ -1,0 +1,1 @@
+{"version":3,"sources":["misc/is-quote.js"],"names":["note","renoteId","text","poll","fileIds","length"],"mappings":";+BAEA;;;eAAA;;;AAAe,SAAf,SAAwBA,IAAW;IAClC,OAAOA,KAAKC,QAAQ,IAAI,QAASD,CAAAA,KAAKE,IAAI,IAAI,QAAQF,KAAKG,IAAI,IAAI,QAASH,KAAKI,OAAO,IAAI,QAAQJ,KAAKI,OAAO,CAACC,MAAM,GAAG,CAAC;AAC5H","file":"is-quote.js","sourceRoot":"../../built"}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["models/following.js"],"names":["Following","db","get","createIndex","unique"],"mappings":";+BAOA;;;eAAA;;;yBANe;AAEf,MAAMA,YAAYC,gBAAE,CAACC,GAAG,CAAa;AACrCF,UAAUG,WAAW,CAAC;AACtBH,UAAUG,WAAW,CAAC;AACtBH,UAAUG,WAAW,CAAC;IAAC;IAAc;CAAa,EAAE;IAAEC,QAAQ;AAAK;MACnE,WAAeJ","file":"following.js","sourceRoot":"../../built"}

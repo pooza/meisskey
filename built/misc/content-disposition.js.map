@@ -1,0 +1,1 @@
+{"version":3,"sources":["misc/content-disposition.js"],"names":["contentDisposition","type","filename","fallback","replace","ContentDisposition"],"mappings":";+BAEgBA;;;eAAAA;;;oCAFoB;AAE7B,SAASA,mBAAmBC,IAA6B,EAAEC,QAAgB;IACjF,MAAMC,WAAWD,SAASE,OAAO,CAAC,YAAY;IAC9C,OAAOC,oBAAmBH,UAAU;QAAED;QAAME;IAAS;AACtD","file":"content-disposition.js","sourceRoot":"../../built"}

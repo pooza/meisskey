@@ -1,0 +1,1 @@
+{"version":3,"sources":["remote/activitypub/logger.js"],"names":["apLogger","remoteLogger","createSubLogger"],"mappings":";+BAEaA;;;eAAAA;;;wBAFgB;AAEtB,MAAMA,WAAWC,oBAAY,CAACC,eAAe,CAAC,MAAM","file":"logger.js","sourceRoot":"../../../built"}

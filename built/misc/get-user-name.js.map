@@ -1,0 +1,1 @@
+{"version":3,"sources":["misc/get-user-name.js"],"names":["user","name","username"],"mappings":";+BAGA;;;eAAA;;;AAAe,SAAf,SAAwBA,IAA4B;IACnD,OAAOA,KAAKC,IAAI,IAAID,KAAKE,QAAQ;AAClC","file":"get-user-name.js","sourceRoot":"../../built"}

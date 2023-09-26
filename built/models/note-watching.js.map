@@ -1,0 +1,1 @@
+{"version":3,"sources":["models/note-watching.js"],"names":["NoteWatching","db","get","createIndex","unique"],"mappings":";+BAOA;;;eAAA;;;yBANe;AAEf,MAAMA,eAAeC,gBAAE,CAACC,GAAG,CAAgB;AAC3CF,aAAaG,WAAW,CAAC;AACzBH,aAAaG,WAAW,CAAC;AACzBH,aAAaG,WAAW,CAAC;IAAC;IAAU;CAAS,EAAE;IAAEC,QAAQ;AAAK;MAC9D,WAAeJ","file":"note-watching.js","sourceRoot":"../../built"}
